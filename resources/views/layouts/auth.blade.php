@@ -31,43 +31,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
-    <!--
-    BODY TAG OPTIONS:
-    =================
-    Apply one or more of the following classes to get the
-    desired effect
-    |---------------------------------------------------------|
-    | SKINS         | skin-blue                               |
-    |               | skin-black                              |
-    |               | skin-purple                             |
-    |               | skin-yellow                             |
-    |               | skin-red                                |
-    |               | skin-green                              |
-    |---------------------------------------------------------|
-    |LAYOUT OPTIONS | fixed                                   |
-    |               | layout-boxed                            |
-    |               | layout-top-nav                          |
-    |               | sidebar-collapse                        |
-    |               | sidebar-mini                            |
-    |---------------------------------------------------------|
-    -->
-    <body class="hold-transition skin-blue sidebar-mini">
+
+    <body class="hold-transition login-page">
         <div class="wrapper">
 
-            @include("shared.main.header")
-            @include("shared.main.aside")
+            @include("shared.auth.header")
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
-                @yield('content')
-                <!-- /.content -->
-            </div>
+            @yield('content')
+            <!-- /.content -->
             <!-- /.content-wrapper -->
-
-            @include("shared.main.footer")
-
-            {{--   @include("shared.main.sidebar") --}}
-
 
         </div>
         <!-- ./wrapper -->
