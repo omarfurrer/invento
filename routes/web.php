@@ -11,6 +11,6 @@
   |
  */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
+
+Auth::routes();
+
