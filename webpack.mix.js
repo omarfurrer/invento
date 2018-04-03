@@ -22,4 +22,5 @@ mix
             'node_modules/bootstrap/dist/js/bootstrap.min.js'
         ], 'public/adminlte/js/all.js')
         .copyDirectory('node_modules/admin-lte/dist', 'public/adminlte/dist')
+        .copyDirectory('node_modules/bootstrap/fonts', 'public/adminlte/fonts')
         .copyDirectory('node_modules/font-awesome/fonts', 'public/adminlte/fonts');
