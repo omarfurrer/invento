@@ -11,6 +11,11 @@
   |
  */
 
+Route::redirect('/','/dashboard');
 
 Auth::routes();
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', 'PagesController@getDashboard');
+});
 
