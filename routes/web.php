@@ -11,11 +11,15 @@
   |
  */
 
-Route::redirect('/','/dashboard');
+Route::redirect('/', '/dashboard');
 
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'PagesController@getDashboard');
+
+    Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'], function () {
+        Route::resource('users', 'UsersController');
+    });
 });
 

@@ -32,6 +32,11 @@ class SuperAdminUsersTableSeeder extends Seeder {
             'email' => 'omar.furrer@gmail.com',
             'password' => '12345678'
                 ], 'super admin');
+        $this->usersRepository->create([
+            'name' => 'Ahmed EL Gallad',
+            'email' => 'ahmed.gallad@gmail.com',
+            'password' => '12345678'
+                ], 'super admin');
     }
 
 }
