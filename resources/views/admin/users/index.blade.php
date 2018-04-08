@@ -18,47 +18,59 @@
 
 <!-- Main content -->
 
-
 <section class="content container-fluid">
     <div class="row">
+        <div class="col-sm-12">
+          <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">My Users</h3>
 
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
 
-        <table class="table">
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- /.box-header -->
 
-            <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Role</th>
-              </tr>
-          </thead>
-          <tbody>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tbody><tr id="theaderRow">
+              <th>ID</th>
+              <th>User</th>
+              <th>E-email</th>
+              <th>Role</th>
+              <th></th>
+          </tr>
 
-            @for ($i = 0; $i < count($users); $i++)
+          @for ($i = 0; $i < count($users); $i++)
 
-            <tr>
-              <th scope="row">{{$users[$i]->id}}</th>
+          <tr>
+              <td>{{$users[$i]->id}}</td>
               <td>{{ $users[$i]->name }}</td>
               <td>{{ $users[$i]->email }}</td>
               <td>{{ $users[$i]->roles()->first()->name }}</td>
-
-              <td><ol class="list-inline">
+              <td><ul class="list-inline">
                 <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
                 <li><a href="#"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
-            </ol></td>
+            </ul></td>
 
         </tr>
+
     </tbody>
     @endfor
 </table>
-
-
 </div>
-
-
-
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
 
 </section>
 @endsection
