@@ -75,6 +75,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <script src="{{ asset("adminlte/js/all.js") }}"></script>
         <script src="{{ asset("adminlte/dist/js/adminlte.min.js") }}"></script>
+        <script>
+function deleteModel(event, form_id, message) {
+    event.preventDefault();
+    if (confirm(message)) {
+        document.getElementById(form_id).submit();
+        return true;
+    }
+    return false;
+}
+        </script>
         @stack('scripts')
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
