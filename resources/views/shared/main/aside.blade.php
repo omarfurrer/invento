@@ -30,13 +30,13 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url("/dashboard") }}"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+            <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url("/dashboard") }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class="header">Inventory</li>
             <!-- Optionally, you can add icons to the links -->
-            <li><a href="#"><i class="fa fa-link"></i> <span>Log</span></a></li>
-            <li><a href="#"><i class="fa fa-link"></i> <span>Items</span></a></li>
+            <li><a href="#"><i class="fa fa-paperclip"></i> <span>Log</span></a></li>
+            <li><a href="#"><i class="fa fa-th-list"></i> <span>Items</span></a></li>
             <li class="header">Admin</li>
-            <li class="{{ Request::is('admin/users') ? 'active' : '' }}"><a href="{{ url("/admin/users") }}"><i class="fa fa-link"></i> <span>Users</span></a></li>
+            <li class="{{ Request::is('admin/users') ? 'active' : '' }}"><a href="{{ url("/admin/users") }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
