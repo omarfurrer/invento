@@ -7,8 +7,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Add New user
-        <a href="{{ url('/admin/users/create') }}"><i class="fa fa-plus" aria-hidden="true">  </i></a>
+        <a class="btn btn-primary" href="{{ url('/admin/users/create') }}">Add New user<i class="fa fa-plus" style="padding-left: 10px;" aria-hidden="true">  </i></a>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,7 +22,7 @@
         <div class="col-sm-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">My Users</h3>
+                    <h3 class="box-title"><small>Showing: <b>{{count($users)}} Users</b></small></h3>
 
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 150px;">
@@ -43,7 +42,7 @@
                         <tbody><tr id="theaderRow">
                                 <th>ID</th>
                                 <th>User</th>
-                                <th>E-email</th>
+                                <th>E-mail</th>
                                 <th>Role</th>
                                 <th></th>
                             </tr>
