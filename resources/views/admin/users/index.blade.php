@@ -79,3 +79,11 @@
 
 </section>
 @endsection
+
+@push('scripts')
+<script>
+
+    // JS code goes here
+
+</script>
+@endpush
