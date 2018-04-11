@@ -7,7 +7,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <a id="addUserBtn" class="btn btn-primary" href="{{ url('/admin/users/create') }}">Add New user<i class="fa fa-plus"  aria-hidden="true">  </i></a>
+    <a id="addUserBtn" class="btn btn-primary" href="{{ url('/admin/users/create') }}">Add New user   <i class="fa fa-plus"  aria-hidden="true"></i></a>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
