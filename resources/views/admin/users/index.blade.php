@@ -7,7 +7,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <a class="btn btn-primary" href="{{ url('/admin/users/create') }}">Add New user<i class="fa fa-plus" style="padding-left: 10px;" aria-hidden="true">  </i></a>
+    <a id="addUserBtn" class="btn btn-primary" href="{{ url('/admin/users/create') }}">Add New user<i class="fa fa-plus"  aria-hidden="true">  </i></a>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -25,7 +25,7 @@
           <h3 class="box-title"><small>Showing: <b>{{count($users)}} Users</b></small></h3>
 
           <div class="box-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
+            <div id="Serchinput" class="input-group input-group-sm">
               <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="myFunction()">
 
               <div class="input-group-btn">
@@ -81,6 +81,7 @@
 @endsection
 
 @push('scripts')
+
 <script>
 
   function myFunction() {
@@ -104,4 +105,5 @@
   }
 
 </script>
+
 @endpush
