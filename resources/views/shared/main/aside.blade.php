@@ -33,6 +33,7 @@
             <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url("/dashboard") }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class="header">Inventory</li>
             <!-- Optionally, you can add icons to the links -->
+            <li class="{{ Request::is('measurmentUnits') ? 'active' : '' }}"><a href="{{ url("measurement_units") }}"><i class="fa fa-cubes"></i> <span>Measurment Units</span></a></li>
             <li><a href="#"><i class="fa fa-paperclip"></i> <span>Log</span></a></li>
             <li><a href="#"><i class="fa fa-th-list"></i> <span>Items</span></a></li>
             <li class="header">Admin</li>

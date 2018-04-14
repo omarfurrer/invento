@@ -12,13 +12,15 @@
 }
 
 
-#addUserBtn {
-  padding-left: 10px;
- 
-}
-
-#Serchinput {
-  width: 150px;
+.addUserBtn {
+	padding-left: 10px;
 
 }
+
+.searchInput {
+	width: 150px;
+
+}
+
+
 
