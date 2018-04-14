@@ -33,7 +33,7 @@ class MeasurementUnitsController extends Controller {
     public function index()
     {
         $measurementUnits = $this->measurementUnitsReposiotry->all();
-        return view('admin.units.index', compact("measurementUnits"));
+        return view('measurementUnits.index', compact("measurementUnits"));
     }
 
     /**
@@ -43,7 +43,7 @@ class MeasurementUnitsController extends Controller {
      */
     public function create()
     {
-        return view('admin.measurementUnits.create');
+        return view('measurementUnits.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class MeasurementUnitsController extends Controller {
      */
     public function edit(MeasurementUnit $measurementUnit)
     {
-        return view('admin.measurementUnits.edit', compact('measurementUnit'));
+        return view('measurementUnits.edit', compact('measurementUnit'));
     }
 
     /**
