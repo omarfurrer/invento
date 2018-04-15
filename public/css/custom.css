@@ -1,26 +1,33 @@
 
 
-#theaderRow {
+#tHeaderRow {
 	background-color: #3c8dbc; 
 	color: white;
 }
 
-
+/*
 #formBox {
 	margin-top: 30px ;
 
 }
 
 
-.addUserBtn {
+.addBtn {
 	padding-left: 10px;
 
 }
+
+*/
 
 .searchInput {
 	width: 150px;
 
 }
+
+th.tblActionCol {
+	width: 20%;
+}
+
 
 
 

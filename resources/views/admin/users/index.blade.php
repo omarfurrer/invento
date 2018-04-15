@@ -8,7 +8,7 @@
 
 <section class="content-header">
   <h1>
-    <a class="btn btn-primary addUserBtn" href="{{ url('/admin/users/create') }}">Add New user   <i class="fa fa-plus"  aria-hidden="true"></i></a>
+    <a class="btn btn-primary addBtn" href="{{ url('/admin/users/create') }}">Add New user   <i class="fa fa-plus"  aria-hidden="true"></i></a>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -27,7 +27,7 @@
 
           <div class="box-tools">
             <div class="input-group input-group-sm searchInput">
-              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="myFunction()">
+              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="search()">
 
               <div class="input-group-btn">
                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -40,12 +40,12 @@
 
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover" id="userTbl">
-            <tbody><tr id="theaderRow">
+            <tbody><tr id="tHeaderRow">
               <th>ID</th>
               <th>User</th>
               <th>E-mail</th>
               <th>Role</th>
-              <th></th>
+              <th class="tblActionCol"></th>
             </tr>
 
             @for ($i = 0; $i < count($users); $i++)
@@ -85,7 +85,7 @@
 
 <script>
 
-  function myFunction() {
+  function search() {
 
     var input, filter, table, tr, td, i;
     input = document.getElementById("search");

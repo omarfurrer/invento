@@ -7,7 +7,7 @@
 
 <section class="content-header">
 	<h1>
-		<a class="btn btn-primary addUserBtn" href="{{ url('measurement_units/create') }}">Add New unit   <i class="fa fa-plus"  aria-hidden="true"></i></a>
+		<a class="btn btn-primary addBtn" href="{{ url('measurement_units/create') }}">Add New unit   <i class="fa fa-plus"  aria-hidden="true"></i></a>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -19,21 +19,20 @@
 
 <section class="content container-fluid">
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title"><small>Showing: <b>{{count($measurementUnits)}} Units</b></small></h3>
+					<h3 class="box-title">Showing: <b>{{count($measurementUnits)}} Units</b></h3>
 					
 					<div class="box-tools">
 						<div class="input-group input-group-sm searchInput">
-							<input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="myFunction()">
+							<input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="search()">
 
 							<div class="input-group-btn">
 								<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
 							</div>
 						</div>
 					</div>
-
 				</div>
 
 				<!-- /.box-header -->
@@ -41,10 +40,10 @@
 				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover" id="mUnitsTbl">
 						<tbody>
-							<tr id="theaderRow">
+							<tr id="tHeaderRow">
 								<th>Name</th>
 								<th>Short Name</th>
-								<th></th>
+								<th class="tblActionCol"></th>
 							</tr>
 
 							@for ($i = 0; $i < count($measurementUnits); $i++)
@@ -52,10 +51,12 @@
 							<tr>
 								<td>{{$measurementUnits[$i]->name}}</td>
 								<td>{{ $measurementUnits[$i]->short_name }}</td>
-								<td><ul class="list-inline">
-									<li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
-									<li><a href="{{ url('measurement_units/'.$measurementUnits[$i]->id.'/edit') }}"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
-								</ul></td>
+								<td>
+									<ul class="list-inline">
+										<li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
+										<li><a href="{{ url('measurement_units/'.$measurementUnits[$i]->id.'/edit') }}"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
+									</ul>
+								</td>								
 
 							</tr>
 
@@ -76,7 +77,7 @@
 
 <script>
 
-	function myFunction() {
+	function search() {
 
 		var input, filter, table, tr, td, i;
 		input = document.getElementById("search");
