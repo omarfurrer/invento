@@ -20,7 +20,7 @@
 <section class="content container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="box boxMargin">
+			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Showing: <b>{{count($suppliers)}} Suppliers</b></h3>
 					

@@ -21,7 +21,7 @@
 <section class="content container-fluid">
   <div class="row">
     <div class="col-sm-12">
-      <div class="box boxMargin">
+      <div class="box">
         <div class="box-header">
           <h3 class="box-title">Showing: <b>{{count($users)}} Users</b></h3>
 
@@ -70,47 +70,48 @@
                       {{ method_field('DELETE') }}
                     </form>
 
-                  </ul></td>
+                  </ul>
+                </td>
 
-                </tr>
+              </tr>
 
-              </tbody>
-              @endfor
-            </table>
-          </div>
-          <!-- /.box-body -->
+            </tbody>
+            @endfor
+          </table>
         </div>
-        <!-- /.box -->
+        <!-- /.box-body -->
       </div>
+      <!-- /.box -->
     </div>
+  </div>
 
-  </section>
-  @endsection
+</section>
+@endsection
 
-  @push('scripts')
+@push('scripts')
 
-  <script>
+<script>
 
-    function search() {
+  function search() {
 
-      var input, filter, table, tr, td, i;
-      input = document.getElementById("search");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("userTbl");
-      tr = table.getElementsByTagName("tr");
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("search");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("userTbl");
+    tr = table.getElementsByTagName("tr");
 
-      for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            tr[i].style.display = "";
-          } else {
-            tr[i].style.display = "none";
-          }
-        } 
-      }
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
     }
+  }
 
-  </script>
+</script>
 
-  @endpush
+@endpush
