@@ -3,6 +3,7 @@
 namespace App\Http\Requests\MeasurementUnits;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateMeasurementUnitRequest extends FormRequest {
 
@@ -24,8 +25,8 @@ class UpdateMeasurementUnitRequest extends FormRequest {
     public function rules()
     {
         return [
-            'name' => 'required|string|between:3,255',
-            'short_name' => ['required', 'string', 'between:3,255', Rule::unique('measurement_units')->ignore($this->measurementUnit->id)]
+            'name' => 'required|string|between:1,255',
+            'short_name' => ['required', 'string', 'between:1,255', Rule::unique('measurement_units')->ignore($this->route('measurement_unit')->id)]
         ];
     }
 

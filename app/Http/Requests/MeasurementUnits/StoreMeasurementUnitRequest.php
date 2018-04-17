@@ -24,8 +24,8 @@ class StoreMeasurementUnitRequest extends FormRequest {
     public function rules()
     {
         return [
-            'name' => 'required|string|between:3,255',
-            'short_name' => 'required|string|between:3,255|unique'
+            'name' => 'required|string|between:1,255',
+            'short_name' => 'required|string|between:1,255|unique:measurement_units'
         ];
     }
 
