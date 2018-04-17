@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'PagesController@getDashboard');
 
     Route::resource('measurement_units', 'MeasurementUnitsController');
+    Route::resource('suppliers', 'SuppliersController');
     Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'], function () {
         Route::resource('users', 'UsersController');
     });
