@@ -29,4 +29,15 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
+    /**
+     * Generate gravatar link from email.
+     * 
+     * @return string
+     */
+    public function getGravatarAttribute()
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return "http://www.gravatar.com/avatar/$hash";
+    }
+
 }
