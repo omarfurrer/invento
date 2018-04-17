@@ -20,7 +20,7 @@
 <section class="content container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box">
+            <div class="box boxMargin">
                 <div class="box-header">
                     <h3 class="box-title">Showing: <b>{{count($measurementUnits)}} Units</b></h3>
 
@@ -53,14 +53,14 @@
                                 <td>{{ $measurementUnits[$i]->short_name }}</td>
                                 <td>
                                     <ul class="list-inline">
+                                         <li><a href="{{ url('measurement_units/'.$measurementUnits[$i]->id.'/edit') }}"><i class="fa fa-pencil btn btn-xs btn-primary" aria-hidden="true"> Edit</i></a></li>   
                                         <li><a href="#"
                                                onclick="return deleteModel(event,'delete-form-{{$measurementUnits[$i]->id}}', 'Are you sure you want to delete this unit ? All related data will be lost');"
-                                               ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
+                                               ><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
                                         <form id="delete-form-{{$measurementUnits[$i]->id}}" action="{{ url("measurement_units/". $measurementUnits[$i]->id ) }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                        </form>
-                                        <li><a href="{{ url('measurement_units/'.$measurementUnits[$i]->id.'/edit') }}"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
+                                        </form> 
                                     </ul>
                                 </td>								
 

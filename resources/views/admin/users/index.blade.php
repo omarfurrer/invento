@@ -21,9 +21,9 @@
 <section class="content container-fluid">
   <div class="row">
     <div class="col-sm-12">
-      <div class="box">
+      <div class="box boxMargin">
         <div class="box-header">
-          <h3 class="box-title"><small>Showing: <b>{{count($users)}} Users</b></small></h3>
+          <h3 class="box-title">Showing: <b>{{count($users)}} Users</b></h3>
 
           <div class="box-tools">
             <div class="input-group input-group-sm searchInput">
@@ -55,56 +55,62 @@
               <td>{{ $users[$i]->name }}</td>
               <td>{{ $users[$i]->email }}</td>
               <td>{{ $users[$i]->roles()->first()->name }}</td>
-              <td><ul class="list-inline">
-                <li><a href="#" 
-                 onclick="return deleteModel(event,'delete-form-{{$users[$i]->id}}', 'Are you sure you want to delete this user ? All related data will be lost');"
-                 ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
-                 <form id="delete-form-{{$users[$i]->id}}" action="{{ url("admin/users/". $users[$i]->id ) }}" method="POST" style="display: none;">
-                  {{ csrf_field() }}
-                  {{ method_field('DELETE') }}
-                </form>
-                <li><a href="{{ url("admin/users/". $users[$i]->id ."/edit") }}"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
-              </ul></td>
+              <td>
+                <ul class="list-inline">
+                  <li>
+                    <a href="{{ url("admin/users/". $users[$i]->id ."/edit") }}"><i class="fa fa-pencil btn btn-xs btn-primary" aria-hidden="true"> Edit</i>
+                    </a>
+                  </li>    
+                  <li>
+                    <a href="#" 
+                    onclick="return deleteModel(event,'delete-form-{{$users[$i]->id}}', 'Are you sure you want to delete this user ? All related data will be lost');"
+                    ><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
+                    <form id="delete-form-{{$users[$i]->id}}" action="{{ url("admin/users/". $users[$i]->id ) }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                    </form>
 
-            </tr>
+                  </ul></td>
 
-          </tbody>
-          @endfor
-        </table>
+                </tr>
+
+              </tbody>
+              @endfor
+            </table>
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
       </div>
-      <!-- /.box-body -->
     </div>
-    <!-- /.box -->
-  </div>
-</div>
 
-</section>
-@endsection
+  </section>
+  @endsection
 
-@push('scripts')
+  @push('scripts')
 
-<script>
+  <script>
 
-  function search() {
+    function search() {
 
-    var input, filter, table, tr, td, i;
-    input = document.getElementById("search");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("userTbl");
-    tr = table.getElementsByTagName("tr");
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("search");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("userTbl");
+      tr = table.getElementsByTagName("tr");
 
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[1];
-      if (td) {
-        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      } 
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        } 
+      }
     }
-  }
 
-</script>
+  </script>
 
-@endpush
+  @endpush

@@ -20,7 +20,7 @@
 
         <div class="form-group{{ $errors->has('contact_number') ? ' has-error' : '' }}">
             <label for="contact_number">Contact Number</label>
-            <input type="text" class="form-control" required name="contact_number" id="contact_number" placeholder="Contact number" value="{{ old('contact_number',isset($supplier)? $supplier->contact_number : '') }}">
+            <input type="text" class="form-control"  name="contact_number" id="contact_number" placeholder="Contact number" value="{{ old('contact_number',isset($supplier)? $supplier->contact_number : '') }}">
             @if($errors->has('contact_number'))
             <p class="text-danger">{{ $errors->first('contact_number') }}</p>
             @endif

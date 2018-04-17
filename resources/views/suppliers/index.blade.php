@@ -20,7 +20,7 @@
 <section class="content container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="box">
+			<div class="box boxMargin">
 				<div class="box-header">
 					<h3 class="box-title">Showing: <b>{{count($suppliers)}} Suppliers</b></h3>
 					
@@ -53,8 +53,8 @@
 								<td>{{ $suppliers[$i]->contact_number }}</td>
 								<td>
 									<ul class="list-inline">
-										<li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
-										<li><a href="{{ url('suppliers/'.$suppliers[$i]->id.'/edit') }}"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</a></li>    
+										<li><a href="{{ url('suppliers/'.$suppliers[$i]->id.'/edit') }}"><i class="fa fa-pencil btn btn-xs btn-primary" aria-hidden="true"> Edit</i></a></li>  
+										<li><a href="#"><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>  
 									</ul>
 								</td>								
 
