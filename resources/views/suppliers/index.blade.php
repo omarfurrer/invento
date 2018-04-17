@@ -42,7 +42,7 @@
 						<tbody>
 							<tr id="tHeaderRow">
 								<th>Name</th>
-								<th>Short Name</th>
+								<th>Contact Number</th>
 								<th class="tblActionCol"></th>
 							</tr>
 
