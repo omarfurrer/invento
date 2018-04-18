@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('measurement_units', 'MeasurementUnitsController');
     Route::resource('suppliers', 'SuppliersController');
+    Route::resource('items', 'ItemsController');
     Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'], function () {
         Route::resource('users', 'UsersController');
     });
