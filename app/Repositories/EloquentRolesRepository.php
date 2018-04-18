@@ -15,14 +15,6 @@ class EloquentRolesRepository extends EloquentAbstractRepository implements Role
         $this->modelClass = 'Spatie\Permission\Models\Role';
     }
 
-    /**
-     * Retrieve list of roles and their IDs.
-     * 
-     * @return array
-     */
-    public function lists()
-    {
-        return Role::pluck('name', 'id');
-    }
+   
 
 }

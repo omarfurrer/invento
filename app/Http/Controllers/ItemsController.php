@@ -8,13 +8,9 @@ use App\Repositories\Interfaces\ItemsRepositoryInterface;
 use App\Services\ItemsService;
 use App\Http\Requests\Items\StoreItemRequest;
 use App\Http\Requests\Items\UpdateItemRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ItemsController extends Controller {
-
-    /**
-     * @var ItemsRepositoryInterface 
-     */
-    protected $itemsRepository;
 
     /**
      * @var ItemsService 
@@ -24,12 +20,10 @@ class ItemsController extends Controller {
     /**
      * ItemsController Constructor.
      * 
-     * @param ItemsRepositoryInterface $itemsRepository
      * @param ItemsService $itemsService
      */
-    public function __construct(ItemsRepositoryInterface $itemsRepository, ItemsService $itemsService)
+    public function __construct(ItemsService $itemsService)
     {
-        $this->itemsRepository = $itemsRepository;
         $this->itemsService = $itemsService;
     }
 
@@ -63,7 +57,10 @@ class ItemsController extends Controller {
      */
     public function store(StoreItemRequest $request)
     {
-        
+        $item = $this->itemsService->create($request->all());
+
+        \Session::flash('flash_message_success', 'Item Created.');
+        return redirect()->to('/items');
     }
 
     /**
@@ -86,7 +83,6 @@ class ItemsController extends Controller {
     public function edit(Item $item)
     {
         $dependencies = $this->itemsService->getEdit($item->id);
-        dd($dependencies);
         return view('items.edit', $dependencies);
     }
 
@@ -97,9 +93,17 @@ class ItemsController extends Controller {
      * @param  Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Item $item)
+    public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $item = $this->itemsService->edit($item->id, $request->all(), Auth::user());
+
+        if (!$item) {
+            \Session::flash('flash_message_error', $this->itemsService->getErrorMessage());
+            return redirect()->back();
+        }
+
+        \Session::flash('flash_message_success', 'Item Updated.');
+        return redirect()->to('/items');
     }
 
     /**
