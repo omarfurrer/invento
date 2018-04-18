@@ -116,4 +116,14 @@ abstract class EloquentAbstractRepository implements RepositoryInterface {
         return call_user_func_array([$this->modelClass, 'truncate'], []);
     }
 
+    /**
+     * Lists a resource.
+     * 
+     * @return array
+     */
+    public function lists($key = 'id', $value = 'name')
+    {
+        return call_user_func_array([$this->modelClass, 'pluck'], [$value, $key]);
+    }
+
 }

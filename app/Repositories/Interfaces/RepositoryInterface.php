@@ -67,4 +67,11 @@ interface RepositoryInterface {
      * @return void
      */
     public function truncate();
+
+    /**
+     * Lists a resource.
+     * 
+     * @return array
+     */
+    public function lists($key = 'id', $value = 'name');
 }
