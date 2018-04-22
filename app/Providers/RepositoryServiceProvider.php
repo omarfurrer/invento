@@ -44,6 +44,9 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->singleton(
                 Interfaces\ItemsRepositoryInterface::class, Repositories\EloquentItemsRepository::class
         );
+        $this->app->singleton(
+                Interfaces\ItemBatchesRepositoryInterface::class, Repositories\EloquentItemBatchesRepository::class
+        );
     }
 
 }
