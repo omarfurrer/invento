@@ -15,11 +15,13 @@ mix
         .styles([
             'node_modules/font-awesome/css/font-awesome.min.css',
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'node_modules/ionicons/dist/css/ionicons.min.css'
+            'node_modules/ionicons/dist/css/ionicons.min.css',
+            'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
         ], 'public/adminlte/css/all.css')
         .scripts([
             'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/bootstrap/dist/js/bootstrap.min.js'
+            'node_modules/bootstrap/dist/js/bootstrap.min.js',
+            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
         ], 'public/adminlte/js/all.js')
         .copyDirectory('node_modules/admin-lte/dist', 'public/adminlte/dist')
         .copyDirectory('node_modules/bootstrap/fonts', 'public/adminlte/fonts')
