@@ -133,6 +133,16 @@ class ItemsService extends BaseService {
     }
 
     /**
+     * Get all items which have been initially approved by admin.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllInitiallyApproved()
+    {
+        return $this->getAll()->where('is_initially_approved', true);
+    }
+
+    /**
      * Get all items that need initial admin approval.
      * 
      * @return \Illuminate\Database\Eloquent\Collection
