@@ -18,7 +18,7 @@ class Item extends Model {
      *
      * @var array
      */
-    protected $fillable = ['description', 'initial_quantity', 'current_quantity', 'minimum_quantity', 'price', 'expires_at', 'notes'
+    protected $fillable = ['description', 'current_quantity', 'minimum_quantity', 'price', 'expires', 'notes'
         , 'is_initially_approved', 'initially_approved_at', 'unit_id', 'supplier_id'];
 
     /**
@@ -26,14 +26,14 @@ class Item extends Model {
      *
      * @var array
      */
-    protected $dates = ['created_at', 'updated_at', 'initially_approved_at', 'expires_at'];
+    protected $dates = ['created_at', 'updated_at', 'initially_approved_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['is_initially_approved' => 'boolean'];
+    protected $casts = ['is_initially_approved' => 'boolean', 'expires' => 'boolean'];
 
     /**
      * An item belongs to a supplier.
@@ -53,6 +53,16 @@ class Item extends Model {
     public function measurementUnit()
     {
         return $this->belongsTo('App\Models\MeasurementUnit', 'unit_id');
+    }
+
+    /**
+     * An item has many batches.
+     *
+     * @return HasMany
+     */
+    public function itemBatches()
+    {
+        return $this->hasMany('App\Models\ItemBatch');
     }
 
 }
