@@ -84,6 +84,8 @@ function deleteModel(event, form_id, message) {
     }
     return false;
 }
+
+$('.date-picker').datepicker();
         </script>
         @stack('scripts')
 
