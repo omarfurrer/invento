@@ -60,7 +60,7 @@
               <td>{{ $items[$i]->measurementUnit->name }}</td>
               <td>{{ isset($items[$i]->supplier) ? $items[$i]->supplier->name : 'N/A' }}</td>
               <td>{{ $items[$i]->minimum_quantity }}</td>
-              <td>{!! $items[$i]->is_initially_approved ? '<i class="fa fa-check btn btn-xs btn-success" aria-hidden="true"> Approved</i>' : '<i class="fa fa-close btn btn-xs btn-warning" aria-hidden="true"> Needs Approval</i>' !!}</td>
+              <td>{!! $items[$i]->is_initially_approved ? '<i class="fa fa-check btn btn-xs btn-success" aria-hidden="true"> Approved</i>' : '<i class="fa fa-circle-o-notch btn btn-xs btn-warning" aria-hidden="true"> Needs Approval</i>' !!}</td>
               <td>
                 <ul class="list-inline">
                   <li>
