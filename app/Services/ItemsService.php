@@ -177,7 +177,12 @@ class ItemsService extends BaseService {
      */
     public function getNeedsInitialApproval()
     {
-        return $this->itemsRepository->getNeedsInitialApproval();
+        $items = $this->itemsRepository->getNeedsInitialApproval();
+        $items->map(function ($item, $key) {
+            $item['current_quantity'] = $this->getTotalQuantity($item);
+            return $item ;
+        });
+        return $items->all();
     }
 
     /**
