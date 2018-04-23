@@ -34,7 +34,7 @@ class ItemsController extends Controller {
      */
     public function index()
     {
-        $items = $this->itemsService->getAllInitiallyApproved();
+        $items = $this->itemsService->getAll();
         return view('items.index', compact('items'));
     }
 

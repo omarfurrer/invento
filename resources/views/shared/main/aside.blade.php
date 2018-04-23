@@ -33,17 +33,19 @@
             <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url("/dashboard") }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class="header">Inventory</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{ Request::is('measurmentUnits') ? 'active' : '' }}"><a href="{{ url("measurement_units") }}"><i class="fa fa-cubes"></i> <span>Measurment Units</span></a></li>
-
+            <li><a href="#"><i class="fa fa-paperclip"></i> <span>Log</span></a></li>
+            <li class="{{ Request::is('items') ? 'active' : '' }}"><a href="{{ url("items") }}"><i class="fa fa-th-list"></i> <span>Items</span></a></li>
             <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a href="{{ url("suppliers") }}"><i class="fa fa-cart-plus"></i> <span>Suppliers</span></a></li>
 
-            <li><a href="#"><i class="fa fa-paperclip"></i> <span>Log</span></a></li>
-
-            <li class="{{ Request::is('items') ? 'active' : '' }}"><a href="{{ url("items") }}"><i class="fa fa-th-list"></i> <span>Items</span></a></li>
-
+            @hasanyrole('admin|super admin')
             <li class="header">Admin</li>
             <li class="{{ Request::is('admin/users') ? 'active' : '' }}"><a href="{{ url("/admin/users") }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
             <li class="{{ Request::is('admin/items') ? 'active' : '' }}"><a href="{{ url("/admin/items/approval/initial") }}"><i class="fa fa-check"></i> <span>New Items</span></a></li>
+            @endhasanyrole
+            @hasanyrole('super admin')
+            <li class="header">Super Admin</li>
+            <li class="{{ Request::is('measurmentUnits') ? 'active' : '' }}"><a href="{{ url("measurement_units") }}"><i class="fa fa-cubes"></i> <span>Measurment Units</span></a></li>
+            @endhasanyrole
         </ul>
         <!-- /.sidebar-menu -->
     </section>

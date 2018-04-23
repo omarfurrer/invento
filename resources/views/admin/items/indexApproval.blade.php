@@ -38,7 +38,7 @@
 
             <tr>
               <td>{{$items[$i]->description}}</td>
-              <td>{{$items[$i]->current_quantity}}/{{ $items[$i]->measurementUnit->name }}</td>
+              <td>{{$items[$i]->current_quantity}} {{ $items[$i]->measurementUnit->name }}</td>
               <td>{{ isset($items[$i]->minimum_quantity) ? $items[$i]->minimum_quantity : 'N/A' }}</td>
               <td>
                 <ul class="list-inline">

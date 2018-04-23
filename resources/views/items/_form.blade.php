@@ -123,7 +123,7 @@
 
                                 <div class="form-group{{ $errors->has('item_batches.0.unit_price') ? ' has-error' : '' }}">
 
-                                    <input type="number" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
+                                    <input type="number" step="0.01" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
                                     @if($errors->has('item_batches.0.unit_price'))
                                     <p class="text-danger">{{ $errors->first('item_batches.0.unit_price') }}</p>
                                     @endif
