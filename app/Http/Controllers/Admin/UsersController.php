@@ -41,7 +41,11 @@ class UsersController extends Controller {
      */
     public function index()
     {
-        $users = $this->usersRepository->all();
+        if (auth()->user()->hasRole('super admin')) {
+            $users = $this->usersRepository->all();
+        } else {
+            $users = $this->usersRepository->getAllExceptSuperAdmins();
+        }
         return view('admin.users.index', compact("users"));
     }
 
@@ -52,7 +56,10 @@ class UsersController extends Controller {
      */
     public function create()
     {
-        $roles = $this->rolesRepository->lists();
+        $roles = $this->rolesRepository->lists()->toArray();
+        if (!auth()->user()->hasRole('super admin')) {
+            unset($roles[array_search('super admin', $roles)]);
+        }
         return view('admin.users.create', compact('roles'));
     }
 
@@ -78,7 +85,10 @@ class UsersController extends Controller {
      */
     public function edit(User $user)
     {
-        $roles = $this->rolesRepository->lists();
+        $roles = $this->rolesRepository->lists()->toArray();
+        if (!auth()->user()->hasRole('super admin')) {
+            unset($roles[array_search('super admin', $roles)]);
+        }
         return view('admin.users.edit', compact('user', 'roles'));
     }
 

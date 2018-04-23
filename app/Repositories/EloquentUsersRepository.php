@@ -65,4 +65,16 @@ class EloquentUsersRepository extends EloquentAbstractRepository implements User
         return $user;
     }
 
+    /**
+     * Return all users except super admins.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllExceptSuperAdmins()
+    {
+        return User::whereHas('roles', function($q) {
+                    $q->where('name', '!=', 'super admin');
+                })->get();
+    }
+
 }
