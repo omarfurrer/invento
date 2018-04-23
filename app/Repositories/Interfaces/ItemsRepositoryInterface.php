@@ -18,4 +18,11 @@ interface ItemsRepositoryInterface {
      * @return Item
      */
     public function approveInitially($id);
+
+    /**
+     * Get items that have been approved by an admin.
+     * 
+     * @return Collection
+     */
+    public function getInitiallyApproved();
 }

@@ -18,6 +18,16 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
     }
 
     /**
+     * Get items that have been approved by an admin.
+     * 
+     * @return Collection
+     */
+    public function getInitiallyApproved()
+    {
+        return Item::where('is_initially_approved', true)->get();
+    }
+
+    /**
      * Get items that need to be approved by an admin.
      * 
      * @return Collection

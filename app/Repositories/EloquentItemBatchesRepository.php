@@ -17,6 +17,18 @@ class EloquentItemBatchesRepository extends EloquentAbstractRepository implement
         $this->modelClass = 'App\Models\ItemBatch';
     }
 
-   
+    /**
+     * Create a new item batch.
+     *
+     * @param array $fields
+     * @return mixed
+     */
+    public function create(array $fields = null)
+    {
+        if (!empty($fields['expiry_date'])) {
+            $fields['expiry_date'] = Carbon::parse($fields['expiry_date'])->format('Y-m-d');
+        }
+        return parent::create($fields);
+    }
 
 }

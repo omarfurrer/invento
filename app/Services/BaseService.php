@@ -7,7 +7,7 @@ class BaseService {
     /**
      * @var array 
      */
-    protected $errorMessages;
+    protected $errorMessages = [];
 
     /**
      * Add an error message to array.

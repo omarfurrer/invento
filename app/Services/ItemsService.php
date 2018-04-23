@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Repositories\Interfaces\ItemsRepositoryInterface;
 use App\Repositories\Interfaces\SuppliersRepositoryInterface;
 use App\Repositories\Interfaces\MeasurementUnitsRepositoryInterface;
+use App\Repositories\Interfaces\ItemBatchesRepositoryInterface;
 use App\Models\Item;
+use App\Models\ItemBatch;
 use App\User;
 
 class ItemsService extends BaseService {
@@ -26,17 +28,25 @@ class ItemsService extends BaseService {
     protected $measurementUnitsRepository;
 
     /**
+     * @var ItemBatchesRepositoryInterface
+     */
+    protected $itemBatchesRepository;
+
+    /**
      * ItemsService Constructor.
      * 
      * @param ItemsRepositoryInterface $itemsRepository
      * @param SuppliersRepositoryInterface $suppliersRepository
      * @param MeasurementUnitsRepositoryInterface $measurementUnitsRepository
+     * @param ItemBatchesRepositoryInterface $itemBatchesRepository
      */
-    public function __construct(ItemsRepositoryInterface $itemsRepository, SuppliersRepositoryInterface $suppliersRepository, MeasurementUnitsRepositoryInterface $measurementUnitsRepository)
+    public function __construct(ItemsRepositoryInterface $itemsRepository, SuppliersRepositoryInterface $suppliersRepository, MeasurementUnitsRepositoryInterface $measurementUnitsRepository,
+            ItemBatchesRepositoryInterface $itemBatchesRepository)
     {
         $this->itemsRepository = $itemsRepository;
         $this->suppliersRepository = $suppliersRepository;
         $this->measurementUnitsRepository = $measurementUnitsRepository;
+        $this->itemBatchesRepository = $itemBatchesRepository;
     }
 
     /**
@@ -57,9 +67,23 @@ class ItemsService extends BaseService {
      * @param array $data
      * @return Item
      */
-    public function create($data)
+    public function create($data, User $user)
     {
         $item = $this->itemsRepository->create($data);
+
+        if (!empty($data['item_batches'])) {
+            foreach ($data['item_batches'] as $itemBatch) {
+                $this->itemBatchesRepository->create(array_merge(
+                                $itemBatch,
+                                [
+                    'is_initial' => true,
+                    'user_id' => $user->id,
+                    'item_id' => $item->id
+                                ]
+                ));
+            }
+        }
+
         return $item;
     }
 
@@ -88,18 +112,19 @@ class ItemsService extends BaseService {
     {
         $item = $this->itemsRepository->getById($id);
 
-        // check if initial quantity will be changed
-        // inital quantity cannot be changed after it has been approved, except by and admin
-        if ($item->initial_quantity != $data['initial_quantity'] && ($item->is_initially_approved || !$user->hasRole(['admin', 'super admin']))) {
-            $this->addError('Only an admin can change inital item quantity after it has been approved.');
-            return false;
-        }
+        $itemBatches = $this->itemBatchesRepository->findAllBy($item->id, 'item_id');
 
-        // store pricing historic data
-        if ($item->price != $data['price']) {
-            /**
-             * TODO : Store pricing historic data.
-             */
+        foreach ($itemBatches as $key => $itemBatch) {
+            $newItemBatch = $data['item_batches'][$key];
+
+            // check if initial quantity will be changed
+            // inital quantity cannot be changed after it has been approved, except by an admin
+            if ($itemBatch->is_initial && $itemBatch->quantity != $newItemBatch['quantity'] && $item->is_initially_approved && !$user->hasRole(['admin', 'super admin'])) {
+                $this->addError('Only an admin can change inital item quantity after it has been approved.');
+                return false;
+            }
+
+            $this->itemBatchesRepository->update($itemBatch->id, $newItemBatch);
         }
 
         $item = $this->itemsRepository->update($id, $data);
@@ -119,7 +144,10 @@ class ItemsService extends BaseService {
             $this->addError('Only an admin can give approval.');
             return false;
         }
-        return $this->itemsRepository->approveInitially($id);
+        $this->itemsRepository->approveInitially($id);
+        $item = $this->updateCurrentQuantity($item);
+        $this->updateItemBatchesCurrentQuantity($item);
+        return $item;
     }
 
     /**
@@ -139,7 +167,7 @@ class ItemsService extends BaseService {
      */
     public function getAllInitiallyApproved()
     {
-        return $this->getAll()->where('is_initially_approved', true);
+        return $this->itemsRepository->getInitiallyApproved();
     }
 
     /**
@@ -150,6 +178,69 @@ class ItemsService extends BaseService {
     public function getNeedsInitialApproval()
     {
         return $this->itemsRepository->getNeedsInitialApproval();
+    }
+
+    /**
+     * Update an Item's current quantity.
+     * 
+     * @param Item $item
+     * @return Item
+     */
+    public function updateCurrentQuantity(Item $item)
+    {
+        $totalQuantity = $this->getTotalQuantity($item);
+        return $this->itemsRepository->update(['current_quantity' => $totalQuantity]);
+    }
+
+    /**
+     * Update an Item's current quantity.
+     * 
+     * @param Item $item
+     * @return Item
+     */
+    public function updateItemBatchesCurrentQuantity(Item $item)
+    {
+        $itemBatches = $this->getItemBatches($item);
+        foreach ($itemBatches as $itemBatch) {
+            $this->updateItemBatchCurrentQuantity($itemBatch);
+        }
+    }
+
+    /**
+     * Update current quantity for item batch.
+     * 
+     * TODO: update with item withdrawls
+     * 
+     * @param ItemBatch $itemBatch
+     * @return ItemBatch
+     */
+    public function updateItemBatchCurrentQuantity(ItemBatch $itemBatch)
+    {
+        return $this->itemBatchesRepository->update(['current_quantity' => $itemBatch->quantity]);
+    }
+
+    /**
+     * Get total quantity from summing batch quantities.
+     * 
+     * TODO : Add subtracting of item withdrawls. 
+     * 
+     * @param Item $item
+     * @return Integet
+     */
+    public function getTotalQuantity(Item $item)
+    {
+        return $this->getItemBatches($item)->sum('quantity');
+    }
+
+    /**
+     * Get batches of a specific item.
+     * 
+     * @param Item $item
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getItemBatches(Item $item)
+    {
+        return $this->itemBatchesRepository->findAllBy($item->id, 'item_id');
     }
 
 }

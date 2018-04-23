@@ -57,7 +57,7 @@ class ItemsController extends Controller {
      */
     public function store(StoreItemRequest $request)
     {
-        $item = $this->itemsService->create($request->all());
+        $item = $this->itemsService->create($request->all(), Auth::user());
 
         \Session::flash('flash_message_success', 'Item Created.');
         return redirect()->to('/items');

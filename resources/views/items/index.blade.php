@@ -44,13 +44,9 @@
           <table class="table table-hover" id="itemsTbl">
             <tbody><tr id="tHeaderRow">
               <th>Description</th>
-              <th>Initial Quantity</th>
-              <th>Unit ID</th>
-              <th>Supplier ID</th>
-              <th>Price</th>
+              <th>Unit</th>
+              <th>Supplier</th>
               <th>Minimum quantity</th>
-              <th>Expiry Date</th>
-              <th>Notes</th>
               <th class="tblActionCol"></th>
             </tr>
 
@@ -58,17 +54,13 @@
 
             <tr>
               <td>{{$items[$i]->description}}</td>
-              <td>{{ $items[$i]->initial_quantity }}</td>
-              <td>{{ $items[$i]->unit_id }}</td>
-              <td>{{ $items[$i]->supplier_id }}</td>
-              <td>{{ $items[$i]->price }}</td>
+              <td>{{ $items[$i]->measurementUnit->name }}</td>
+              <td>{{ isset($items[$i]->supplier) ? $items[$i]->supplier->name : 'N/A' }}</td>
               <td>{{ $items[$i]->minimum_quantity }}</td>
-              <td>{{ $items[$i]->expiry_date }}</td>
-              <td>{{ $items[$i]->notes }}</td>
               <td>
                 <ul class="list-inline">
                   <li>
-                    <a href="{{ url("items". $items[$i]->id ."/edit") }}"><i class="fa fa-pencil btn btn-xs btn-primary" aria-hidden="true"> Edit</i>
+                    <a href="{{ url("items/". $items[$i]->id ."/edit") }}"><i class="fa fa-pencil btn btn-xs btn-primary" aria-hidden="true"> Edit</i>
                     </a>
                   </li>    
                   <li>

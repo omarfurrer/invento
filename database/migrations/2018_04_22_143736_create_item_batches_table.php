@@ -15,6 +15,7 @@ class CreateItemBatchesTable extends Migration {
     {
         Schema::create('item_batches',
                        function (Blueprint $table) {
+            $table->increments('id');
             $table->float('quantity', 8, 2);
             $table->date('expiry_date')->nullable();
             $table->float('unit_price', 8, 2)->nullable();
@@ -24,6 +25,7 @@ class CreateItemBatchesTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('item_id')->unsigned()->index();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

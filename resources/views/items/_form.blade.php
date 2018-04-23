@@ -30,7 +30,7 @@
                     <select id="unit_id" name="unit_id" class="form-control" required>
                         <option value="">Select Unit</option>
                         @foreach($measurementUnits as $key => $name)
-                        <option value="{{ $key }}" {{  old('unit_id') != NULL ? (old('unit_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->$measurementUnit->id == $key ? 'selected' : '') :'')   }}>{{ $name }}</option>
+                        <option value="{{ $key }}" {{  old('unit_id') != NULL ? (old('unit_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->measurementUnit->id == $key ? 'selected' : '') :'')   }}>{{ $name }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('unit_id'))
@@ -59,7 +59,7 @@
                     <select id="supplier_id" name="supplier_id" class="form-control">
                         <option value="">Select Supplier</option>
                         @foreach($suppliers as $key => $name)
-                        <option value="{{ $key }}" {{  old('supplier_id') != NULL ? (old('supplier_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->$supplier->id == $key ? 'selected' : '') :'')   }}>{{ $name }}</option>
+                        <option value="{{ $key }}" {{  old('supplier_id') != NULL ? (old('supplier_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->supplier->id == $key ? 'selected' : '') :'')   }}>{{ $name }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('supplier_id'))
@@ -91,7 +91,7 @@
          
        <div class="form-group{{ $errors->has('item_batches[0][quantity]') ? ' has-error' : '' }}">
         
-                    <input type="number" class="form-control" name="item_batches[0][quantity]" id="item_batches_quantity" placeholder="Enter quantity" value="{{ old('item_batches[0][quantity]',isset($item)? $item->item_batches[0][quantity] : '') }}">
+                    <input type="number" class="form-control" name="item_batches[0][quantity]" id="item_batches_quantity" placeholder="Enter quantity" value="{{ old('item_batches[0][quantity]',isset($item)? $item->itemBatches[0]['quantity'] : '') }}">
                     @if($errors->has('item_batches[0][quantity]'))
                     <p class="text-danger">{{ $errors->first('item_batches[0][quantity]') }}</p>
                     @endif
@@ -108,7 +108,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches[0][expiry_date]',isset($item)? $item->item_batches[0][expiry_date] : '') }}" placeholder="Select expiry date">
+                  <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches[0][expiry_date]',isset($item)? $item->itemBatches[0]['expiry_date'] : '') }}" placeholder="Select expiry date">
                 </div>
                  @if($errors->has('item_batches[0][expiry_date]'))
                     <p class="text-danger">{{ $errors->first('item_batches[0][expiry_date]') }}</p>
@@ -121,7 +121,7 @@
          
        <div class="form-group{{ $errors->has('item_batches[0][unit_price]') ? ' has-error' : '' }}">
         
-                    <input type="number" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches[0][unit_price]',isset($item)? $item->item_batches[0][unit_price] : '') }}">
+                    <input type="number" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches[0][unit_price]',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
                     @if($errors->has('item_batches[0][unit_price]'))
                     <p class="text-danger">{{ $errors->first('item_batches[0][unit_price]') }}</p>
                     @endif
