@@ -144,7 +144,7 @@ class ItemsService extends BaseService {
             $this->addError('Only an admin can give approval.');
             return false;
         }
-        $this->itemsRepository->approveInitially($id);
+        $item = $this->itemsRepository->approveInitially($id);
         $item = $this->updateCurrentQuantity($item);
         $this->updateItemBatchesCurrentQuantity($item);
         return $item;
@@ -180,7 +180,7 @@ class ItemsService extends BaseService {
         $items = $this->itemsRepository->getNeedsInitialApproval();
         $items->map(function ($item, $key) {
             $item['current_quantity'] = $this->getTotalQuantity($item);
-            return $item ;
+            return $item;
         });
         return $items->all();
     }
@@ -194,7 +194,7 @@ class ItemsService extends BaseService {
     public function updateCurrentQuantity(Item $item)
     {
         $totalQuantity = $this->getTotalQuantity($item);
-        return $this->itemsRepository->update(['current_quantity' => $totalQuantity]);
+        return $this->itemsRepository->update($item->id, ['current_quantity' => $totalQuantity]);
     }
 
     /**
@@ -221,7 +221,7 @@ class ItemsService extends BaseService {
      */
     public function updateItemBatchCurrentQuantity(ItemBatch $itemBatch)
     {
-        return $this->itemBatchesRepository->update(['current_quantity' => $itemBatch->quantity]);
+        return $this->itemBatchesRepository->update($itemBatch->id, ['current_quantity' => $itemBatch->quantity]);
     }
 
     /**

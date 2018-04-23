@@ -43,7 +43,8 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover" id="itemsTbl">
             <tbody><tr id="tHeaderRow">
-              <th>Description</th>
+              <th>Item</th>
+              <th>quantity</th>
               <th>Unit</th>
               <th>Supplier</th>
               <th>Minimum quantity</th>
@@ -54,6 +55,7 @@
 
             <tr>
               <td>{{$items[$i]->description}}</td>
+              <td>{{ $items[$i]->current_quantity }}</td>
               <td>{{ $items[$i]->measurementUnit->name }}</td>
               <td>{{ isset($items[$i]->supplier) ? $items[$i]->supplier->name : 'N/A' }}</td>
               <td>{{ $items[$i]->minimum_quantity }}</td>

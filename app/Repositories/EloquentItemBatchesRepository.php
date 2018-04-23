@@ -31,4 +31,19 @@ class EloquentItemBatchesRepository extends EloquentAbstractRepository implement
         return parent::create($fields);
     }
 
+    /**
+     * Update an item batch.
+     *
+     * @param Integer $id
+     * @param array $fields
+     * @return mixed
+     */
+    public function update($id, array $fields = array())
+    {
+        if (!empty($fields['expiry_date'])) {
+            $fields['expiry_date'] = Carbon::parse($fields['expiry_date'])->format('Y-m-d');
+        }
+        return parent::update($id, $fields);
+    }
+
 }

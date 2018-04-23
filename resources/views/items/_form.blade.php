@@ -12,8 +12,8 @@
         {{ method_field('PATCH') }}
         @endif
 
-        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-            <label for="description">Description</label>
+        <div class="form-group required{{ $errors->has('description') ? ' has-error' : '' }}">
+            <label for="description" class="control-label">Description</label>
             <input type="text" class="form-control" name="description" id="description" placeholder="Enter item's description" value="{{ old('description',isset($item)? $item->description : '') }}" required>
             @if($errors->has('description'))
             <p class="text-danger">{{ $errors->first('description') }}</p>
@@ -24,9 +24,8 @@
 
             <div class="col-md-6">
 
-
-               <div class="form-group{{ $errors->has('unit_id') ? ' has-error' : '' }}">
-                    <label for="unit_id">Unit</label>
+                <div class="form-group required{{ $errors->has('unit_id') ? ' has-error' : '' }}">
+                    <label for="unit_id" class="control-label">Unit</label>
                     <select id="unit_id" name="unit_id" class="form-control" required>
                         <option value="">Select Unit</option>
                         @foreach($measurementUnits as $key => $name)
@@ -83,71 +82,66 @@
 
         </div>
 
-<h3><small><b>Initial Batches<b></small></h3>
-    <hr>
-    <div class="row">
+        <h3><small><b>Initial Batches<b></small></h3>
 
-          <div class="col-md-4">
-         
-       <div class="form-group{{ $errors->has('item_batches[0][quantity]') ? ' has-error' : '' }}">
-        
-                    <input type="number" class="form-control" name="item_batches[0][quantity]" id="item_batches_quantity" placeholder="Enter quantity" value="{{ old('item_batches[0][quantity]',isset($item)? $item->itemBatches[0]['quantity'] : '') }}">
-                    @if($errors->has('item_batches[0][quantity]'))
-                    <p class="text-danger">{{ $errors->first('item_batches[0][quantity]') }}</p>
-                    @endif
-                </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div 
+                                    class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }}">
+                                    <input type="number"
+                                           class="form-control"
+                                           name="item_batches[0][quantity]"
+                                           id="item_batches_quantity"
+                                           placeholder="Enter quantity"
+                                           value="{{ old('item_batches[0][quantity]',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
+                                           {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
+                                    @if($errors->has('item_batches.0.quantity'))
+                                    <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
+                                    @endif
+                                </div>
+                            </div>
 
+                            <div class="col-md-4">
 
-      </div>
+                                <div class="form-group{{ $errors->has('item_batches.0.expiry_date') ? ' has-error' : '' }}">
 
-       <div class="col-md-4">
-         
-    <div class="form-group{{ $errors->has('item_batches[0][expiry_date]') ? ' has-error' : '' }}">
-              
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches[0][expiry_date]',isset($item)? $item->itemBatches[0]['expiry_date'] : '') }}" placeholder="Select expiry date">
-                </div>
-                 @if($errors->has('item_batches[0][expiry_date]'))
-                    <p class="text-danger">{{ $errors->first('item_batches[0][expiry_date]') }}</p>
-                    @endif
-              </div>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? $item->itemBatches[0]->expiry_date->format('d-m-Y') : '') }}" placeholder="Select expiry date">
+                                    </div>
+                                    @if($errors->has('item_batches.0.expiry_date'))
+                                    <p class="text-danger">{{ $errors->first('item_batches.0.expiry_date') }}</p>
+                                    @endif
+                                </div>
 
-      </div>
+                            </div>
 
-       <div class="col-md-4">
-         
-       <div class="form-group{{ $errors->has('item_batches[0][unit_price]') ? ' has-error' : '' }}">
-        
-                    <input type="number" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches[0][unit_price]',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
-                    @if($errors->has('item_batches[0][unit_price]'))
-                    <p class="text-danger">{{ $errors->first('item_batches[0][unit_price]') }}</p>
-                    @endif
-                </div>
+                            <div class="col-md-4">
 
+                                <div class="form-group{{ $errors->has('item_batches.0.unit_price') ? ' has-error' : '' }}">
 
-      </div>
-
-    </div>
-    <hr>
-    <button type="submit" class="btn btn-primary pull-right">Add new batch </button>
-     
+                                    <input type="number" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
+                                    @if($errors->has('item_batches.0.unit_price'))
+                                    <p class="text-danger">{{ $errors->first('item_batches.0.unit_price') }}</p>
+                                    @endif
+                                </div>
 
 
+                            </div>
 
+                        </div>
+                        <!--                        <hr>
+                                                <button type="submit" class="btn btn-primary pull-right">Add new batch </button>-->
 
+                        </div>
 
-
-
-
-</div>
-
-<div class="box-footer">
-    <button type="submit" class="btn btn-primary pull-right">Save</button>
-</div>
-</form>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary pull-right">Save</button>
+                        </div>
+                        </form>
 
 
 

@@ -48,6 +48,7 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
         $item = $this->getById($id);
         $item->is_initially_approved = true;
         $item->initially_approved_at = Carbon::now();
+        $item->save();
         return $item;
     }
 
