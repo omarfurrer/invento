@@ -30,7 +30,7 @@
             <tbody><tr id="tHeaderRow">
               <th>Item</th>
               <th>Quantity</th>
-              <th>Min</th>
+              <th>Min <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than min an alert will be displayed"></i></th>
               <th class="tblActionCol"></th>
             </tr>
 
@@ -65,3 +65,16 @@
 
 </section>
 @endsection
+
+
+@push('scripts')
+<script>
+  
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+
+
+</script>
+
+@endpush
