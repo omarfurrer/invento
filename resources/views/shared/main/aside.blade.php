@@ -43,6 +43,7 @@
 
             <li class="header">Admin</li>
             <li class="{{ Request::is('admin/users') ? 'active' : '' }}"><a href="{{ url("/admin/users") }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+            <li class="{{ Request::is('admin/items') ? 'active' : '' }}"><a href="{{ url("/admin/items/approval/initial") }}"><i class="fa fa-check"></i> <span>New Items</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>
