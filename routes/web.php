@@ -21,6 +21,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('measurement_units', 'MeasurementUnitsController');
     Route::resource('suppliers', 'SuppliersController');
     Route::resource('items', 'ItemsController');
+
+    Route::get('log', 'LogController@index');
+    Route::get('log/in/create', 'LogController@getCreateIn');
+    Route::post('log/in/create', 'LogController@postCreateIn');
+    Route::get('log/out/create', 'LogController@getCreateOut');
+    Route::post('log/out/create', 'LogController@postCreateOut');
+
     Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'],
                  function () {
         Route::resource('users', 'UsersController');

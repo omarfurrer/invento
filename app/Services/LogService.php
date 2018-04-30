@@ -12,6 +12,7 @@ use App\Models\ItemWithdrawl;
 use App\User;
 use App\Services\ItemsService;
 use App\Models\Log;
+use Illuminate\Support\Collection;
 
 class LogService extends BaseService {
 
@@ -57,6 +58,16 @@ class LogService extends BaseService {
         $this->itemWithdrawlsRepository = $itemWithdrawlsRepository;
         $this->itemsService = $itemsService;
         $this->logRepository = $logRepository;
+    }
+
+    /**
+     * Get all log records.
+     * 
+     * @return Collection
+     */
+    public function getAll()
+    {
+        return $this->logRepository->all();
     }
 
     /**
