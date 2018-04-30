@@ -50,6 +50,9 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->singleton(
                 Interfaces\ItemWithdrawlsRepositoryInterface::class, Repositories\EloquentItemWithdrawlsRepository::class
         );
+        $this->app->singleton(
+                Interfaces\LogRepositoryInterface::class, Repositories\EloquentLogRepository::class
+        );
     }
 
 }
