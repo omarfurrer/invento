@@ -40,7 +40,17 @@
             @hasanyrole('admin|super admin')
             <li class="header">Admin</li>
             <li class="{{ Request::is('admin/users') ? 'active' : '' }}"><a href="{{ url("/admin/users") }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
-            <li class="{{ Request::is('admin/items') ? 'active' : '' }}"><a href="{{ url("/admin/items/approval/initial") }}"><i class="fa fa-check"></i> <span>New Items</span></a></li>
+            <li class="{{ Request::is('admin/items') ? 'active' : '' }}">
+                <a href="{{ url("/admin/items/approval/initial") }}">
+                    <i class="fa fa-check"></i>
+                    <span>New Items</span>
+                    @if($notificationsService->hasItemsNeedInitialApproval())
+                    <span class="pull-right-container">
+                        <small class="label pull-right bg-yellow">{{ $notificationsService->getItemsNeedInitialApprovalCount() }}</small>
+                    </span>
+                    @endif
+                </a>
+            </li>
             @endhasanyrole
             @hasanyrole('super admin')
             <li class="header">Super Admin</li>

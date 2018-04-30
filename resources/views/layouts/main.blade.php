@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-
+            @inject('notificationsService', 'App\Services\NotificationsService')
             @include("shared.main.header")
             @include("shared.main.aside")
 
