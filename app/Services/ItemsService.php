@@ -248,4 +248,52 @@ class ItemsService extends BaseService {
         return $this->itemBatchesRepository->findAllBy($item->id, 'item_id');
     }
 
+    /**
+     * Add quantity to Item.
+     * 
+     * @param Item $item
+     * @param float $quantity
+     * @return Item
+     */
+    public function addQuantity(Item $item, $quantity)
+    {
+        return $this->itemsRepository->update($item->id, ['current_quantity' => $item->current_quantity + $quantity]);
+    }
+
+    /**
+     * Remove quantity from Item.
+     * 
+     * @param Item $item
+     * @param float $quantity
+     * @return Item
+     */
+    public function subtractQuantity(Item $item, $quantity)
+    {
+        return $this->itemsRepository->update($item->id, ['current_quantity' => $item->current_quantity - $quantity]);
+    }
+
+    /**
+     * Add quantity to Item Batch.
+     * 
+     * @param ItemBatch $itemBatch
+     * @param float $quantity
+     * @return ItemBatch
+     */
+    public function addQuantityToItemBatch(ItemBatch $itemBatch, $quantity)
+    {
+        return $this->itemBatchesRepository->update($itemBatch->id, ['current_quantity' => $itemBatch->current_quantity + $quantity]);
+    }
+
+    /**
+     * Remove quantity from Item Batch.
+     * 
+     * @param ItemBatch $itemBatch
+     * @param float $quantity
+     * @return ItemBatch
+     */
+    public function subtractQuantityFromItemBatch(ItemBatch $itemBatch, $quantity)
+    {
+        return $this->itemBatchesRepository->update($itemBatch->id, ['current_quantity' => $itemBatch->current_quantity - $quantity]);
+    }
+
 }
