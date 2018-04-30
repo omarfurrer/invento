@@ -1,7 +1,3 @@
-
-
-
-
 <form action="{{ isset($item)? '/items/'.$item->id : '/items' }}" method="POST">
 
     <div class="box-body">
@@ -37,8 +33,6 @@
                     @endif
                 </div>
 
-
-
                 <div class="form-group{{ $errors->has('minimum_quantity') ? ' has-error' : '' }}">
                     <label for="minimum_quantity">Minimum Quantity</label>
                     <input type="number" class="form-control" name="minimum_quantity" id="minimum_quantity" placeholder="Enter minimum quantity" value="{{ old('minimum_quantity',isset($item)? $item->minimum_quantity : '') }}">
@@ -49,7 +43,6 @@
 
 
             </div>
-
 
             <div class="col-md-6">
 
@@ -66,11 +59,9 @@
                     @endif
                 </div>
 
-              
-
                 <div class="form-group{{ $errors->has('expires') ? ' has-error' : '' }}">
                     <label for="expires">Expires:</label>
-                     <select id="expires" name="expires" class="form-control">
+                    <select id="expires" name="expires" class="form-control">
                         <option value="0" {{  old('expires') != NULL ? (old('expires') == 0 ? 'selected' : '' ) : (isset($item)? ($item->expires == 0 ? 'selected' : '') :'')   }}>No</option>
                         <option value="1" {{  old('expires') != NULL ? (old('expires') == 1 ? 'selected' : '' ) : (isset($item)? ($item->expires == 1 ? 'selected' : '') :'')   }}>Yes</option>
                     </select>
@@ -110,7 +101,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? $item->itemBatches[0]->expiry_date->format('d-m-Y') : '') }}" placeholder="Select expiry date">
+                                        <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? ( $item->itemBatches[0]->expiry_date != null ? $item->itemBatches[0]->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date">
                                     </div>
                                     @if($errors->has('item_batches.0.expiry_date'))
                                     <p class="text-danger">{{ $errors->first('item_batches.0.expiry_date') }}</p>
