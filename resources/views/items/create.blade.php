@@ -1,6 +1,8 @@
 
 @extends('layouts.main')
 
+@section('title', 'Create New Item')
+
 @section('content')
 
 

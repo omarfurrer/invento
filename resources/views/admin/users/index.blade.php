@@ -10,10 +10,7 @@
   <h1>
     <a class="btn btn-primary addBtn" href="{{ url('/admin/users/create') }}">Add New user   <i class="fa fa-plus"  aria-hidden="true"></i></a>
   </h1>
-  <ol class="breadcrumb">
-    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-    <li class="active">Here</li>
-  </ol>
+  
 </section>
 
 <!-- Main content -->
