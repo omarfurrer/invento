@@ -79,8 +79,10 @@
                 <div class="col-md-4">
                     <div 
                     class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }}">
+                    <label for="quantity" class="control-label">Quantity</label>
                     <input type="number"
                     class="form-control"
+                    id="quantity" 
                     name="item_batches[0][quantity]"
                     id="item_batches_quantity"
                     placeholder="Enter quantity"
@@ -95,12 +97,12 @@
             <div class="col-md-4">
 
                 <div class="form-group{{ $errors->has('item_batches.0.expiry_date') ? ' has-error' : '' }}">
-
+                 <label for="expiryDate" class="control-label">Expiry Date</label>
                     <div class="input-group date">
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? ( $item->itemBatches[0]->expiry_date != null ? $item->itemBatches[0]->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date">
+                        <input id="expiryDate" type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? ( $item->itemBatches[0]->expiry_date != null ? $item->itemBatches[0]->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date">
                     </div>
                     @if($errors->has('item_batches.0.expiry_date'))
                     <p class="text-danger">{{ $errors->first('item_batches.0.expiry_date') }}</p>
@@ -112,8 +114,8 @@
             <div class="col-md-4">
 
                 <div class="form-group{{ $errors->has('item_batches.0.unit_price') ? ' has-error' : '' }}">
-
-                    <input type="number" step="0.01" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
+                 <label for="item_batches_unitPrice" class="control-label">Price / Unit</label>
+                    <input  type="number" step="0.01" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
                     @if($errors->has('item_batches.0.unit_price'))
                     <p class="text-danger">{{ $errors->first('item_batches.0.unit_price') }}</p>
                     @endif

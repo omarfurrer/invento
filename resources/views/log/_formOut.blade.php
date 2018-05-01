@@ -37,7 +37,7 @@
 		<div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
 			<label for="batch">Batch</label>
 			<select id="batch" name="batch" class="form-control">
-				<option value="">Select Item</option>
+				<option value="">Select Batch</option>
 				@foreach($items as $key => $item)
 				<option value="{{ $key }}" {{  old('item_batch_id') != NULL ? (old('item_batch_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->id == $key ? 'selected' : '') :'')   }}>{{ $item->item_batch_id }}</option>                      
 				@endforeach
