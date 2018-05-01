@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Editing Item')
+
 @section('content')
 <div class="container-fluid">
     <div class="row">

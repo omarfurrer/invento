@@ -51,7 +51,7 @@
                     <select id="supplier_id" name="supplier_id" class="form-control">
                         <option value="">Select Supplier</option>
                         @foreach($suppliers as $key => $name)
-                        <option value="{{ $key }}" {{  old('supplier_id') != NULL ? (old('supplier_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->supplier->id == $key ? 'selected' : '') :'')   }}>{{ $name }}</option>
+                        <option value="{{ $key }}" {{  old('supplier_id') != NULL ? (old('supplier_id') == $key ? 'selected' : '' ) : ( isset($item) ? $item->supplier != null ? ($item->supplier->id == $key ? 'selected' : '') : '' :'' )   }}>{{ $name }}</option>
                         @endforeach
                     </select>
                     @if($errors->has('supplier_id'))
