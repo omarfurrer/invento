@@ -83,6 +83,11 @@ class ItemsService extends BaseService {
                 ));
             }
         }
+        
+        // If user adding the item is admin or super admin then bypass initial approval
+        if ($user->hasRole(['admin', 'super admin'])) {
+            $item = $this->approveInitially($item->id, $user);
+        }
 
         return $item;
     }
