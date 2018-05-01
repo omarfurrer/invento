@@ -10,8 +10,8 @@
         {{ method_field('PATCH') }}
         @endif
 
-        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name">Name</label>
+        <div class="form-group required{{ $errors->has('name') ? ' has-error' : '' }}">
+            <label for="name" class="control-label">Name</label>
             <input type="text" class="form-control" required name="name" id="name" placeholder="Name" value="{{ old('name',isset($supplier)? $supplier->name : '') }}">
             @if($errors->has('name'))
             <p class="text-danger">{{ $errors->first('name') }}</p>
