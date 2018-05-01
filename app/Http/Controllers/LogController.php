@@ -43,7 +43,7 @@ class LogController extends Controller {
     public function getCreateIn()
     {
         $dependencies = $this->logService->getCreateIn();
-        return view('items.createIn', $dependencies);
+        return view('log.createIn', $dependencies);
     }
 
     /**
@@ -68,7 +68,7 @@ class LogController extends Controller {
     public function getCreateOut()
     {
         $dependencies = $this->logService->getCreateOut();
-        return view('items.createOut', $dependencies);
+        return view('log.createOut', $dependencies);
     }
 
     /**
