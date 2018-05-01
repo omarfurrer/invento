@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Repositories\Interfaces\ItemCategoriesRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class ItemCategoriesTableSeeder extends Seeder {
 
@@ -27,7 +28,9 @@ class ItemCategoriesTableSeeder extends Seeder {
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         $this->itemCategoriesRepository->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
 }

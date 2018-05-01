@@ -27,6 +27,7 @@ class MeasurementUnitsTableSeeder extends Seeder {
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         $this->measurementUnitsRepository->truncate();
         $this->measurementUnitsRepository->create(['short_name' => 'bg', 'name' => 'bag']);
         $this->measurementUnitsRepository->create(['short_name' => 'bt', 'name' => 'bottle']);
@@ -36,6 +37,7 @@ class MeasurementUnitsTableSeeder extends Seeder {
         $this->measurementUnitsRepository->create(['short_name' => 'li', 'name' => 'liter']);
         $this->measurementUnitsRepository->create(['short_name' => 'pc', 'name' => 'piece']);
         $this->measurementUnitsRepository->create(['short_name' => 'pk', 'name' => 'pack']);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 
 }
