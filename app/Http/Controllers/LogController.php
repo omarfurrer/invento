@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\LogService;
+use App\Http\Requests\Log\PostCreateInRequest;
+use App\Http\Requests\Log\PostCreateOutRequest;
 
 class LogController extends Controller {
 
@@ -47,10 +49,10 @@ class LogController extends Controller {
     /**
      * create new log in record.
      * 
-     * @param Request $request
+     * @param PostCreateInRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreateIn(Request $request)
+    public function postCreateIn(PostCreateInRequest $request)
     {
         $log = $this->logService->createIn($request->item_id, $request->quantity, $request->expiry_date, $request->unit_price, auth()->user());
 
@@ -72,10 +74,10 @@ class LogController extends Controller {
     /**
      * create new log out record.
      * 
-     * @param Request $request
+     * @param PostCreateOutRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreateOut(Request $request)
+    public function postCreateOut(PostCreateOutRequest $request)
     {
         $log = $this->logService->createOut($request->item_id, $request->quantity, $request->item_batch_id, auth()->user());
 
