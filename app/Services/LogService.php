@@ -124,7 +124,7 @@ class LogService extends BaseService {
      */
     public function getCreateOut()
     {
-        $items = $this->itemsRepository->getInitiallyApproved()->load('itemBatches');
+        $items = $this->itemsRepository->getInitiallyApproved();
         return compact('items');
     }
 
