@@ -46,4 +46,16 @@ class EloquentItemBatchesRepository extends EloquentAbstractRepository implement
         return parent::update($id, $fields);
     }
 
+    /**
+     * Find item batch by item ID and expiry date.
+     * 
+     * @param integer $itemID
+     * @param string $expiryDate
+     * @return ItemBatch
+     */
+    public function findByItemAndExpiry($itemID, $expiryDate)
+    {
+        return ItemBatch::where('item_id', $itemID)->where('expiry_date', Carbon::parse($expiryDate)->format('Y-m-d'))->first();
+    }
+
 }
