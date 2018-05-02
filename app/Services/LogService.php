@@ -67,7 +67,7 @@ class LogService extends BaseService {
      */
     public function getAll()
     {
-        return $this->logRepository->all();
+        return $this->logRepository->getAllOrderBy();
     }
 
     /**
