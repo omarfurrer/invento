@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Log;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Item;
 
 class PostCreateInRequest extends FormRequest {
 
@@ -23,12 +24,19 @@ class PostCreateInRequest extends FormRequest {
      */
     public function rules()
     {
-        return [
+        $rules = [
             'item_id' => 'required|exists:items,id',
             'quantity' => 'required|numeric',
             'expiry_date' => 'nullable|date',
             'unit_price' => 'nullable|numeric'
         ];
+        $item = Item::find($this->get('item_id'));
+        if ($item) {
+            if ($item->expires) {
+                $rules['expiry_date'] = $rules['expiry_date'] . '|required';
+            }
+        }
+        return $rules;
     }
 
 }

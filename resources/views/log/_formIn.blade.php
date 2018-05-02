@@ -9,8 +9,8 @@
         {{ method_field('PATCH') }}
         @endif
 
-        <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
-            <label for="item">Item</label>
+        <div class="form-group required{{ $errors->has('item_id') ? ' has-error' : '' }}">
+            <label for="item" class="control-label">Item</label>
             <select id="item" name="item_id" class="form-control">
                 <option value="">Select Item</option>
                 @foreach($items as $id => $description)
@@ -23,8 +23,8 @@
         </div>
 
 
-        <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-            <label for="quantity">Quantity</label>
+        <div class="form-group required{{ $errors->has('quantity') ? ' has-error' : '' }}">
+            <label for="quantity" class="control-label">Quantity</label>
             <input 
             step="0.01" 
             type="number" 
@@ -40,8 +40,8 @@
         </div>
 
 
-        <div class="form-group{{ $errors->has('expiry_date') ? ' has-error' : '' }}">
-         <label for="expiryDate">Expiry date</label>
+        <div class="form-group required{{ $errors->has('expiry_date') ? ' has-error' : '' }}">
+            <label for="expiryDate" class="control-label">Expiry date</label>
          <div class="input-group date">
             <div class="input-group-addon">
                 <i class="fa fa-calendar"></i>

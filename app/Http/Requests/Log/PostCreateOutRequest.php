@@ -25,7 +25,7 @@ class PostCreateOutRequest extends FormRequest {
     {
         return [
             'item_id' => 'required|exists:items,id',
-            'quantity' => 'required|numeric',
+            'quantity' => 'required|numeric'
         ];
     }
 
