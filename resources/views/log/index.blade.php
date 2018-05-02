@@ -35,7 +35,7 @@
 							<th>In/Out</th>
 							<th>Quantity</th>
 							<th>Item</th>
-							<th>Current Quantity</th>
+							<th>Remaining</th>
 							<th>User</th>
 							<th>Date</th>
 							<th class="tblActionCol"></th>
@@ -45,13 +45,17 @@
 
 						<tr>
 							<td>
-
+                                                            @if($log[$i]->in)
+                                                            <i class="fa fa-sort-down text-success"></i>           
+                                                            @else
+                                                            <i class="fa fa-sort-up text-danger"></i>           
+                                                            @endif
 							</td>
 							<td>{{$log[$i]->quantity}}</td>
 							<td>{{$log[$i]->item->description}}</td>
-							<td>{{$log[$i]->created_at}}</td>
-							<td>{{$log[$i]->item->current_quantity}}</td>
+							<td>{{$log[$i]->item_current_quantity}}</td>
 							<td>{{$log[$i]->user->name}}</td>
+							<td>{{$log[$i]->created_at->format('d-m-Y')}}</td>
 							<td>
 								<ul class="list-inline">
 									<li>
@@ -59,8 +63,8 @@
 									</ul>
 								</td>
 									</tr>
-								</tbody>
 								@endfor
+								</tbody>
 							</table>
 						</div>
 						<!-- /.box-body -->

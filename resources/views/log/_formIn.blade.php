@@ -9,16 +9,16 @@
         {{ method_field('PATCH') }}
         @endif
 
-        <div class="form-group{{ $errors->has('item') ? ' has-error' : '' }}">
+        <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
             <label for="item">Item</label>
-            <select id="item" name="item" class="form-control">
+            <select id="item" name="item_id" class="form-control">
                 <option value="">Select Item</option>
-                @foreach($items as $key => $item)
-                <option value="{{ $key }}" {{  old('item_id') != NULL ? (old('item_id') == $key ? 'selected' : '' ) : (isset($item)? ($item->id == $key ? 'selected' : '') :'')   }}>{{ $item->description }}</option>                      
+                @foreach($items as $id => $description)
+                <option value="{{ $id }}"{{ old('item_id') != NULL ? (old('item_id') == $id ? 'selected' : '' ) : (isset($item)? ($item->id == $id ? 'selected' : '') :'')  }}>{{ $description }}</option>                      
                 @endforeach
             </select>
-            @if($errors->has('item'))
-            <p class="text-danger">{{ $errors->first('item') }}</p>
+            @if($errors->has('item_id'))
+            <p class="text-danger">{{ $errors->first('item_id') }}</p>
             @endif
         </div>
 
@@ -68,6 +68,7 @@
 </div>
 
 <div class="box-footer">
-    <button style="margin-left: 10px" type="submit" class="btn btn-primary pull-right">Save & Add</button>
+    <!--<button style="margin-left: 10px" type="submit" class="btn btn-primary pull-right">Save & Add</button>-->
     <button type="submit" class="btn btn-primary pull-right">Save</button>
 </div>
+</form>
