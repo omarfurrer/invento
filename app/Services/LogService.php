@@ -77,7 +77,8 @@ class LogService extends BaseService {
      */
     public function getCreateIn()
     {
-        $items = $this->itemsRepository->getInitiallyApproved()->pluck('description','id');
+        $items = $this->itemsRepository->getInitiallyApproved();
+//        $items = $this->itemsRepository->getInitiallyApproved()->pluck('description','id');
         return compact('items');
     }
 
@@ -124,7 +125,8 @@ class LogService extends BaseService {
      */
     public function getCreateOut()
     {
-        $items = $this->itemsRepository->getInitiallyApproved()->pluck('description','id');
+        $items = $this->itemsRepository->getInitiallyApproved();
+//        $items = $this->itemsRepository->getInitiallyApproved()->pluck('description','id');
         return compact('items');
     }
 
