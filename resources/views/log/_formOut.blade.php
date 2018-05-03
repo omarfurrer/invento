@@ -4,12 +4,13 @@
 	<div class="box-body">
 
 		<div class="form-group required{{ $errors->has('item_id') ? ' has-error' : '' }}">
-                    <label for="item" class="control-label">Item</label>
+			<label for="item" class="control-label">Item</label>
 			<select id="item" name="item_id" class="form-control">
 				<option value="">Select Item</option>
-				@foreach($items as $id => $description)
-				<option value="{{ $id }}" {{  old('item_id') != NULL ? (old('item_id') == $id ? 'selected' : '' ) : (isset($item)? ($item->id == $id ? 'selected' : '') :'')   }}>{{ $description }}</option>                      
+				@foreach($items as $item)
+				<option value="{{ $item->id }}"{{ old('item_id') != NULL ? (old('item_id') == $item->id ? 'selected' : '' ) : (isset($log)? ($item->id == $log->item->id ? 'selected' : '') :'')  }}>{{ $item->description }}</option>                      
 				@endforeach
+
 			</select>
 			@if($errors->has('item_id'))
 			<p class="text-danger">{{ $errors->first('item_id') }}</p>
@@ -18,8 +19,9 @@
 
 
 
+
 		<div class="form-group required{{ $errors->has('quantity') ? ' has-error' : '' }}">
-                    <label for="quantity" class="control-label">Quantity</label>
+			<label for="quantity" class="control-label">Quantity</label>
 			<input 
 			step="0.01" 
 			type="number" 
@@ -51,3 +53,63 @@
 		<button type="submit" class="btn btn-primary pull-right">Save</button>
 	</div>
 </form>
+
+
+
+
+@push('scripts')
+
+<script>
+
+	$(document).ready(function() {
+		var method = 'GET';
+
+		$("#item").change(function() {
+
+			var selectedItemId = $(this).val();
+
+			var url = '/api/items/'+selectedItemId+'/batches';
+
+			$.ajax ({
+
+				type: method,
+				url: url,
+
+				success: function(data) {
+
+
+					var itemBatches = data.itemBatches;
+
+                         $('#batch').empty();
+					for(i=0; i < itemBatches.length; i++) {
+
+						var currentDate = itemBatches[i].expiry_date;
+						var formatedCurrentDate = moment(currentDate).format('DD/MM/YYYY');
+						var currentQuanrity = itemBatches[i].current_quantity;
+
+
+						$('#batch').append('<option value="itemBatches[i].id">'+currentQuanrity+' Remaining - '+ 
+                           ((currentDate==null)? '(Does not expire' :'Expires at: ('+formatedCurrentDate)+
+
+							')</option>')  ;
+					
+
+					}
+
+                               
+
+				} 
+
+
+
+                                    
+			});
+
+
+		});
+	});
+
+
+</script>
+
+@endpush

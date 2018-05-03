@@ -94,6 +94,10 @@
 
          var currentItemId = $(this).val();
 
+         if (currentItemId == '') {
+            $('#expiryDate_input').hide();
+         }
+
          for (i=0; i < allItems.length; i++)   {
 
              var arrayItemId = allItems[i].id;
