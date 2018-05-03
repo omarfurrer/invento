@@ -13,9 +13,10 @@
             <label for="item" class="control-label">Item</label>
             <select id="item" name="item_id" class="form-control">
                 <option value="">Select Item</option>
-                @foreach($items as $id => $description)
-                <option value="{{ $id }}"{{ old('item_id') != NULL ? (old('item_id') == $id ? 'selected' : '' ) : (isset($item)? ($item->id == $id ? 'selected' : '') :'')  }}>{{ $description }}</option>                      
+                @foreach($items as $item)
+                <option value="{{ $item->id }}"{{ old('item_id') != NULL ? (old('item_id') == $item->id ? 'selected' : '' ) : (isset($log)? ($item->id == $log->item->id ? 'selected' : '') :'')  }}>{{ $item->description }}</option>                      
                 @endforeach
+
             </select>
             @if($errors->has('item_id'))
             <p class="text-danger">{{ $errors->first('item_id') }}</p>
@@ -40,35 +41,80 @@
         </div>
 
 
-        <div class="form-group required{{ $errors->has('expiry_date') ? ' has-error' : '' }}">
+        <div class="form-group required{{ $errors->has('expiry_date') ? ' has-error' : '' }}" id="expiryDate_input">
             <label for="expiryDate" class="control-label">Expiry date</label>
-         <div class="input-group date">
-            <div class="input-group-addon">
-                <i class="fa fa-calendar"></i>
+            <div class="input-group date">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text"
+                class="form-control pull-right date-picker" 
+                name="expiry_date" 
+                value="{{ old('expiry_date',isset($item)? ( $item->expiry_date != null ? $item->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date" id="expiryDate">
             </div>
-            <input type="text"
-            class="form-control pull-right date-picker" 
-            name="expiry_date" 
-            value="{{ old('expiry_date',isset($item)? ( $item->expiry_date != null ? $item->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date" id="expiryDate">
+            @if($errors->has('expiry_date'))
+            <p class="text-danger">{{ $errors->first('expiry_date') }}</p>
+            @endif
         </div>
-        @if($errors->has('expiry_date'))
-        <p class="text-danger">{{ $errors->first('expiry_date') }}</p>
-        @endif
+
+
+        <div class="form-group{{ $errors->has('unit_price') ? ' has-error' : '' }}">
+            <label for="unitPrice">Price / Unit</label> 
+            <input type="number" step="0.01" class="form-control" name="unit_price" id="unitPrice" placeholder="Enter Price / Unit" value="{{ old('unit_price',isset($item)? $item->unit_price : '') }}">
+            @if($errors->has('unit_price'))
+            <p class="text-danger">{{ $errors->first('unit_price') }}</p>
+            @endif
+        </div>
+
     </div>
 
-
-    <div class="form-group{{ $errors->has('unit_price') ? ' has-error' : '' }}">
-        <label for="unitPrice">Price / Unit</label> 
-        <input type="number" step="0.01" class="form-control" name="unit_price" id="unitPrice" placeholder="Enter Price / Unit" value="{{ old('unit_price',isset($item)? $item->unit_price : '') }}">
-        @if($errors->has('unit_price'))
-        <p class="text-danger">{{ $errors->first('unit_price') }}</p>
-        @endif
+    <div class="box-footer">
+        <!--<button style="margin-left: 10px" type="submit" class="btn btn-primary pull-right">Save & Add</button>-->
+        <button type="submit" class="btn btn-primary pull-right">Save</button>
     </div>
-
-</div>
-
-<div class="box-footer">
-    <!--<button style="margin-left: 10px" type="submit" class="btn btn-primary pull-right">Save & Add</button>-->
-    <button type="submit" class="btn btn-primary pull-right">Save</button>
-</div>
 </form>
+
+
+
+
+
+
+
+@push('scripts')
+
+<script>
+
+    $(document).ready(function() {
+
+       var allItems = {!! json_encode($items->toArray()) !!};
+
+       $('#expiryDate_input').hide();
+
+       $("#item").change(function() {
+
+         var currentItemId = $(this).val();
+
+         for (i=0; i < allItems.length; i++)   {
+
+             var arrayItemId = allItems[i].id;
+
+             if (currentItemId == arrayItemId){
+
+                if(allItems[i].expires) {
+                 $('#expiryDate_input').show();
+             }   
+             else {
+                 $('#expiryDate_input').hide();
+             }
+
+         } 
+
+     }        
+
+ });
+
+   });
+
+</script>
+
+@endpush

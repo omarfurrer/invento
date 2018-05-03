@@ -41,7 +41,7 @@
                     <table class="table table-hover" id="itemsTbl">
                         <tbody><tr id="tHeaderRow">
                                 <th>Item</th>
-                                <th>quantity</th>
+                                <th>Quantity</th>
                                 <th>Unit</th>
                                 <th>Supplier</th>
                                 <th>Minimum quantity</th>

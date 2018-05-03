@@ -51,9 +51,9 @@
                                                             <i class="fa fa-sort-up text-danger"></i>           
                                                             @endif
 							</td>
-							<td>{{$log[$i]->quantity}}</td>
+							<td>{{$log[$i]->quantity}} {{$log[$i]-> item->measurementUnit->name }}</td>
 							<td>{{$log[$i]->item->description}}</td>
-							<td>{{$log[$i]->item_current_quantity}}</td>
+							<td>{{$log[$i]->item_current_quantity}} {{$log[$i]-> item->measurementUnit->name }}</td>
 							<td>{{$log[$i]->user->name}}</td>
 							<td>{{$log[$i]->created_at->format('d-m-Y')}}</td>
 							<td>
