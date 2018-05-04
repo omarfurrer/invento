@@ -21,7 +21,8 @@ mix
         .scripts([
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/bootstrap/dist/js/bootstrap.min.js',
-            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'
+            'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+            'node_modules/moment/min/moment.min.js'
         ], 'public/adminlte/js/all.js')
         .copyDirectory('node_modules/admin-lte/dist', 'public/adminlte/dist')
         .copyDirectory('node_modules/bootstrap/fonts', 'public/adminlte/fonts')
