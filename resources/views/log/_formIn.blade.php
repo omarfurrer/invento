@@ -86,7 +86,25 @@
 
 $(document).ready(function() {
 
-    function showHide(item) {
+    $('#expiryDate_input').hide();
+
+        var allItems = {!! json_encode($items->toArray()) !!};
+        var arrayItemId = $('#item').val();
+        search(arrayItemId);
+    
+    $("#item").change(function() {
+
+        var currentItemId = $(this).val();
+        if (currentItemId == '') {
+            $('#expiryDate_input').hide();
+        }
+        search(currentItemId);
+        
+    });
+
+
+
+     function showHide(item) {
         if(item.expires) {
 
            $('#expiryDate_input').show();
@@ -106,23 +124,7 @@ $(document).ready(function() {
             }         
         }
     }
-    
 
-    $('#expiryDate_input').hide();
-
-        var allItems = {!! json_encode($items->toArray()) !!};
-        var arrayItemId = $('#item').val();
-        search(arrayItemId);
-    
-
-    $("#item").change(function() {
-
-        var currentItemId = $(this).val();
-        if (currentItemId == '') {
-            $('#expiryDate_input').hide();
-        }
-        search(currentItemId);
-    });
 });
 
 </script>
