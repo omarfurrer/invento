@@ -123,6 +123,9 @@
 
 
             </div>
+                @if(isset($item))
+                <input type="hidden" name="item_batches[0][id]" value="{{ $item->itemBatches[0]['id'] }}">
+                @endif
 
         </div>
                         <!--                        <hr>

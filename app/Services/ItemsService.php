@@ -119,8 +119,14 @@ class ItemsService extends BaseService {
 
         $itemBatches = $this->itemBatchesRepository->findAllBy($item->id, 'item_id');
 
-        foreach ($itemBatches as $key => $itemBatch) {
-            $newItemBatch = $data['item_batches'][$key];
+        $newItemBatches = collect($data['item_batches']);
+
+        foreach ($itemBatches as $itemBatch) {
+            $newItemBatch = $newItemBatches->firstWhere('id', '=', $itemBatch->id);
+
+            if (empty($newItemBatch)) {
+                continue;
+            }
 
             // check if initial quantity will be changed
             // inital quantity cannot be changed after it has been approved, except by an admin
