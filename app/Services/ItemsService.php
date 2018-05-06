@@ -307,4 +307,27 @@ class ItemsService extends BaseService {
         return $this->itemBatchesRepository->update($itemBatch->id, ['current_quantity' => $itemBatch->current_quantity - $quantity]);
     }
 
+    /**
+     * Check if quantity can be withdrawn from an item and a batch.
+     * 
+     * @param Item|null $item
+     * @param ItemBatch|null $itemBatch
+     * @param float $quantity
+     * @return boolean
+     */
+    public function canWithdraw($item, $itemBatch, $quantity)
+    {
+        if (!empty($itemBatch)) {
+            if (($itemBatch->current_quantity - $quantity) < 0) {
+                return false;
+            }
+        }
+        if (!empty($item)) {
+            if (($item->current_quantity - $quantity) < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

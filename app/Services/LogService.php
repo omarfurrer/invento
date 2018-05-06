@@ -137,11 +137,17 @@ class LogService extends BaseService {
      * @param float $quantity
      * @param Integer $itemBatchID
      * @param User $user
-     * @return Log
+     * @return Log|boolean
      */
     public function createOut($itemID, $quantity, $itemBatchID, User $user)
     {
         $item = $this->itemsRepository->getById($itemID);
+        $itemBatch = $this->itemBatchesRepository->getById($itemBatchID);
+
+        if (!$this->itemsService->canWithdraw($item, $itemBatch, $quantity)) {
+            $this->addError("Not enough {$item->description} remain.");
+            return false;
+        }
 
         $itemWithdrawl = $this->itemWithdrawlsRepository->create([
             'item_id' => $itemID,
@@ -151,8 +157,6 @@ class LogService extends BaseService {
         ]);
 
         $item = $this->itemsService->subtractQuantity($item, $quantity);
-
-        $itemBatch = $this->itemBatchesRepository->getById($itemBatchID);
 
         $this->itemsService->subtractQuantityFromItemBatch($itemBatch, $quantity);
 

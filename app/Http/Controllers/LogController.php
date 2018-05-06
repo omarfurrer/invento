@@ -81,6 +81,11 @@ class LogController extends Controller {
     {
         $log = $this->logService->createOut($request->item_id, $request->quantity, $request->item_batch_id, auth()->user());
 
+        if (!$log) {
+            \Session::flash('flash_message_error', $this->logService->getErrorMessage());
+            return redirect()->back();
+        }
+
         \Session::flash('flash_message_success', 'Log Created.');
         return redirect()->to('/log');
     }
