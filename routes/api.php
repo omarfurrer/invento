@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'API'], function () {
     Route::get('items/{item}/batches', 'ItemBatchesController@getForItem');
+    Route::get('items', 'ItemsController@getAll');
 });
