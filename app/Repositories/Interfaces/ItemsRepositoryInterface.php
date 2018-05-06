@@ -25,4 +25,11 @@ interface ItemsRepositoryInterface {
      * @return Collection
      */
     public function getInitiallyApproved();
+    
+    /**
+     * Get items where minimum quantity threshold has exceeded.
+     * 
+     * @return Collection
+     */
+    public function getLowQuantity();
 }

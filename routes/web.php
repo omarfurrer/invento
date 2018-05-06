@@ -16,7 +16,7 @@ Route::redirect('/', '/dashboard');
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', 'PagesController@getDashboard');
+    Route::get('/dashboard', 'DashboardController@getDashboard');
 
     Route::resource('measurement_units', 'MeasurementUnitsController');
     Route::resource('suppliers', 'SuppliersController');

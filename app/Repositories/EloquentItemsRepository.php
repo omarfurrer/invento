@@ -52,4 +52,14 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
         return $item;
     }
 
+    /**
+     * Get items where minimum quantity threshold has exceeded.
+     * 
+     * @return Collection
+     */
+    public function getLowQuantity()
+    {
+        return Item::whereColumn('minimum_quantity', '>', 'current_quantity')->get();
+    }
+
 }
