@@ -84,40 +84,46 @@
 
 <script>
 
-    $(document).ready(function() {
+$(document).ready(function() {
 
-       var allItems = {!! json_encode($items->toArray()) !!};
+    function showHide(item) {
+        if(item.expires) {
 
-       $('#expiryDate_input').hide();
+           $('#expiryDate_input').show();
+        }   
+        else {
+           $('#expiryDate_input').hide();
 
-       $("#item").change(function() {
+        }
+    }
 
-         var currentItemId = $(this).val();
+    function search(id) {
 
-         if (currentItemId == '') {
+        for (i=0; i < allItems.length; i++)   {
+            var arrayItemId = allItems[i].id;
+            if (id == arrayItemId){
+                showHide( allItems[i]);
+            }         
+        }
+    }
+    
+
+    $('#expiryDate_input').hide();
+
+        var allItems = {!! json_encode($items->toArray()) !!};
+        var arrayItemId = $('#item').val();
+        search(arrayItemId);
+    
+
+    $("#item").change(function() {
+
+        var currentItemId = $(this).val();
+        if (currentItemId == '') {
             $('#expiryDate_input').hide();
-         }
-
-         for (i=0; i < allItems.length; i++)   {
-
-             var arrayItemId = allItems[i].id;
-
-             if (currentItemId == arrayItemId){
-
-                if(allItems[i].expires) {
-                 $('#expiryDate_input').show();
-             }   
-             else {
-                 $('#expiryDate_input').hide();
-             }
-
-         } 
-
-     }        
-
- });
-
-   });
+        }
+        search(currentItemId);
+    });
+});
 
 </script>
 
