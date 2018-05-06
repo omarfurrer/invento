@@ -3,6 +3,14 @@
 
 	<div class="box-body">
 
+		{{ csrf_field() }}
+
+		@if(isset($log))
+		{{ method_field('PATCH') }}
+		@endif
+
+
+
 		<div class="form-group required{{ $errors->has('item_id') ? ' has-error' : '' }}">
 			<label for="item" class="control-label">Item</label>
 			<select id="item" name="item_id" class="form-control">
@@ -36,14 +44,14 @@
 			@endif
 		</div>
 
-		<div class="form-group{{ $errors->has('batch') ? ' has-error' : '' }}">
+		<div class="form-group{{ $errors->has('item_batch_id') ? ' has-error' : '' }}">
 			<label for="batch">Batch</label>
-			<select id="batch" name="batch" class="form-control">
+			<select id="batch" name="item_batch_id" class="form-control">
 				<option value="">Select Batch</option>
 				
 			</select>
-			@if($errors->has('batch'))
-			<p class="text-danger">{{ $errors->first('batch') }}</p>
+			@if($errors->has('item_batch_id'))
+			<p class="text-danger">{{ $errors->first('item_batch_id') }}</p>
 			@endif
 		</div>
 
@@ -62,25 +70,37 @@
 <script>
 
 	$(document).ready(function() {
-		var method = 'GET';
+
+
+		var currentItemId = $("#item").val();
+
+		searchAndPopulateBatch(currentItemId);
+
+		
 
 		$("#item").change(function() {
 
 			var selectedItemId = $(this).val();
+			searchAndPopulateBatch(selectedItemId);
 
-			var url = '/api/items/'+selectedItemId+'/batches';
 
-			$.ajax ({
+		});
 
-				type: method,
-				url: url,
+		function searchAndPopulateBatch (id) {
 
+			if (id != '') {
+                
+                $.ajax ({
+
+				type: 'GET',
+				url: '/api/items/'+id+'/batches',
 				success: function(data) {
 
 
 					var itemBatches = data.itemBatches;
 
-                         $('#batch').empty();
+					$('#batch').empty();
+
 					for(i=0; i < itemBatches.length; i++) {
 
 						var currentDate = itemBatches[i].expiry_date;
@@ -88,25 +108,21 @@
 						var currentQuanrity = itemBatches[i].current_quantity;
 
 
-						$('#batch').append('<option value="itemBatches[i].id">'+currentQuanrity+' Remaining - '+ 
-                           ((currentDate==null)? '(Does not expire' :'Expires at: ('+formatedCurrentDate)+
+						$('#batch').append('<option value="'+itemBatches[i].id+'">'+currentQuanrity+' Remaining - '+ 
+							((currentDate==null)? '(Does not expire' :'Expires at: ('+formatedCurrentDate)+
 
-							')</option>')  ;
-					
+							')</option>');
+
 
 					}
 
-                               
-
 				} 
+               
+               });
 
+			}
 
-
-                                    
-			});
-
-
-		});
+		}
 	});
 
 
