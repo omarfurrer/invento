@@ -115,6 +115,10 @@
 
 
 					}
+                                         var oldSelectedItemBatchID = {!! json_encode(old('item_batch_id',null)) !!};
+                if (oldSelectedItemBatchID != null) {
+                    $('option[value="'+oldSelectedItemBatchID+'"]').prop('selected',true);
+                }
 
 				} 
                
