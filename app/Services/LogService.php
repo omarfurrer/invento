@@ -172,15 +172,20 @@ class LogService extends BaseService {
 
         $this->itemsService->subtractQuantityFromItemBatch($itemBatch, $quantity);
 
-        return $this->logRepository->create([
-                    'item_id' => $itemID,
-                    'quantity' => $quantity,
-                    'user_id' => $user->id,
-                    'item_batch_id' => $itemBatch->id,
-                    'item_withdrawl_id' => $itemWithdrawl->id,
-                    'in' => false,
-                    'item_current_quantity' => $item->current_quantity
+        $log = $this->logRepository->create([
+            'item_id' => $itemID,
+            'quantity' => $quantity,
+            'user_id' => $user->id,
+            'item_batch_id' => $itemBatch->id,
+            'item_withdrawl_id' => $itemWithdrawl->id,
+            'in' => false,
+            'item_current_quantity' => $item->current_quantity
         ]);
+
+        if ($this->isAPI) {
+            $log->load('user', 'item.measurementUnit');
+        }
+        return $log;
     }
 
     /**

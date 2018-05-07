@@ -28,8 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('log/out/create', 'LogController@getCreateOut');
     Route::post('log/out/create', 'LogController@postCreateOut');
 
-    Route::group(['prefix' => '/ajax', 'namespace' => 'API'], function () {
+    Route::group(['prefix' => '/ajax', 'namespace' => 'API'],
+                 function () {
         Route::post('log/in/create', 'LogController@postCreateIn');
+        Route::post('log/out/create', 'LogController@postCreateOut');
     });
 
     Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'],
