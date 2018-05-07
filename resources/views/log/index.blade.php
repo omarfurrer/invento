@@ -31,7 +31,8 @@
 
 				<div class="box-body no-padding">
 					<table class="table table-condensed">
-						<tbody><tr>
+                                            <thead>
+                                                <tr>
 							<th>In/Out</th>
 							<th>Item</th>
 							<th>Quantity</th>
@@ -40,6 +41,8 @@
 							<th>Date</th>
 							<th class="tblActionCol"></th>
 						</tr>
+                                            </thead>
+						<tbody>
 
 						@for ($i = 0; $i < count($log); $i++)
 

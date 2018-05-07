@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         </div>
-        <!-- ./wrapper -->
+
 
         <script src="{{ asset("adminlte/js/all.js") }}"></script>
         <script src="{{ asset("adminlte/dist/js/adminlte.min.js") }}"></script>
@@ -84,11 +84,23 @@ function deleteModel(event, form_id, message) {
     }
     return false;
 }
+$(document).ready(function () {
 
-$('.date-picker').datepicker({
-    format: 'dd-mm-yyyy'
+    $('.date-picker').datepicker({
+        format: 'dd-mm-yyyy'
+    });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 });
         </script>
+
+        @include("shared.main.modals")
+        <script src="{{ asset("js/modals.js") }}"></script>
+
         @stack('scripts')
 
         <!-- Optionally, you can add Slimscroll and FastClick plugins.
