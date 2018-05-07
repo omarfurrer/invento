@@ -27,6 +27,17 @@
             </ul>
         </div>
 
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" role="button" data-toggle="modal" data-target="#modal-log-out-create">
+                        Log <i class="fa fa-minus"  aria-hidden="true"></i><span class="sr-only">(current)</span>
+                    </a></li>
+            </ul>
+        </div>
+
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">

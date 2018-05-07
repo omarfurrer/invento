@@ -26,8 +26,6 @@
 		</div>
 
 
-
-
 		<div class="form-group required{{ $errors->has('quantity') ? ' has-error' : '' }}">
 			<label for="quantity" class="control-label">Quantity</label>
 			<input 
