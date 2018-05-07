@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Log;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Item;
 
 class PostCreateOutRequest extends FormRequest {
 
@@ -23,10 +24,19 @@ class PostCreateOutRequest extends FormRequest {
      */
     public function rules()
     {
-        return [
+        $rules = [
             'item_id' => 'required|exists:items,id',
             'quantity' => 'required|numeric'
         ];
+        $item = Item::find($this->get('item_id'));
+        if ($item) {
+            if ($item->expires) {
+                $rules['item_batch_id'] = 'required|exists:item_batches,id';
+            } else {
+                $rules['item_batch_id'] = 'nullable';
+            }
+        }
+        return $rules;
     }
 
 }

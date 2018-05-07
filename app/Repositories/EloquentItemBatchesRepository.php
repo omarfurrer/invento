@@ -58,4 +58,15 @@ class EloquentItemBatchesRepository extends EloquentAbstractRepository implement
         return ItemBatch::where('item_id', $itemID)->where('expiry_date', Carbon::parse($expiryDate)->format('Y-m-d'))->first();
     }
 
+    /**
+     * Get all initial item batches of a specific item.
+     * 
+     * @param Integer $itemID
+     * @return Collection
+     */
+    public function getInitialByItem($itemID)
+    {
+        return ItemBatch::where('is_initial', true)->where('item_id', $itemID)->get();
+    }
+
 }

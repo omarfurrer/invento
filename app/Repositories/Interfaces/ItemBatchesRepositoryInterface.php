@@ -12,4 +12,12 @@ interface ItemBatchesRepositoryInterface {
      * @return ItemBatch
      */
     public function findByItemAndExpiry($itemID, $expiryDate);
+
+    /**
+     * Get all initial item batches of a specific item.
+     * 
+     * @param Integer $itemID
+     * @return Collection
+     */
+    public function getInitialByItem($itemID);
 }
