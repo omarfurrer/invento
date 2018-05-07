@@ -42,6 +42,12 @@ class LogService extends BaseService {
     protected $logRepository;
 
     /**
+     * Used to handle differences when working with an API.
+     * @var boolean 
+     */
+    protected $isAPI;
+
+    /**
      * LogService Constructor.
      * 
      * @param ItemsRepositoryInterface $itemsRepository
@@ -58,6 +64,7 @@ class LogService extends BaseService {
         $this->itemWithdrawlsRepository = $itemWithdrawlsRepository;
         $this->itemsService = $itemsService;
         $this->logRepository = $logRepository;
+        $this->isAPI = false;
     }
 
     /**
@@ -107,15 +114,20 @@ class LogService extends BaseService {
 
         $item = $this->itemsService->addQuantity($item, $quantity);
 
-        return $this->logRepository->create([
-                    'item_id' => $itemID,
-                    'quantity' => $quantity,
-                    'user_id' => $user->id,
-                    'item_batch_id' => $itemBatch->id,
-                    'item_withdrawl_id' => null,
-                    'in' => true,
-                    'item_current_quantity' => $item->current_quantity
+        $log = $this->logRepository->create([
+            'item_id' => $itemID,
+            'quantity' => $quantity,
+            'user_id' => $user->id,
+            'item_batch_id' => $itemBatch->id,
+            'item_withdrawl_id' => null,
+            'in' => true,
+            'item_current_quantity' => $item->current_quantity
         ]);
+
+        if ($this->isAPI) {
+            $log->load('user', 'item.measurementUnit');
+        }
+        return $log;
     }
 
     /**
@@ -169,6 +181,26 @@ class LogService extends BaseService {
                     'in' => false,
                     'item_current_quantity' => $item->current_quantity
         ]);
+    }
+
+    /**
+     * IsAPI getter.
+     * 
+     * @return boolean
+     */
+    function getIsAPI()
+    {
+        return $this->isAPI;
+    }
+
+    /**
+     * IsAPI setter.
+     * 
+     * @param boolean $isAPI
+     */
+    function setIsAPI($isAPI)
+    {
+        $this->isAPI = $isAPI;
     }
 
 }
