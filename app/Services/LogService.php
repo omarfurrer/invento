@@ -184,6 +184,87 @@ class LogService extends BaseService {
     }
 
     /**
+     * Delete a log record and undo its changes.
+     * 
+     * @param Log|Integer $log
+     * @return boolean
+     */
+    public function delete($log)
+    {
+        if (!($log instanceof Log)) {
+            $log = $this->logRepository->getById($log);
+        }
+        if ($log->in) {
+            return $this->undoCreateIn($log);
+        }
+        return $this->undoCreateOut($log);
+    }
+
+    /**
+     * Undo changes done by creating a log in.
+     * 
+     * @param Log $log
+     * @return boolean
+     */
+    public function undoCreateIn(Log $log)
+    {
+        $item = $this->itemsRepository->getById($log->item_id);
+        $itemBatch = $this->itemBatchesRepository->getById($log->item_batch_id);
+        $quantity = $log->quantity;
+
+        // update dependent records item_current_quantity
+        $followingRecords = $this->logRepository->getFollowingByItem($log);
+        foreach ($followingRecords as $followingRecord) {
+            $this->logRepository->update($followingRecord->id, [
+                'item_current_quantity' => $followingRecord->item_current_quantity - $quantity
+            ]);
+        }
+
+        $this->itemBatchesRepository->delete($itemBatch);
+        $item = $this->itemsService->subtractQuantity($item, $quantity);
+
+        // update $item->quantity if there are records which withdraw from the deleted item batch
+        $followingOutRecords = $followingRecords->where('in', false)->where('item_batch_id', $itemBatch->id);
+        foreach ($followingOutRecords as $followingOutRecord) {
+            $item = $this->itemsService->addQuantity($item, $followingOutRecord->quantity);
+        }
+
+        $this->logRepository->delete($log);
+
+        return true;
+    }
+
+    /**
+     * Undo changes done by creating a log out.
+     * 
+     * @param Log $log
+     * @return boolean
+     */
+    public function undoCreateOut(Log $log)
+    {
+        $item = $this->itemsRepository->getById($log->item_id);
+        $itemBatch = $this->itemBatchesRepository->getById($log->item_batch_id);
+        $quantity = $log->quantity;
+
+        // update dependent records item_current_quantity
+        $followingRecords = $this->logRepository->getFollowingByItem($log);
+        foreach ($followingRecords as $followingRecord) {
+            $this->logRepository->update($followingRecord->id, [
+                'item_current_quantity' => $followingRecord->item_current_quantity + $quantity
+            ]);
+        }
+
+        $itemWithdrawl = $this->itemWithdrawlsRepository->getById($log->item_withdrawl_id);
+        $this->itemWithdrawlsRepository->delete($itemWithdrawl);
+        $item = $this->itemsService->addQuantity($item, $quantity);
+        $itemBatch = $this->itemsService->addQuantityToItemBatch($itemBatch, $quantity);
+
+        $this->logRepository->delete($log);
+
+        return true;
+    }
+
+    /**
      * IsAPI getter.
      * 
      * @return boolean

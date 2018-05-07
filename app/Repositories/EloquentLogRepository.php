@@ -29,4 +29,18 @@ class EloquentLogRepository extends EloquentAbstractRepository implements LogRep
         return Log::orderBy($orderBy, $order)->get();
     }
 
+    /**
+     * Get all records that were created after a specific one and related to an item.
+     * 
+     * @param Log|Integer $log
+     * @return Collection
+     */
+    public function getFollowingByItem($log)
+    {
+        if (!($log instanceof Log)) {
+            $log = $this->logRepository->getById($log);
+        }
+        return Log::where('item_id', $log->item_id)->where('id', '>', $log->id)->get();
+    }
+
 }

@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', 'UsersController');
         Route::get('items/approval/initial', 'ItemsController@getNeedsInitialApproval');
         Route::get('items/{item}/approval/initial', 'ItemsController@approveInitially');
+        Route::delete('log/{log}', 'LogController@destroy');
     });
 });
 
