@@ -18,6 +18,7 @@
 <section class="content container-fluid">
   <div class="row">
     <div class="col-sm-12">
+      @if(count($users) != 0)
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">Showing: <b>{{count($users)}} Users</b></h3>
@@ -79,6 +80,15 @@
         <!-- /.box-body -->
       </div>
       <!-- /.box -->
+
+      @else
+                   
+                    <h4 class="text-center emptyArrayHeader">
+                      <i class="fa fa-info-circle"></i>  
+                    There are currently no users to show, please add user first.
+                </h4>
+               
+                    @endif
     </div>
   </div>
 

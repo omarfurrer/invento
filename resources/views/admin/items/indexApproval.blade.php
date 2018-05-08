@@ -8,7 +8,7 @@
 
 
 <section class="content-header">
-  
+
 </section>
 
 <!-- Main content -->
@@ -16,10 +16,11 @@
 <section class="content container-fluid">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
+        @if(count($items) != 0)
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">New Items</h3>
-          </div>
+        </div>
         
         <!-- /.box-header -->
 
@@ -46,20 +47,27 @@
                     </a>
                   </li> 
 
-                  </ul>
-                </td>
+                </ul>
+              </td>
 
-              </tr>
+            </tr>
 
-            </tbody>
-            @endfor
-          </table>
-        </div>
-        <!-- /.box-body -->
+          </tbody>
+          @endfor
+        </table>
       </div>
-      <!-- /.box -->
+      <!-- /.box-body -->
     </div>
+    <!-- /.box -->
+    @else
+    <h4 class="text-center emptyArrayHeader">
+      <i class="fa fa-info-circle"></i>  
+      There are currently no new items to approve
+    </h4>
+
+    @endif
   </div>
+</div>
 
 </section>
 @endsection
@@ -67,10 +75,10 @@
 
 @push('scripts')
 <script>
-  
-$(document).ready(function(){
+
+  $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
-});
+  });
 
 
 </script>
