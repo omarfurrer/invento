@@ -29,7 +29,7 @@
             <tbody><tr id="tHeaderRow">
               <th>Item</th>
               <th>Quantity</th>
-              <th>Min <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than min an alert will be displayed"></i></th>
+              <th>Minimum Quantity <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than minimum quantity, an alert will be displayed in the dashboard"></i></th>
               <th class="tblActionCol"></th>
             </tr>
 

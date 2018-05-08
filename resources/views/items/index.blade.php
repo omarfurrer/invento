@@ -47,7 +47,7 @@
                                 <th>Quantity</th>
                                 <th>Unit</th>
                                 <th>Supplier</th>
-                                <th>Minimum quantity</th>
+                                <th>Minimum Quantity <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than minimum quantity, an alert will be displayed in the dashboard"></i></th>
                                 <th>Status</th>
                                 <th class="tblActionCol"></th>
                             </tr>
@@ -122,6 +122,16 @@
             }
         }
     }
+
+
+
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+  });
+
+
+
 
 </script>
 
