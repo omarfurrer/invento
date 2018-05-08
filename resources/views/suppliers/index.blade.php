@@ -18,6 +18,7 @@
 <section class="content container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
+			@if(count($suppliers) != 0)
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">Showing: <b>{{count($suppliers)}} Suppliers</b></h3>
@@ -65,6 +66,14 @@
 				<!-- /.box-body -->
 			</div>
 			<!-- /.box -->
+			@else
+
+			<h4 class="text-center emptyArrayHeader">
+				<i class="fa fa-info-circle"></i>  
+				There are currently no suppliers to show, please add supplier first.
+			</h4>
+
+			@endif
 		</div>
 	</div>
 

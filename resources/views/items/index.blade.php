@@ -20,10 +20,12 @@
 <section class="content container-fluid">
     <div class="row">
         <div class="col-sm-12">
+            @if(count($items) != 0)
             <div class="box">
+                  
                 <div class="box-header">
                     <h3 class="box-title">Showing: <b>{{count($items)}} Items</b></h3>
-
+                    
                     <div class="box-tools">
                         <div class="input-group input-group-sm searchInput">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="search()">
@@ -36,6 +38,7 @@
                 </div>
 
                 <!-- /.box-header -->
+                 
 
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover" id="itemsTbl">
@@ -44,10 +47,11 @@
                                 <th>Quantity</th>
                                 <th>Unit</th>
                                 <th>Supplier</th>
-                                <th>Minimum quantity</th>
+                                <th>Minimum Quantity <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than minimum quantity, an alert will be displayed in the dashboard"></i></th>
                                 <th>Status</th>
                                 <th class="tblActionCol"></th>
                             </tr>
+                          
 
                             @for ($i = 0; $i < count($items); $i++)
 
@@ -75,10 +79,20 @@
                         </tbody>
                         @endfor
                     </table>
+
+                    
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
+            @else
+                   
+                    <h4 class="text-center emptyArrayHeader">
+                      <i class="fa fa-info-circle"></i>  
+                    There are currently no items to show, please add item first.
+                </h4>
+               
+                    @endif
         </div>
     </div>
 
@@ -108,6 +122,16 @@
             }
         }
     }
+
+
+
+
+  $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+  });
+
+
+
 
 </script>
 
