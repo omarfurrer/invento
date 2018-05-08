@@ -15,39 +15,36 @@
 <!-- Main content -->
 <section class="content container-fluid">
     <div class="row">
+
         @if(!$lowQuantityItems->isEmpty())
-        <div class="col-md-4 col-lg-2">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Running Low On</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table no-margin text-center">
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Remaining</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($lowQuantityItems as $item)
-                                <tr>
-                                    <td>{{ $item->description }}</td>
-                                    <td>{{ $item->current_quantity }} {{ $item->measurementUnit->short_name }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.table-responsive -->
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-        @endif
-    </div>
+
+        @foreach($lowQuantityItems as $item)
+        <div class="col-md-3 col-sm-6 col-xs-12">
+             
+          <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-exclamation"></i></span>
+              
+            
+
+            <div class="info-box-content">
+              <span class="info-box-text">{{ $item->description }}</span>
+              <span class="info-box-number">Remaining: {{ $item->current_quantity }} {{ $item->measurementUnit->short_name }}</span>
+          </div>
+          <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+      
+  </div>
+  @endforeach
+  
+  
+<!-- /.table-responsive -->
+</div>
+
+<!-- /.box-body -->
+
+@endif
+
 
 
 

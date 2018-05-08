@@ -27,7 +27,7 @@
             </ul>
         </div>
 
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+        <button type="button" class="navbar-toggle collapsed logBtn" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
