@@ -23,7 +23,7 @@
                     <table class="table table-condensed">
                         <thead>
                             <tr class="text-center">
-                                <th>In/Out</th>
+                                <th class="text-center">In/Out</th>
                                 <th>Item</th>
                                 <th>Quantity</th>
                                 <th>Remaining</th>
