@@ -31,6 +31,26 @@
                                 <th>Date</th>
                                 <th class="tblActionCol"></th>
                             </tr>
+                            <tr id="new-row" class="hide">
+                                <td class="text-center">#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>#</td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a href="#" 
+                                               onclick="return deleteModel(event, 'delete-form-{log_id}', 'Are you sure you want to delete this log ? All related data will be lost');"
+                                               ><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
+                                        <form id="delete-form-{log_id}" action="/admin/log/{log_id}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
+                                    </ul>
+                                </td>
+                            </tr>
                         </thead>
                         <tbody>
 
@@ -46,13 +66,13 @@
                                 </td>
                                 <td>{{$log[$i]->item->description}}</td>
 
- 
+
                                 <td>
-                                   @if($log[$i]->in)	
-                               <p> + {{$log[$i]->quantity}} {{$log[$i]-> item->measurementUnit->name }}</p>
-                                   @else
-                                <p> - {{$log[$i]->quantity}} {{$log[$i]-> item->measurementUnit->name }}</p>
-                                @endif
+                                    @if($log[$i]->in)	
+                                    <p> + {{$log[$i]->quantity}} {{$log[$i]-> item->measurementUnit->name }}</p>
+                                    @else
+                                    <p> - {{$log[$i]->quantity}} {{$log[$i]-> item->measurementUnit->name }}</p>
+                                    @endif
                                 </td>
                                 <td>{{$log[$i]->item_current_quantity}} {{$log[$i]-> item->measurementUnit->name }}</td>
                                 <td>{{$log[$i]->user->name}}</td>
@@ -78,6 +98,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 

@@ -91,8 +91,7 @@ $(document).ready(function () {
                 // handle updating log table if url is '/log'
                 if (location.pathname.substr(1) === 'log') {
                     // clone first row
-                    var logRow = $('table > tbody > tr:first').clone();
-
+                    var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
                     // change row cell values
 
                     // In/Out
@@ -111,6 +110,8 @@ $(document).ready(function () {
                     logRow.find('td').eq(4).html(log.user.name);
                     // Date
                     logRow.find('td').eq(5).html(moment(log.created_at).format('DD-MM-YYYY'));
+
+                    logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
 
                     // add cloned row to top of table
                     $(logRow).prependTo("table > tbody");
@@ -266,7 +267,7 @@ $(document).ready(function () {
                 // handle updating log table if url is '/log'
                 if (location.pathname.substr(1) === 'log') {
                     // clone first row
-                    var logRow = $('table > tbody > tr:first').clone();
+                    var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
 
                     // change row cell values
 
@@ -286,6 +287,8 @@ $(document).ready(function () {
                     logRow.find('td').eq(4).html(log.user.name);
                     // Date
                     logRow.find('td').eq(5).html(moment(log.created_at).format('DD-MM-YYYY'));
+
+                    logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
 
                     // add cloned row to top of table
                     $(logRow).prependTo("table > tbody");
@@ -321,3 +324,11 @@ $(document).ready(function () {
         return false;
     });
 });
+
+function escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
+function replaceAll(str, find, replace) {
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
