@@ -19,7 +19,7 @@
 
                 <!-- /.box-header -->
 
-                <div class="box-body no-padding">
+                <div class="box-body no-padding table-responsive">
                     <table class="table table-condensed">
                         <thead>
                             <tr class="text-center">
@@ -52,6 +52,7 @@
                                 </td>
                             </tr>
                         </thead>
+
                         <tbody>
 
                             @for ($i = 0; $i < count($log); $i++)
@@ -100,6 +101,5 @@
     </div>
 
 </section>
-
 
 @endsection

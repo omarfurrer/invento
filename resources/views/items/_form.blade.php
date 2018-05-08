@@ -78,9 +78,10 @@
             <div class="row">
                 <div class="col-md-4">
                     <div 
-                    class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }}">
+                    class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }} required">
                     <label for="quantity" class="control-label">Quantity</label>
                     <input type="number"
+                    required 
                     class="form-control"
                     id="quantity" 
                     name="item_batches[0][quantity]"
@@ -97,37 +98,37 @@
             <div class="col-md-4">
 
                 <div class="form-group{{ $errors->has('item_batches.0.expiry_date') ? ' has-error' : '' }}">
-                 <label for="expiryDate" class="control-label">Expiry Date</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input id="expiryDate" type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? ( $item->itemBatches[0]->expiry_date != null ? $item->itemBatches[0]->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date">
+                   <label for="expiryDate" class="control-label">Expiry Date</label>
+                   <div class="input-group date">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
                     </div>
-                    @if($errors->has('item_batches.0.expiry_date'))
-                    <p class="text-danger">{{ $errors->first('item_batches.0.expiry_date') }}</p>
-                    @endif
+                    <input id="expiryDate" type="text" class="form-control pull-right date-picker" name="item_batches[0][expiry_date]" value="{{ old('item_batches.0.expiry_date',isset($item)? ( $item->itemBatches[0]->expiry_date != null ? $item->itemBatches[0]->expiry_date->format('d-m-Y'): '' ) : '') }}" placeholder="Select expiry date">
                 </div>
-
-            </div>
-
-            <div class="col-md-4">
-
-                <div class="form-group{{ $errors->has('item_batches.0.unit_price') ? ' has-error' : '' }}">
-                 <label for="item_batches_unitPrice" class="control-label">Price / Unit</label>
-                    <input  type="number" step="0.01" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
-                    @if($errors->has('item_batches.0.unit_price'))
-                    <p class="text-danger">{{ $errors->first('item_batches.0.unit_price') }}</p>
-                    @endif
-                </div>
-
-
-            </div>
-                @if(isset($item))
-                <input type="hidden" name="item_batches[0][id]" value="{{ $item->itemBatches[0]['id'] }}">
+                @if($errors->has('item_batches.0.expiry_date'))
+                <p class="text-danger">{{ $errors->first('item_batches.0.expiry_date') }}</p>
                 @endif
+            </div>
 
         </div>
+
+        <div class="col-md-4">
+
+            <div class="form-group{{ $errors->has('item_batches.0.unit_price') ? ' has-error' : '' }}">
+               <label for="item_batches_unitPrice" class="control-label">Price / Unit</label>
+               <input  type="number" step="0.01" class="form-control" name="item_batches[0][unit_price]" id="item_batches_unitPrice" placeholder="Enter Price / Unit" value="{{ old('item_batches.0.unit_price',isset($item)? $item->itemBatches[0]['unit_price'] : '') }}">
+               @if($errors->has('item_batches.0.unit_price'))
+               <p class="text-danger">{{ $errors->first('item_batches.0.unit_price') }}</p>
+               @endif
+           </div>
+
+
+       </div>
+       @if(isset($item))
+       <input type="hidden" name="item_batches[0][id]" value="{{ $item->itemBatches[0]['id'] }}">
+       @endif
+
+   </div>
                         <!--                        <hr>
                             <button type="submit" class="btn btn-primary pull-right">Add new batch </button>-->
 
@@ -141,4 +142,40 @@
 
 
 
+                    @push('scripts')
+                    <script>
+                        $(document).ready(function(){
 
+                            var expiresVal = $('#expires').val();
+
+
+                            showAndHideExpiryDate(expiresVal);
+                            
+
+
+                            $("#expires").change(function() {
+
+                                var currentVal = $(this).val();
+
+                                showAndHideExpiryDate(currentVal);
+
+                          });
+
+                          function showAndHideExpiryDate (val) {
+                            
+                             if(val == 1) {
+
+                                   $('#expiryDate').closest('div[class^="col-md-4"]').show();
+
+                               } else {
+
+                                  $('#expiryDate').closest('div[class^="col-md-4"]').hide();
+                              }
+
+
+
+                          }
+
+                        });
+                    </script>
+                    @endpush
