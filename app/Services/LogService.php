@@ -217,21 +217,45 @@ class LogService extends BaseService {
         $itemBatch = $this->itemBatchesRepository->getById($log->item_batch_id);
         $quantity = $log->quantity;
 
-        // update dependent records item_current_quantity
+        // same item records following after this record
         $followingRecords = $this->logRepository->getFollowingByItem($log);
-        foreach ($followingRecords as $followingRecord) {
-            $this->logRepository->update($followingRecord->id, [
-                'item_current_quantity' => $followingRecord->item_current_quantity - $quantity
+
+        // same item records that need to be updated 
+        $recordsToUpdate = $followingRecords->filter(function($record) use($itemBatch) {
+            return $record->item_batch_id != $itemBatch->id;
+        });
+
+        // subtract quantity of $log from records that need updating
+        foreach ($recordsToUpdate as $recordToUpdate) {
+            $this->logRepository->update($recordToUpdate->id, [
+                'item_current_quantity' => $recordToUpdate->item_current_quantity - $quantity
             ]);
         }
 
+        // same item records following after this record
+        $followingRecords = $this->logRepository->getFollowingByItem($log);
+
+        // same item records that need to be updated 
+        $recordsToUpdate = $followingRecords->filter(function($record) use($itemBatch) {
+            return $record->item_batch_id != $itemBatch->id;
+        });
+
+        // delete batch associated with item 
         $this->itemBatchesRepository->delete($itemBatch);
+
+        // update current_quantity for item
         $item = $this->itemsService->subtractQuantity($item, $quantity);
 
-        // update $item->quantity if there are records which withdraw from the deleted item batch
-        $followingOutRecords = $followingRecords->where('in', false)->where('item_batch_id', $itemBatch->id);
-        foreach ($followingOutRecords as $followingOutRecord) {
-            $item = $this->itemsService->addQuantity($item, $followingOutRecord->quantity);
+        // records which withdraw from the deleted item batch
+        $dependentRecords = $followingRecords->where('in', false)->where('item_batch_id', $itemBatch->id);
+
+        $totalDependentQuantity = $dependentRecords->sum('quantity');
+
+        $item = $this->itemsService->addQuantity($item, $totalDependentQuantity);
+        foreach ($recordsToUpdate as $recordToUpdate) {
+            $this->logRepository->update($recordToUpdate->id, [
+                'item_current_quantity' => $recordToUpdate->item_current_quantity + $totalDependentQuantity
+            ]);
         }
 
         $this->logRepository->delete($log);
