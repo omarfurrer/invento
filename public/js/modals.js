@@ -97,14 +97,14 @@ $(document).ready(function () {
 
                     // In/Out
                     if (log.in) {
-                        logRow.find('td').eq(0).html('<i class="fa fa-sort-down text-success"></i>');
+                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-down text-success"></i>');
                     } else {
-                        logRow.find('td').eq(0).html('<i class="fa fa-sort-up text-danger"></i>');
+                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-up text-danger"></i>');
                     }
                     // Item
                     logRow.find('td').eq(1).html(log.item.description);
                     // Quantity
-                    logRow.find('td').eq(2).html(log.quantity + ' ' + log.item.measurement_unit.name);
+                    logRow.find('td').eq(2).html((log.in ? '+' : '-') + ' ' + log.quantity + ' ' + log.item.measurement_unit.name);
                     // Remaining
                     logRow.find('td').eq(3).html(log.item_current_quantity + ' ' + log.item.measurement_unit.name);
                     // User
@@ -194,54 +194,53 @@ $(document).ready(function () {
                 });
 
 
-                $('#batch').empty(); 
+                $('#batch').empty();
                 $('#modal-log-out-create #batch').append('<option value="">Select Item to see batches</option>');
-                 
 
-                 // Helper Function
 
-                 function searchAndPopulateBatch (id) {
+                // Helper Function
+
+                function searchAndPopulateBatch(id) {
 
                     if (id != '') {
 
-                        $.ajax ({
+                        $.ajax({
 
                             type: 'GET',
-                            url: '/api/items/'+id+'/batches',
-                            success: function(data) {
+                            url: '/api/items/' + id + '/batches',
+                            success: function (data) {
 
                                 var itemBatches = data.itemBatches;
 
                                 $('#batch').empty();
 
-                                for(i=0; i < itemBatches.length; i++) {
+                                for (i = 0; i < itemBatches.length; i++) {
 
                                     var currentDate = itemBatches[i].expiry_date;
                                     var formatedCurrentDate = moment(currentDate).format('DD/MM/YYYY');
                                     var currentQuanrity = itemBatches[i].current_quantity;
 
 
-                                    $('#batch').append('<option value="'+itemBatches[i].id+'">'+currentQuanrity+' Remaining - '+ 
-                                        ((currentDate==null)? '(Does not expire' :'Expires at: ('+formatedCurrentDate)+
-
-                                        ')</option>');
+                                    $('#batch').append('<option value="' + itemBatches[i].id + '">' + currentQuanrity + ' Remaining - ' +
+                                            ((currentDate == null) ? '(Does not expire' : 'Expires at: (' + formatedCurrentDate) +
+                                            ')</option>');
                                 }
 
-                            } 
+                            }
 
                         });
 
                     } else {
 
-                         $('#batch').empty();
+                        $('#batch').empty();
                         $("#batch").append("<option value=''>Select Item to see batches</option>");
 
+                    }
+
+
                 }
-
-
             }
-        }
-    });
+        });
 
 
     });
@@ -273,14 +272,14 @@ $(document).ready(function () {
 
                     // In/Out
                     if (log.in) {
-                        logRow.find('td').eq(0).html('<i class="fa fa-sort-down text-success"></i>');
+                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-down text-success"></i>');
                     } else {
-                        logRow.find('td').eq(0).html('<i class="fa fa-sort-up text-danger"></i>');
+                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-up text-danger"></i>');
                     }
                     // Item
                     logRow.find('td').eq(1).html(log.item.description);
                     // Quantity
-                    logRow.find('td').eq(2).html(log.quantity + ' ' + log.item.measurement_unit.name);
+                    logRow.find('td').eq(2).html((log.in ? '+' : '-') + ' ' + log.quantity + ' ' + log.item.measurement_unit.name);
                     // Remaining
                     logRow.find('td').eq(3).html(log.item_current_quantity + ' ' + log.item.measurement_unit.name);
                     // User
