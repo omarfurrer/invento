@@ -48,7 +48,10 @@ class LogController extends Controller {
     public function postCreateOut(PostCreateOutRequest $request)
     {
         $log = $this->logService->createOut($request->item_id, $request->quantity, $request->item_batch_id, auth()->user());
-
+        if (!$log) {
+            $errorMessage = $this->logService->getErrorMessage();
+            return response()->json(compact('errorMessage'), 400);
+        }
         return response()->json(compact('log'));
     }
 
