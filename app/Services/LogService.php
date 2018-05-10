@@ -68,13 +68,29 @@ class LogService extends BaseService {
     }
 
     /**
-     * Get all log records.
+     * Get all records.
      * 
+     * @param string $orderBy
+     * @param string $order
+     * @param string|null $itemID
+     * @param string|null $fromDate
+     * @param string|null $toDate
      * @return Collection
      */
-    public function getAll()
+    public function getAll($orderBy = 'id', $order = 'DESC', $itemID = null, $fromDate = null, $toDate = null)
     {
-        return $this->logRepository->getAllOrderBy();
+        return $this->logRepository->getAll($orderBy, $order, $itemID, $fromDate, $toDate);
+    }
+
+    /**
+     * Get the data used to populate the filters.
+     * 
+     * @return array
+     */
+    public function getFiltersData()
+    {
+        $items = $this->itemsRepository->lists('id','description');
+        return compact('items');
     }
 
     /**

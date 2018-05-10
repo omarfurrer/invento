@@ -18,15 +18,28 @@ class EloquentLogRepository extends EloquentAbstractRepository implements LogRep
     }
 
     /**
-     * Get all log sorted.
+     * Return log with ordering and filtering.
      * 
      * @param string $orderBy
      * @param string $order
+     * @param string|null $itemID
+     * @param string|null $fromDate
+     * @param string|null $toDate
      * @return Collection
      */
-    public function getAllOrderBy($orderBy = 'id', $order = 'DESC')
+    public function getAll($orderBy = 'id', $order = 'DESC', $itemID = null, $fromDate = null, $toDate = null)
     {
-        return Log::orderBy($orderBy, $order)->get();
+        $log = new Log;
+        if (!empty($itemID)) {
+            $log = $log->where('item_id', $itemID);
+        }
+        if (!empty($fromDate)) {
+            $log->where('created_at', '>=', Carbon::parse($fromDate)->startOfDay());
+        }
+        if (!empty($toDate)) {
+            $log->where('created_at', '<=', Carbon::parse($toDate)->endOfDay());
+        }
+        return $log->orderBy($orderBy, $order)->get();
     }
 
     /**

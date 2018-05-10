@@ -29,10 +29,16 @@ class LogController extends Controller {
      * 
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $log = $this->logService->getAll();
-        return view('log.index', compact('log'));
+        $itemID = $request->get('item_id');
+        $fromDate = $request->get('from_date');
+        $toDate = $request->get('to_date');
+
+        $filtersData = $this->logService->getFiltersData();
+        
+        $log = $this->logService->getAll('id', 'DESC', $itemID, $fromDate, $toDate);
+        return view('log.index', compact('log', 'filtersData'));
     }
 
     /**

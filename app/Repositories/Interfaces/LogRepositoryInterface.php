@@ -2,16 +2,22 @@
 
 namespace App\Repositories\Interfaces;
 
+use Illuminate\Support\Collection;
+use App\Models\Log;
+
 interface LogRepositoryInterface {
 
     /**
-     * Get all log sorted.
+     * Return log with ordering and filtering.
      * 
      * @param string $orderBy
      * @param string $order
+     * @param string|null $itemID
+     * @param string|null $fromDate
+     * @param string|null $toDate
      * @return Collection
      */
-    public function getAllOrderBy($orderBy = 'id', $order = 'DESC');
+    public function getAll($orderBy = 'id', $order = 'DESC', $itemID = null, $fromDate = null, $toDate = null);
 
     /**
      * Get all records that were created after a specific one and related to an item.
