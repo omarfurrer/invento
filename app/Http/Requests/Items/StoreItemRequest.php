@@ -28,6 +28,7 @@ class StoreItemRequest extends FormRequest {
             'unit_id' => 'required|exists:measurement_units,id',
             'supplier_id' => 'nullable|exists:suppliers,id',
             'minimum_quantity' => 'nullable|numeric',
+            'image' => 'nullable|image',
             'expires' => 'required|boolean',
             'item_batches' => 'required|array',
             'item_batches.*.quantity' => 'required|numeric'

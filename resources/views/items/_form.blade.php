@@ -1,4 +1,4 @@
-<form action="{{ isset($item)? '/items/'.$item->id : '/items' }}" method="POST">
+<form action="{{ isset($item)? '/items/'.$item->id : '/items' }}" method="POST" enctype="multipart/form-data">
 
     <div class="box-body">
 
@@ -111,7 +111,7 @@
                 name="item_batches[0][quantity]"
                 id="item_batches_quantity"
                 placeholder="Enter quantity"
-                value="{{ old('item_batches[0][quantity]',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
+                value="{{ old('item_batches.0.quantity',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
                 {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
                 @if($errors->has('item_batches.0.quantity'))
                 <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
