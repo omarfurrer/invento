@@ -1,4 +1,4 @@
-<form action="{{ isset($item)? '/items/'.$item->id : '/items' }}" method="POST">
+<form action="{{ isset($item)? '/items/'.$item->id : '/items' }}" method="POST" enctype="multipart/form-data">
 
     <div class="box-body">
 
@@ -101,29 +101,28 @@
 
 
 
-
 <h3><small><b>Initial Batches<b></small></h3>
-
-    <hr>
-    <div class="row">
-        <div class="col-md-4">
-            <div 
-            class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }} required">
-            <label for="quantity" class="control-label">Quantity</label>
-            <input type="number"
-            required 
-            class="form-control"
-            id="quantity" 
-            name="item_batches[0][quantity]"
-            id="item_batches_quantity"
-            placeholder="Enter quantity"
-            value="{{ old('item_batches[0][quantity]',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
-            {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
-            @if($errors->has('item_batches.0.quantity'))
-            <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
-            @endif
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <div 
+                class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }} required">
+                <label for="quantity" class="control-label">Quantity</label>
+                <input type="number"
+                required 
+                class="form-control"
+                id="quantity" 
+                name="item_batches[0][quantity]"
+                id="item_batches_quantity"
+                placeholder="Enter quantity"
+                value="{{ old('item_batches.0.quantity',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
+                {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
+                @if($errors->has('item_batches.0.quantity'))
+                <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
+                @endif
+            </div>
         </div>
-    </div>
+
 
     <div class="col-md-4">
 

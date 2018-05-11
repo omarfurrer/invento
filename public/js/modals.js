@@ -88,8 +88,9 @@ $(document).ready(function () {
             success: function (data) {
                 $('#modal-log-in-create').modal('toggle');
                 var log = data.log;
+                var filterItemID = getParameterByName('item_id');
                 // handle updating log table if url is '/log'
-                if (location.pathname.substr(1) === 'log') {
+                if (location.pathname.substr(1) === 'log' && (filterItemID == null || filterItemID == log.item.id)) {
                     // clone first row
                     var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
                     // change row cell values
@@ -264,8 +265,9 @@ $(document).ready(function () {
             success: function (data) {
                 $('#modal-log-out-create').modal('toggle');
                 var log = data.log;
+                var filterItemID = getParameterByName('item_id');
                 // handle updating log table if url is '/log'
-                if (location.pathname.substr(1) === 'log') {
+                if (location.pathname.substr(1) === 'log' && (filterItemID == null || filterItemID == log.item.id)) {
                     // clone first row
                     var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
 
@@ -331,4 +333,17 @@ function escapeRegExp(str) {
 
 function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+
+function getParameterByName(name, url) {
+    if (!url)
+        url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+    if (!results)
+        return null;
+    if (!results[2])
+        return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }

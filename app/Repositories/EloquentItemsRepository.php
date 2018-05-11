@@ -6,6 +6,8 @@ use App\Repositories\Interfaces\ItemsRepositoryInterface;
 use App\Models\Item;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class EloquentItemsRepository extends EloquentAbstractRepository implements ItemsRepositoryInterface {
 
@@ -28,6 +30,7 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
         if (isset($fields['image'])) {
             $image = $fields['image'];
             $imagePath = $image->store('images/items', 'public');
+            $this->_resizeImage($imagePath);
             $fields['image_path'] = $imagePath;
         }
         return parent::create($fields);
@@ -45,13 +48,14 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
 
         if (isset($fields['image'])) {
 
-            $model = $this->find($id);
+            $model = $this->getById($id);
 
             if (!$this->_deleteImage($model)) {
                 return false;
             }
             $image = $fields['image'];
             $imagePath = $image->store('images/items', 'public');
+            $this->_resizeImage($imagePath);
             $fields['image_path'] = $imagePath;
         }
 
@@ -118,6 +122,18 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
             }
         }
         return true;
+    }
+
+    /**
+     * Resize image to reduce size and proper display.
+     * 
+     * @param string $imagePath
+     * @param string $height
+     * @param string $width
+     */
+    protected function _resizeImage($imagePath, $height = 150, $width = 150)
+    {
+        Image::make(storage_path('app/public/' . $imagePath))->resize($width, $height)->save(storage_path('app/public/' . $imagePath));
     }
 
 }
