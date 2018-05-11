@@ -19,7 +19,7 @@ class Item extends Model {
      * @var array
      */
     protected $fillable = ['description', 'current_quantity', 'minimum_quantity', 'price', 'expires', 'notes'
-        , 'is_initially_approved', 'initially_approved_at', 'unit_id', 'supplier_id'];
+        , 'is_initially_approved', 'initially_approved_at', 'image_path', 'unit_id', 'supplier_id'];
 
     /**
      * The attributes that should be mutated to dates.

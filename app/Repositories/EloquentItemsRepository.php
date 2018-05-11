@@ -18,6 +18,47 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
     }
 
     /**
+     * Create an item.
+     * 
+     * @param array $fields
+     * @return mixed
+     */
+    public function create(array $fields = null)
+    {
+        if (isset($fields['image'])) {
+            $image = $fields['image'];
+            $imagePath = $image->store('images/items', 'public');
+            $fields['image_path'] = $imagePath;
+        }
+        return parent::create($fields);
+    }
+
+    /**
+     * Update an item.
+     *
+     * @param Integer $id
+     * @param array $fields
+     * @return mixed
+     */
+    public function update($id, array $fields = [])
+    {
+
+        if (isset($fields['image'])) {
+
+            $model = $this->find($id);
+
+            if (!$this->_deleteImage($model)) {
+                return false;
+            }
+            $image = $fields['image'];
+            $imagePath = $image->store('images/items', 'public');
+            $fields['image_path'] = $imagePath;
+        }
+
+        return parent::update($id, $fields);
+    }
+
+    /**
      * Get items that have been approved by an admin.
      * 
      * @return Collection
@@ -60,6 +101,23 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
     public function getLowQuantity()
     {
         return Item::whereColumn('minimum_quantity', '>', 'current_quantity')->get();
+    }
+
+    /**
+     * Delete an item's image.
+     * 
+     * @param Item $item
+     * @return boolean
+     */
+    protected function _deleteImage(Item $item)
+    {
+        if ($item->image_path != NULL) {
+            $deleted = Storage::disk('public')->delete($item->image_path);
+            if (!$deleted) {
+                return $deleted;
+            }
+        }
+        return true;
     }
 
 }
