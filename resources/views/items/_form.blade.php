@@ -56,7 +56,7 @@
             id="formImg"
             width="150px"
             height="150px">
-            <input type="file" id="formImgInput" accept="image/x-png,image/jpg,image/jpeg" name="name">
+            <input type="file" id="formImgInput" accept="image/x-png,image/jpg,image/jpeg" name="image">
             @if($errors->has('image'))
             <p class="text-danger">{{ $errors->first('image') }}</p>
             @endif
