@@ -49,6 +49,7 @@
                                 <th>Supplier</th>
                                 <th>Minimum Quantity <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="If Item quantity is less than minimum quantity, an alert will be displayed in the dashboard"></i></th>
                                 <th>Status</th>
+                                <th>Image</th>
                                 <th class="tblActionCol"></th>
                             </tr>
                           
@@ -62,6 +63,7 @@
                                 <td>{{ isset($items[$i]->supplier) ? $items[$i]->supplier->name : 'N/A' }}</td>
                                 <td>{{ $items[$i]->minimum_quantity }}</td>
                                 <td>{!! $items[$i]->is_initially_approved ? '<i class="fa fa-check btn btn-xs btn-success" aria-hidden="true"> Approved</i>' : '<i class="fa fa-circle-o-notch btn btn-xs btn-warning" aria-hidden="true"> Needs Approval</i>' !!}</td>
+                                <td><img {{(isset($item)? ($item->image_path == null ? "src=http://via.placeholder.com/150x150" :'src="$item->image_path"') : "src=http://via.placeholder.com/150x150")}} height ="75px" width = "75px"></td>
                                 <td>
                                     <ul class="list-inline">
                                         <li>
@@ -70,10 +72,8 @@
                                         </li>    
                                         <li>
                                             <a href="#"><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
-
                                     </ul>
                                 </td>
-
                             </tr>
 
                         </tbody>
