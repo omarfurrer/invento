@@ -38,7 +38,7 @@ class LogController extends Controller {
         $filtersData = $this->logService->getFiltersData();
         
         $log = $this->logService->getAll('id', 'DESC', $itemID, $fromDate, $toDate);
-        return view('log.index', compact('log', 'filtersData'));
+        return view('log.index', compact('log', 'filtersData','itemID','fromDate','toDate'));
     }
 
     /**
