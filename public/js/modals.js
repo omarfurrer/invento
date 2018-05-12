@@ -88,35 +88,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#modal-log-in-create').modal('toggle');
                 var log = data.log;
-                var filterItemID = getParameterByName('item_id');
-                // handle updating log table if url is '/log'
-                if (location.pathname.substr(1) === 'log' && (filterItemID == null || filterItemID == log.item.id)) {
-                    // clone first row
-                    var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
-                    // change row cell values
-
-                    // In/Out
-                    if (log.in) {
-                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-down text-success"></i>');
-                    } else {
-                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-up text-danger"></i>');
-                    }
-                    // Item
-                    logRow.find('td').eq(1).html(log.item.description);
-                    // Quantity
-                    logRow.find('td').eq(2).html((log.in ? '+' : '-') + ' ' + log.quantity + ' ' + log.item.measurement_unit.name);
-                    // Remaining
-                    logRow.find('td').eq(3).html(log.item_current_quantity + ' ' + log.item.measurement_unit.name);
-                    // User
-                    logRow.find('td').eq(4).html(log.user.name);
-                    // Date
-                    logRow.find('td').eq(5).html(moment(log.created_at).format('DD-MM-YYYY'));
-
-                    logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
-
-                    // add cloned row to top of table
-                    $(logRow).prependTo("table > tbody");
-                }
+                addLogToTable(log);
             },
             error: function (response) {
                 var status = response.status;
@@ -147,13 +119,6 @@ $(document).ready(function () {
         // prevent normal form from submitting
         return false;
     });
-});
-
-// LOG HELPERS
-
-
-
-$(document).ready(function () {
 
     // LOG OUT CREATE MODAL
     $('#modal-log-out-create').on('shown.bs.modal', function (e) {
@@ -265,36 +230,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#modal-log-out-create').modal('toggle');
                 var log = data.log;
-                var filterItemID = getParameterByName('item_id');
-                // handle updating log table if url is '/log'
-                if (location.pathname.substr(1) === 'log' && (filterItemID == null || filterItemID == log.item.id)) {
-                    // clone first row
-                    var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
-
-                    // change row cell values
-
-                    // In/Out
-                    if (log.in) {
-                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-down text-success"></i>');
-                    } else {
-                        logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-up text-danger"></i>');
-                    }
-                    // Item
-                    logRow.find('td').eq(1).html(log.item.description);
-                    // Quantity
-                    logRow.find('td').eq(2).html((log.in ? '+' : '-') + ' ' + log.quantity + ' ' + log.item.measurement_unit.name);
-                    // Remaining
-                    logRow.find('td').eq(3).html(log.item_current_quantity + ' ' + log.item.measurement_unit.name);
-                    // User
-                    logRow.find('td').eq(4).html(log.user.name);
-                    // Date
-                    logRow.find('td').eq(5).html(moment(log.created_at).format('DD-MM-YYYY'));
-
-                    logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
-
-                    // add cloned row to top of table
-                    $(logRow).prependTo("table > tbody");
-                }
+                addLogToTable(log);
             },
             error: function (response) {
                 var status = response.status;
@@ -325,6 +261,48 @@ $(document).ready(function () {
         // prevent normal form from submitting
         return false;
     });
+
+    function addLogToTable(log) {
+        var createdDate = moment(log.created_at);
+
+        var filterItemID = getParameterByName('item_id');
+        var filterFromDate = getParameterByName('from_date') == null ? null : moment(getParameterByName('from_date'), "DD-MM-YYYY").startOf('day');
+        var filterToDate = getParameterByName('to_date') == null ? null : moment(getParameterByName('to_date'), "DD-MM-YYYY").endOf('day');
+
+        // handle updating log table if url is '/log'
+        if (location.pathname.substr(1) === 'log'
+                && (filterItemID == null || filterItemID == log.item.id)
+                && (filterFromDate == null || filterFromDate <= createdDate)
+                && (filterToDate == null || filterToDate >= createdDate)
+                )
+        {
+            // clone first row
+            var logRow = $('#new-row').clone().removeAttr('id').removeClass('hide');
+            // change row cell values
+
+            // In/Out
+            if (log.in) {
+                logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-down text-success"></i>');
+            } else {
+                logRow.find('td').eq(0).html('<i class="fa fa-lg fa-sort-up text-danger"></i>');
+            }
+            // Item
+            logRow.find('td').eq(1).html(log.item.description);
+            // Quantity
+            logRow.find('td').eq(2).html((log.in ? '+' : '-') + ' ' + log.quantity + ' ' + log.item.measurement_unit.name);
+            // Remaining
+            logRow.find('td').eq(3).html(log.item_current_quantity + ' ' + log.item.measurement_unit.name);
+            // User
+            logRow.find('td').eq(4).html(log.user.name);
+            // Date
+            logRow.find('td').eq(5).html(createdDate.format('DD-MM-YYYY'));
+
+            logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
+
+            // add cloned row to top of table
+            $(logRow).prependTo("table > tbody");
+        }
+    }
 });
 
 function escapeRegExp(str) {
