@@ -22,10 +22,10 @@
         <div class="col-sm-12">
             @if(count($items) != 0)
             <div class="box">
-                  
+
                 <div class="box-header">
                     <h3 class="box-title">Showing: <b>{{count($items)}} Items</b></h3>
-                    
+
                     <div class="box-tools">
                         <div class="input-group input-group-sm searchInput">
                             <input type="text" name="table_search" class="form-control pull-right" placeholder="Search" id="search" onkeyup="search()">
@@ -38,7 +38,7 @@
                 </div>
 
                 <!-- /.box-header -->
-                 
+
 
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover" id="itemsTbl">
@@ -52,7 +52,6 @@
                                 <th>Image</th>
                                 <th class="tblActionCol"></th>
                             </tr>
-                          
 
                             @for ($i = 0; $i < count($items); $i++)
 
@@ -63,7 +62,10 @@
                                 <td>{{ isset($items[$i]->supplier) ? $items[$i]->supplier->name : 'N/A' }}</td>
                                 <td>{{ $items[$i]->minimum_quantity }}</td>
                                 <td>{!! $items[$i]->is_initially_approved ? '<i class="fa fa-check btn btn-xs btn-success" aria-hidden="true"> Approved</i>' : '<i class="fa fa-circle-o-notch btn btn-xs btn-warning" aria-hidden="true"> Needs Approval</i>' !!}</td>
-                                <td><img {{(isset($item)? ($item->image_path == null ? "src=http://via.placeholder.com/150x150" :'src="$item->image_path"') : "src=http://via.placeholder.com/150x150")}} height ="75px" width = "75px"></td>
+                                <td><img 
+                                        src="{{ $items[$i]->image_path == null ? 'http://via.placeholder.com/150x150' : asset('storage/'.$items[$i]->image_path) }}"
+                                        height="75px"
+                                        width="75px"></td>
                                 <td>
                                     <ul class="list-inline">
                                         <li>
@@ -80,19 +82,19 @@
                         @endfor
                     </table>
 
-                    
+
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
             @else
-                   
-                    <h4 class="text-center emptyArrayHeader">
-                      <i class="fa fa-info-circle"></i>  
-                    There are currently no items to show, please add item first.
-                </h4>
-               
-                    @endif
+
+            <h4 class="text-center emptyArrayHeader">
+                <i class="fa fa-info-circle"></i>  
+                There are currently no items to show, please add item first.
+            </h4>
+
+            @endif
         </div>
     </div>
 
@@ -126,9 +128,9 @@
 
 
 
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-  });
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
 
 
