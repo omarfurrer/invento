@@ -48,18 +48,20 @@
 
         <div class="col-md-4">
 
-           <div class="form-group {{ $errors->has('image') ? ' has-error' : '' }}" id="formImgDiv">
+           <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}" id="formImgDiv">
 
             <img {{(isset($item)? ($item->image_path == null ? "src=http://via.placeholder.com/150x150" :                  'src="$item->image_path"') : "src=http://via.placeholder.com/150x150")}}                
             class="img-thumbnail"
-            alt="Item's image">
-            <input type="file" id="formImgInput" accept=".jpg, .jpeg, .png" name="name" onchange="previewFile()">
+            alt="Item's image"
+            id="formImg"
+            width="150px"
+            height="150px">
+            <input type="file" id="formImgInput" accept="image/x-png,image/jpg,image/jpeg" name="name">
             @if($errors->has('image'))
             <p class="text-danger">{{ $errors->first('image') }}</p>
             @endif
         </div>
     </div>
-
 </div>
 
 <div class="row">
@@ -102,26 +104,26 @@
 
 
 <h3><small><b>Initial Batches<b></small></h3>
-        <hr>
-        <div class="row">
-            <div class="col-md-4">
-                <div 
-                class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }} required">
-                <label for="quantity" class="control-label">Quantity</label>
-                <input type="number"
-                required 
-                class="form-control"
-                id="quantity" 
-                name="item_batches[0][quantity]"
-                id="item_batches_quantity"
-                placeholder="Enter quantity"
-                value="{{ old('item_batches.0.quantity',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
-                {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
-                @if($errors->has('item_batches.0.quantity'))
-                <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
-                @endif
-            </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <div 
+            class="form-group{{ $errors->has('item_batches.0.quantity') ? ' has-error' : '' }} required">
+            <label for="quantity" class="control-label">Quantity</label>
+            <input type="number"
+            required 
+            class="form-control"
+            id="quantity" 
+            name="item_batches[0][quantity]"
+            id="item_batches_quantity"
+            placeholder="Enter quantity"
+            value="{{ old('item_batches.0.quantity',isset($item)? $item->itemBatches[0]['quantity'] : '') }}"
+            {{ isset($item) ? $item->is_initially_approved ? ' readonly' : '' : '' }}>
+            @if($errors->has('item_batches.0.quantity'))
+            <p class="text-danger">{{ $errors->first('item_batches.0.quantity') }}</p>
+            @endif
         </div>
+    </div>
 
 
     <div class="col-md-4">
@@ -203,22 +205,22 @@
                       }
 
                   });
+                        function readURL(input) {
 
-                        function previewFile() {
-                          var preview = document.querySelector('img');
-                          var file    = document.querySelector('input[type=file]').files[0];
-                          var reader  = new FileReader();
+                          if (input.files && input.files[0]) {
+                            var reader = new FileReader();
 
-                          reader.onloadend = function () {
-                            preview.src = reader.result;
-                        }
+                            reader.onload = function(e) {
+                              $('#formImg').attr('src', e.target.result);
+                          }
 
-                        if (file) {
-                            reader.readAsDataURL(file);
-                        } else {
-                            preview.src = "";
-                        }
-                    }
+                          reader.readAsDataURL(input.files[0]);
+                      }
+                  }
 
-                </script>
-                @endpush
+                  $("#formImgInput").change(function() {
+                      readURL(this);
+                  });
+
+            </script>
+            @endpush
