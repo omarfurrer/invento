@@ -135,7 +135,8 @@
                                 <td>{{$log[$i]->item_current_quantity}} {{$log[$i]-> item->measurementUnit->name }}</td>
                                 <td>{{$log[$i]->user->name}}</td>
                                 <td>{{$log[$i]->created_at->format('d-m-Y')}}</td>
-                                <td><img {{(isset($item)? ($item->image_path == null ? "src=http://via.placeholder.com/150x150" :'src="$item->image_path"') : "src=http://via.placeholder.com/150x150")}} 
+                                <td><img 
+                                                                        src="{{ $log[$i]->item->image_path == null ? 'http://via.placeholder.com/150x150' : asset('storage/'.$log[$i]->item->image_path) }}"
                                     width="75px"
                                     height="75px"></td>
                                     <td>

@@ -50,7 +50,8 @@
 
            <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}" id="formImgDiv">
 
-            <img {{(isset($item)? ($item->image_path == null ? "src=http://via.placeholder.com/150x150" :                  'src="$item->image_path"') : "src=http://via.placeholder.com/150x150")}}                
+            <img 
+                src="{{ isset($item) ? ($item->image_path == null ? 'http://via.placeholder.com/150x150' : asset('storage/'.$item->image_path)) : 'http://via.placeholder.com/150x150' }}"    
             class="img-thumbnail"
             alt="Item's image"
             id="formImg"
