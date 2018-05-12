@@ -296,8 +296,14 @@ $(document).ready(function () {
             logRow.find('td').eq(4).html(log.user.name);
             // Date
             logRow.find('td').eq(5).html(createdDate.format('DD-MM-YYYY'));
-
-            logRow.find('td').eq(6).html(replaceAll(logRow.find('td').eq(6).html(), '{log_id}', log.id));
+            // item image
+            if (log.item.image_path == null) {
+                logRow.find('td').eq(6).html('<img height="75px" width="75px" src="http://via.placeholder.com/150x150">');
+            } else {
+                logRow.find('td').eq(6).html('<img height="75px" width="75px" src="' + window.location.origin + '/storage/' + log.item.image_path + '">');
+            }
+            // delete button
+            logRow.find('td').eq(7).html(replaceAll(logRow.find('td').eq(7).html(), '{log_id}', log.id));
 
             // add cloned row to top of table
             $(logRow).prependTo("table > tbody");

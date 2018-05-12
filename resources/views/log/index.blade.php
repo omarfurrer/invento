@@ -95,6 +95,7 @@
                             <td>#</td>
                             <td>#</td>
                             <td>#</td>
+                            <td>#</td>
                             <td>
                                 <ul class="list-inline">
                                     <li>
