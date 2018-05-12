@@ -17,7 +17,7 @@
             <select id="item" name="item_id" class="form-control">
                 <option value="">Select Item</option>
                 @foreach($filtersData['items'] as $id => $description)
-                <option value="{{ $id }}"{{ old('item_id') != NULL ? (old('item_id') == $id ? 'selected' : '' ):''}}>{{$description}}</option>                      
+                <option value="{{ $id }}" {{ $itemID != null ? ($itemID == $id ? 'selected' : '') : ''  }}>{{$description}}</option>                      
                 @endforeach
                 
             </select>
@@ -35,7 +35,8 @@
                 <input type="text"
                 class="form-control date-picker" 
                 name="from_date" 
-                id="fromDate">
+                id="fromDate"
+                value="{{ $fromDate == null ? '':$fromDate }}">
             </div>
             @if($errors->has('from_date'))
             <p class="text-danger">{{ $errors->first('from_date') }}</p>
@@ -51,7 +52,8 @@
                 <input type="text"
                 class="form-control date-picker" 
                 name="to_date" 
-                id="toDate">
+                id="toDate"
+                value="{{ $toDate == null ? '':$toDate }}">
             </div>
             @if($errors->has('to_date'))
             <p class="text-danger">{{ $errors->first('to_date') }}</p>
