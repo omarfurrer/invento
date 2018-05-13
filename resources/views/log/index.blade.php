@@ -11,9 +11,7 @@
    <div class="row">
        <div class="col-md-10 col-md-offset-1">
 
-        <button type="button" class="navbar-toggle collapsed btn btn-primary btn-xs" data-toggle="collapse" data-target="#form-collapse"> Filter Item
-            <i class="fa fa-bars"></i>
-        </button>
+       
 
         <div class="collapse navbar-collapse" id="form-collapse">
 
@@ -80,15 +78,19 @@
 
     </form>
 
+
 </div>
 
+<br>
+ <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" data-target="#form-collapse"> Filters
+        </button>
 
 </div>
 </div>
 
 
 <!-- /.box-header -->
-<div class="row" style="margin-top: 20px">
+<div class="row" style="margin-top: 10px">
     <div class="col-md-10 col-md-offset-1">
         <div class="box box-primary">
             <div class="box-header">
