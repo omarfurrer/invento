@@ -136,4 +136,35 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
         Image::make(storage_path('app/public/' . $imagePath))->resize($width, $height)->save(storage_path('app/public/' . $imagePath));
     }
 
+    /**
+     * Get all items expiring within 3 months.
+     *  
+     * @return Collection
+     */
+    public function getExpiringSoon()
+    {
+        return Item::join('item_batches', 'items.id', '=', 'item_batches.item_id')
+                        ->join('measurement_units', 'items.unit_id', '=', 'measurement_units.id')
+                        ->where('item_batches.expiry_date', '<', Carbon::now()->addMonths(3))
+                        ->where('item_batches.expiry_date', '>', Carbon::now())
+                        ->where('item_batches.current_quantity', '!=', 0)
+                        ->select('items.description', 'item_batches.current_quantity', 'measurement_units.short_name', 'item_batches.expiry_date')
+                        ->get();
+    }
+
+    /**
+     * Get all items which have expired.
+     *  
+     * @return Collection
+     */
+    public function getExpired()
+    {
+        return Item::join('item_batches', 'items.id', '=', 'item_batches.item_id')
+                        ->join('measurement_units', 'items.unit_id', '=', 'measurement_units.id')
+                        ->where('item_batches.expiry_date', '<', Carbon::now())
+                        ->where('item_batches.current_quantity', '!=', 0)
+                        ->select('items.description', 'item_batches.current_quantity', 'measurement_units.short_name', 'item_batches.expiry_date')
+                        ->get();
+    }
+
 }

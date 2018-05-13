@@ -52,4 +52,24 @@ class DashboardService {
         return $this->itemsRepository->getLowQuantity();
     }
 
+    /**
+     * Retrieve items that are going to expire soon.
+     * 
+     * @return Collection
+     */
+    public function getExpiringSoonItems()
+    {
+        return $this->itemsRepository->getExpiringSoon();
+    }
+
+    /**
+     * Retrieve items that have expired.
+     * 
+     * @return Collection
+     */
+    public function getExpiredItems()
+    {
+        return $this->itemsRepository->getExpired();
+    }
+
 }

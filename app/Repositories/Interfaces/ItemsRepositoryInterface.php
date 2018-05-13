@@ -25,11 +25,25 @@ interface ItemsRepositoryInterface {
      * @return Collection
      */
     public function getInitiallyApproved();
-    
+
     /**
      * Get items where minimum quantity threshold has exceeded.
      * 
      * @return Collection
      */
     public function getLowQuantity();
+
+    /**
+     * Get all items expiring within 3 months.
+     *  
+     * @return Collection
+     */
+    public function getExpiringSoon();
+
+    /**
+     * Get all items which have expired.
+     *  
+     * @return Collection
+     */
+    public function getExpired();
 }

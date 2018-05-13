@@ -30,7 +30,9 @@ class DashboardController extends Controller {
     public function getDashboard()
     {
         $lowQuantityItems = $this->dashboardService->getLowQuantityItems();
-        return view('pages.dashboard', compact('lowQuantityItems'));
+        $expiringSoonItems = $this->dashboardService->getExpiringSoonItems();
+        $expiredItems = $this->dashboardService->getExpiredItems();
+        return view('pages.dashboard', compact('lowQuantityItems', 'expiringSoonItems', 'expiredItems'));
     }
 
 }
