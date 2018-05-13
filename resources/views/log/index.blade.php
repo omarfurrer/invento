@@ -8,61 +8,65 @@
 <!-- Main content -->
 
 <section class="content container-fluid">
- <div class="row">
+   <div class="row">
     <div class="col-md-10 col-md-offset-1">
-       <form class="form-inline " action="/log" method="GET">
+     <form class="form-inline " action="/log" method="GET">
 
-         <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}"  >
-            <label for="item">Item</label>
-            <select id="item" name="item_id" class="form-control">
-                <option value="">Select Item</option>
-                @foreach($filtersData['items'] as $id => $description)
-                <option value="{{ $id }}" {{ $itemID != null ? ($itemID == $id ? 'selected' : '') : ''  }}>{{$description}}</option>                      
-                @endforeach
-                
-            </select>
-            @if($errors->has('item_id'))
-            <p class="text-danger">{{ $errors->first('item_id') }}</p>
-            @endif
-        </div>
+       <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}" style="padding: 7px">
 
-        <div class="form-group{{ $errors->has('from_date') ? ' has-error' : '' }}"  id="fromDate">
-            <label for="fromDate">From</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text"
-                class="form-control date-picker" 
-                name="from_date" 
-                id="fromDate"
-                value="{{ $fromDate == null ? '':$fromDate }}">
+        <select id="item" name="item_id" class="form-control">
+            <option value="">All Items</option>
+            @foreach($filtersData['items'] as $id => $description)
+            <option value="{{ $id }}" {{ $itemID != null ? ($itemID == $id ? 'selected' : '') : ''  }}>{{$description}}</option>                      
+            @endforeach
+
+        </select>
+        @if($errors->has('item_id'))
+        <p class="text-danger">{{ $errors->first('item_id') }}</p>
+        @endif
+    </div>
+
+    <div class="form-group{{ $errors->has('from_date') ? ' has-error' : '' }}"  id="fromDate" style="padding: 7px">
+
+        <div class="input-group date">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
             </div>
-            @if($errors->has('from_date'))
-            <p class="text-danger">{{ $errors->first('from_date') }}</p>
-            @endif
+            <input type="text"
+            class="form-control date-picker" 
+            name="from_date" 
+            id="fromDate"
+            value="{{ $fromDate == null ? '':$fromDate }}"
+            placeholder="Filter date from" 
+            >
         </div>
+        @if($errors->has('from_date'))
+        <p class="text-danger">{{ $errors->first('from_date') }}</p>
+        @endif
+    </div>
 
-        <div class="form-group{{ $errors->has('to_date') ? ' has-error' : '' }}"  id="toDate">
-            <label for="toDate">To</label>
-            <div class="input-group date">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="text"
-                class="form-control date-picker" 
-                name="to_date" 
-                id="toDate"
-                value="{{ $toDate == null ? '':$toDate }}">
+    <div class="form-group{{ $errors->has('to_date') ? ' has-error' : '' }}"  id="toDate" style="padding: 7px">
+
+        <div class="input-group date">
+            <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
             </div>
-            @if($errors->has('to_date'))
-            <p class="text-danger">{{ $errors->first('to_date') }}</p>
-            @endif
+            <input type="text"
+            class="form-control date-picker" 
+            name="to_date" 
+            id="toDate"
+            value="{{ $toDate == null ? '':$toDate }}"
+            placeholder="Filter date to"
+            >
         </div>
+        @if($errors->has('to_date'))
+        <p class="text-danger">{{ $errors->first('to_date') }}</p>
+        @endif
+    </div>
 
-        <button type="submit" class="btn btn-primary pull-right">Show</button>
+    <button type="submit" class="btn btn-primary pull-right" style="margin-top: 7px">Show</button>
 
-    </form>
+</form>
 
 
 </div>
@@ -139,7 +143,7 @@
                                 <td>{{$log[$i]->user->name}}</td>
                                 <td>{{$log[$i]->created_at->format('d-m-Y')}}</td>
                                 <td><img 
-                                                                        src="{{ $log[$i]->item->image_path == null ? 'http://via.placeholder.com/150x150' : asset('storage/'.$log[$i]->item->image_path) }}"
+                                    src="{{ $log[$i]->item->image_path == null ? 'http://via.placeholder.com/150x150' : asset('storage/'.$log[$i]->item->image_path) }}"
                                     width="75px"
                                     height="75px"></td>
                                     <td>
