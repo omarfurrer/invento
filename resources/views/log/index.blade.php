@@ -8,14 +8,18 @@
 <!-- Main content -->
 
 <section class="content container-fluid">
- <div class="row">
- <div class="col-md-10 col-md-offset-1">
+   <div class="row">
+       <div class="col-md-10 col-md-offset-1">
 
-   <form class="form-inline" action="/log" method="GET">
+        <button type="button" class="navbar-toggle collapsed btn btn-primary btn-xs" data-toggle="collapse" data-target="#form-collapse"> Filter Item
+            <i class="fa fa-bars"></i>
+        </button>
 
+        <div class="collapse navbar-collapse" id="form-collapse">
 
-         
-         <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
+         <form class="form-inline" action="/log" method="GET">
+
+           <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
             <select id="item" name="item_id" class="form-control">
                 <option value="">All Items</option>
                 @foreach($filtersData['items'] as $id => $description)
@@ -27,9 +31,9 @@
             <p class="text-danger">{{ $errors->first('item_id') }}</p>
             @endif
         </div>
-   
 
-  
+
+
 
         <div class="form-group{{ $errors->has('from_date') ? ' has-error' : '' }}"  id="fromDate">
             <div class="input-group date">
@@ -48,7 +52,7 @@
             <p class="text-danger">{{ $errors->first('from_date') }}</p>
             @endif
         </div>
-    
+
 
 
         <div class="form-group{{ $errors->has('to_date') ? ' has-error' : '' }}"  id="toDate">
@@ -68,13 +72,15 @@
             <p class="text-danger">{{ $errors->first('to_date') }}</p>
             @endif
         </div>
-    
 
-    
+
+
 
         <button type="submit" class="btn btn-primary pull-right">Show</button>
-    
-</form>
+
+    </form>
+
+</div>
 
 
 </div>
