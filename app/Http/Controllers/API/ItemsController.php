@@ -29,7 +29,8 @@ class ItemsController extends Controller {
      */
     public function getAll()
     {
-        $items = $this->itemsService->getAll();
+        $items = $this->itemsService->getAllInitiallyApproved();
+        $items->load('measurementUnit');
         return response()->json(compact('items'));
     }
 
