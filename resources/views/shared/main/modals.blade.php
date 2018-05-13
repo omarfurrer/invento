@@ -9,7 +9,7 @@
                 </div>
                 <form action="/ajax/log/in/create" method="POST">
                     <div class="modal-body">
-
+                       
                         {{ csrf_field() }}
 
                         <div class="form-group required">
@@ -18,8 +18,8 @@
                             </select>
                         </div>
 
-                        <div class="form-group required">
-                            <label for="quantity" class="control-label">Quantity</label>
+             <div class="form-group required">
+             <label for="quantity" class="control-label">Quantity <b id="measurementUnit"></b></label>
                             <input 
                             step="0.01" 
                             type="number" 
@@ -92,7 +92,7 @@
 
 
                             <div class="form-group required">
-                                <label for="quantity" class="control-label">Quantity</label>
+                                <label for="quantity" class="control-label">Quantity <b id="measurementUnit"></b></label>
                                 <input 
                                 step="0.01" 
                                 type="number" 

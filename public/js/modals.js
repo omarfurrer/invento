@@ -30,8 +30,8 @@ $(document).ready(function () {
                 $('#modal-log-in-create #item').append('<option value="">Select Item</option>');
 
                 // populate items
-                for (i = 0; i < items.length; i++) {
-                    $('#modal-log-in-create #item').append('<option value="' + items[i].id + '">' + items[i].description + '</option>');
+                for (var i = 0; i < items.length; i++) {
+                    $('#modal-log-in-create #item').append('<option value="' + items[i].id + '">' + items[i].description + '</option>'); 
                 }
 
                 // enable all inputs since we successfuly received items
@@ -40,6 +40,11 @@ $(document).ready(function () {
                 // handle expiry date input
                 $("#modal-log-in-create #item").change(function () {
                     handleExpiryDateVisibility($(this).val());
+
+                    var chosenItem = getItem($(this).val());
+
+                    addMeasurementUnit(chosenItem);     
+                     
                 });
 
                 // HELPERS
@@ -64,6 +69,19 @@ $(document).ready(function () {
                     }
                     return false;
                 }
+
+                function addMeasurementUnit (item) {
+
+                   if(!item) {
+                   $("#modal-log-in-create #measurementUnit").html(''); }
+                     else {
+                   $("#modal-log-in-create #measurementUnit").html('('+item.measurement_unit.name+')');
+                      }
+
+
+                }
+
+               
             }
         });
 
@@ -140,7 +158,6 @@ $(document).ready(function () {
             url: '/api/items',
             success: function (data) {
                 var items = data.items;
-
                 // insert default option
                 $('#modal-log-out-create #item').append('<option value="">Select Item</option>');
 
@@ -148,15 +165,16 @@ $(document).ready(function () {
                 for (i = 0; i < items.length; i++) {
                     $('#modal-log-out-create #item').append('<option value="' + items[i].id + '">' + items[i].description + '</option>');
                 }
-
                 // enable all inputs since we successfuly received items
                 $('#modal-log-out-create').find('input,textarea,select').prop('disabled', false);
 
-
+                
                 // Populate Item batches
                 $("#modal-log-out-create #item").change(function () {
 
                     searchAndPopulateBatch($(this).val());
+                    var currentItem = getItem($(this).val());
+                    addMeasurementUnit(currentItem);
 
                 });
 
@@ -206,6 +224,28 @@ $(document).ready(function () {
 
 
                 }
+
+                function getItem(id) {
+                    for (i = 0; i < items.length; i++) {
+                        var arrayItemId = items[i].id;
+                        if (id == arrayItemId) {
+                            return items[i];
+                        }
+                    }
+                    return false;
+                }
+
+                 function addMeasurementUnit (item) {
+
+                   if(!item) {
+                   $("#modal-log-out-create #measurementUnit").html(''); }
+                     else {
+                   $("#modal-log-out-create #measurementUnit").html('('+item.measurement_unit.name+')');
+                      }
+
+
+                }
+
             }
         });
 

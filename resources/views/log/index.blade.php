@@ -11,8 +11,10 @@
  <div class="row">
  <div class="col-md-10 col-md-offset-1">
 
-   <form class="form-inline " action="/log" method="GET">
+   <form class="form-inline" action="/log" method="GET">
 
+
+         
          <div class="form-group{{ $errors->has('item_id') ? ' has-error' : '' }}">
             <select id="item" name="item_id" class="form-control">
                 <option value="">All Items</option>
