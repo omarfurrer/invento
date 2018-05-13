@@ -260,6 +260,17 @@ class ItemsService extends BaseService {
     }
 
     /**
+     * Get non zero batches of an item ordered by expiry date.
+     * 
+     * @param Item $item
+     * @return type
+     */
+    public function getNonZeroItemBatches(Item $item)
+    {
+        return $this->itemBatchesRepository->getOrderByExpiryDate($item->id);
+    }
+
+    /**
      * Add quantity to Item.
      * 
      * @param Item $item

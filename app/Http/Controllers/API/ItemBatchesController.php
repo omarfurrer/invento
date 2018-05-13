@@ -32,7 +32,7 @@ class ItemBatchesController extends Controller {
      */
     public function getForItem(Item $item)
     {
-        $itemBatches = $this->itemsService->getItemBatches($item);
+        $itemBatches = $this->itemsService->getNonZeroItemBatches($item);
         return response()->json(compact('itemBatches'));
     }
 

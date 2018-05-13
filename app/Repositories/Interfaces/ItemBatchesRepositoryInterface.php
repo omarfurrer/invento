@@ -20,4 +20,12 @@ interface ItemBatchesRepositoryInterface {
      * @return Collection
      */
     public function getInitialByItem($itemID);
+
+    /**
+     * Get non zero batches of an item ordered by expiry date.
+     * 
+     * @param Integer $itemID
+     * @return Collection
+     */
+    public function getOrderByExpiryDate($itemID);
 }

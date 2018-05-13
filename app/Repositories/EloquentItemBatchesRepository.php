@@ -69,4 +69,15 @@ class EloquentItemBatchesRepository extends EloquentAbstractRepository implement
         return ItemBatch::where('is_initial', true)->where('item_id', $itemID)->get();
     }
 
+    /**
+     * Get non zero batches of an item ordered by expiry date.
+     * 
+     * @param Integer $itemID
+     * @return Collection
+     */
+    public function getOrderByExpiryDate($itemID)
+    {
+        return ItemBatch::where('item_id', $itemID)->where('current_quantity', '!=', 0)->orderBy('expiry_date', 'ASC')->get();
+    }
+
 }
