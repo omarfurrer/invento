@@ -74,17 +74,20 @@
 
 
 
-        <button type="submit" class="btn btn-primary pull-right">Show</button>
+        <button type="submit"class="btn btn-primary pull-right">Show</button>
 
     </form>
 
 
 </div>
 
-<br>
- <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" data-target="#form-collapse"> Filters
-        </button>
+<hr id="collapsedHr">
 
+ <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" data-target="#form-collapse" id="filterBtn" aria-expanded="false">
+    <i class="fa fa-sort-down"> </i> Filters
+    <i class="fa fa-sort-up"> </i>
+        </button>
+  
 </div>
 </div>
 
@@ -187,3 +190,23 @@
         </section>
 
         @endsection
+
+
+@push('scripts')
+<script>
+
+$(document).ready(function () {
+      
+      $('#collapsedHr').hide(); 
+
+    });
+
+
+ $('#filterBtn').click(function(){
+
+    $('#collapsedHr').toggle();
+ 
+ });
+
+</script>
+@endpush
