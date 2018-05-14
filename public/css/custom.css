@@ -7,7 +7,7 @@
 
 
 .searchInput {
-	width: 150px;
+	width: 130px;
 
 }
 
@@ -43,5 +43,41 @@ margin-top: 10px;
 
 .navbar-toggle {
   padding: 5px;
+
+}
+
+.navbar-collapse {
+ 
+ padding: 0px 0px;
+
+}
+
+
+#collapsedHr {
+ margin-top:10px; 
+ margin-bottom:10px;
+ border-top: 1px solid #aaa;
+
+}
+
+button[aria-expanded=true] .fa-sort-down {
+   display: none;
+}
+button[aria-expanded=false] .fa-sort-up {
+   display: none;
+}
+
+.dashboardHeaders {
+
+	margin-left: 15px;
+}
+
+.smallFontSpan {
+	font-size: 14px;
+}
+
+.box-title {
+ 
+ font-size: 15px !important;
 
 }
