@@ -21,7 +21,7 @@
 			@if(count($suppliers) != 0)
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Showing: <b>{{count($suppliers)}} Suppliers</b></h3>
+					<h5 class="box-title">Showing: <b>{{count($suppliers)}} Suppliers</b></h5>
 					
 					<div class="box-tools">
 						<div class="input-group input-group-sm searchInput">

@@ -24,7 +24,7 @@
             <div class="box">
 
                 <div class="box-header">
-                    <h3 class="box-title">Showing: <b>{{count($items)}} Items</b></h3>
+                    <h5 class="box-title">Showing: <b>{{count($items)}} Items</b></h5>
 
                     <div class="box-tools">
                         <div class="input-group input-group-sm searchInput">
