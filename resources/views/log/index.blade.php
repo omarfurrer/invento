@@ -84,8 +84,8 @@
 <hr id="collapsedHr">
 
  <button type="button" class="navbar-toggle collapsed btn-primary" data-toggle="collapse" data-target="#form-collapse" id="filterBtn" aria-expanded="false">
-    <i class="fa fa-sort-down"> </i> Filters
-    <i class="fa fa-sort-up"> </i>
+   Filters <i class="fa fa-sort-down"> </i> 
+    <i class="fa fa-sort-up"> </i> 
         </button>
   
 </div>
