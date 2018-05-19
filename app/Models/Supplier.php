@@ -20,4 +20,14 @@ class Supplier extends Model {
      */
     protected $fillable = ['name', 'contact_number'];
 
+    /**
+     * A supplier can have many contacts.
+     *
+     * @return HasMany
+     */
+    public function contacts()
+    {
+        return $this->hasMany('App\Models\SupplierContact');
+    }
+
 }

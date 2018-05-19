@@ -53,6 +53,9 @@ class RepositoryServiceProvider extends ServiceProvider {
         $this->app->singleton(
                 Interfaces\LogRepositoryInterface::class, Repositories\EloquentLogRepository::class
         );
+        $this->app->singleton(
+                Interfaces\SupplierContactsRepositoryInterface::class, Repositories\EloquentSupplierContactsRepository::class
+        );
     }
 
 }
