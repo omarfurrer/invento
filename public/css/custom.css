@@ -81,3 +81,7 @@ button[aria-expanded=false] .fa-sort-up {
  font-size: 15px !important;
 
 }
+
+.padding-0{
+    padding: 0px;
+}

@@ -18,7 +18,7 @@ class Supplier extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'contact_number'];
+    protected $fillable = ['name'];
 
     /**
      * A supplier can have many contacts.
