@@ -28,10 +28,11 @@ class StoreItemRequest extends FormRequest {
             'unit_id' => 'required|exists:measurement_units,id',
             'supplier_id' => 'nullable|exists:suppliers,id',
             'minimum_quantity' => 'nullable|numeric',
-            'image' => 'nullable|image',
+            'image' => 'nullable|mimes:jpeg,jpg,png',
             'expires' => 'required|boolean',
             'item_batches' => 'required|array',
-            'item_batches.*.quantity' => 'required|numeric'
+            'item_batches.*.quantity' => 'required|numeric',
+            'item_batches.*.expiry_date' => 'required_if:expires,1|date_format:d-m-Y'
         ];
     }
 
