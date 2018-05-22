@@ -32,7 +32,7 @@ class UpdateItemRequest extends FormRequest {
             'expires' => 'required|boolean',
             'item_batches' => 'required|array',
             'item_batches.*.quantity' => 'required|numeric',
-            'item_batches.*.expiry_date' => 'required_if:expires,1|date_format:d-m-Y'
+            'item_batches.*.expiry_date' => 'nullable|required_if:expires,1|date_format:d-m-Y'
         ];
     }
 
