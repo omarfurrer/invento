@@ -114,7 +114,15 @@ class ItemsController extends Controller {
      */
     public function destroy(Item $item)
     {
-        //
+        $item = $this->itemsService->delete($item, Auth::user());
+
+        if (!$item) {
+            \Session::flash('flash_message_error', $this->itemsService->getErrorMessage());
+            return redirect()->back();
+        }
+
+        \Session::flash('flash_message_success', 'Item Deleted.');
+        return redirect()->to('/items');
     }
 
 }

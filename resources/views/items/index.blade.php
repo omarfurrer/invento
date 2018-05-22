@@ -73,7 +73,13 @@
                                             </a>
                                         </li>    
                                         <li>
-                                            <a href="#"><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
+                                            <a
+                                                onclick="return deleteModel(event,'delete-form-{{$items[$i]->id}}', 'Are you sure you want to delete this item ? All related data will be lost');"
+                                                href="#"><i class="fa fa-trash btn btn-xs btn-danger" aria-hidden="true"> Delete</i></a></li>
+                                        <form id="delete-form-{{$items[$i]->id}}" action="{{ url("items/". $items[$i]->id ) }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
                                     </ul>
                                 </td>
                             </tr>

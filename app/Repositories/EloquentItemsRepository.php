@@ -125,6 +125,23 @@ class EloquentItemsRepository extends EloquentAbstractRepository implements Item
     }
 
     /**
+     * Delete an item.
+     * 
+     * @param Integer $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        $model = $this->getById($id);
+
+        if (!$this->_deleteImage($model)) {
+            return false;
+        }
+
+        return parent::delete($model);
+    }
+
+    /**
      * Resize image to reduce size and proper display.
      * 
      * @param string $imagePath

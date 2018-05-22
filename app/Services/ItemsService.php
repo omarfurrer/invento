@@ -143,6 +143,33 @@ class ItemsService extends BaseService {
     }
 
     /**
+     * Delete an item.
+     * 
+     * @param Item $item
+     * @param User $user
+     * @return boolean
+     */
+    public function delete(Item $item, User $user)
+    {
+        if ($user->hasRole(['admin', 'super admin']) || !$this->isInitiallyApproved($item)) {
+            return $this->itemsRepository->delete($item->id);
+        }
+        $this->addError('Only an admin can delete an item after it has been initially approved.');
+        return false;
+    }
+
+    /**
+     * Check whether an item has been initially approved or not.
+     * 
+     * @param Item $item
+     * @return type
+     */
+    public function isInitiallyApproved(Item $item)
+    {
+        return $item->is_initially_approved;
+    }
+
+    /**
      * Set initial approval for an item. 
      * 
      * @param Integer $id
