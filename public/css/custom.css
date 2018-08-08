@@ -85,3 +85,38 @@ button[aria-expanded=false] .fa-sort-up {
 .padding-0{
     padding: 0px;
 }
+
+.categoryRow {
+	background-color: #b9c7d6;
+}
+
+.categoryRow:hover {
+	background-color: #b9c7d6 !important;
+}
+
+.categoryRow i {
+	color: #34303c;
+	padding-top: 3px;
+}
+
+#categoryTd {
+	padding: 4px;
+}
+
+.categoryRow button {
+	padding: 1px;
+	width: 100%;
+	text-align: left;
+	font-family: sans-serif;
+	font-weight: bold;
+	background-color: #b9c7d6;
+	color: #34303c;
+}
+
+.minusOneBtn i {
+	color: red;
+}
+
+#customInput1, #customInput2, #customInput3, #customInput4 {
+	max-width: 70px;
+}
