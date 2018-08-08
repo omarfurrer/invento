@@ -11,11 +11,15 @@
   |
  */
 
-Route::redirect('/', '/dashboard');
+  Route::redirect('/', '/dashboard');
+  
+  Route::get('/itemCategories', function () {
+   return view('demo.itemCategories');
+  });
 
-Auth::routes();
+  Auth::routes();
 
-Route::middleware('auth')->group(function () {
+  Route::middleware('auth')->group(function () {
     Route::get('/dashboard', 'DashboardController@getDashboard');
 
     Route::resource('measurement_units', 'MeasurementUnitsController');
@@ -29,17 +33,17 @@ Route::middleware('auth')->group(function () {
     Route::post('log/out/create', 'LogController@postCreateOut');
 
     Route::group(['prefix' => '/ajax', 'namespace' => 'API'],
-                 function () {
-        Route::post('log/in/create', 'LogController@postCreateIn');
-        Route::post('log/out/create', 'LogController@postCreateOut');
+     function () {
+      Route::post('log/in/create', 'LogController@postCreateIn');
+      Route::post('log/out/create', 'LogController@postCreateOut');
     });
 
     Route::group(['middleware' => ['role:admin|super admin'], 'prefix' => '/admin', 'namespace' => 'Admin'],
-                 function () {
-        Route::resource('users', 'UsersController');
-        Route::get('items/approval/initial', 'ItemsController@getNeedsInitialApproval');
-        Route::get('items/{item}/approval/initial', 'ItemsController@approveInitially');
-        Route::delete('log/{log}', 'LogController@destroy');
+     function () {
+      Route::resource('users', 'UsersController');
+      Route::get('items/approval/initial', 'ItemsController@getNeedsInitialApproval');
+      Route::get('items/{item}/approval/initial', 'ItemsController@approveInitially');
+      Route::delete('log/{log}', 'LogController@destroy');
     });
-});
+  });
 

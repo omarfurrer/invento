@@ -36,6 +36,8 @@
             <li class="{{ Request::is('log') ? 'active' : '' }}"><a href="{{ url("log") }}"><i class="fa fa-paperclip"></i> <span>Log</span></a></li>
             <li class="{{ Request::is('items') ? 'active' : '' }}"><a href="{{ url("items") }}"><i class="fa fa-th-list"></i> <span>Items</span></a></li>
             <li class="{{ Request::is('suppliers') ? 'active' : '' }}"><a href="{{ url("suppliers") }}"><i class="fa fa-cart-plus"></i> <span>Suppliers</span></a></li>
+             <li class="{{ Request::is('itemCategories') ? 'active' : '' }}"><a href="{{ url("itemCategories") }}"><i class="fa fa-cart-plus"></i> <span>Items & Categories</span></a></li>
+
 
             @hasanyrole('admin|super admin')
             <li class="header">Admin</li>
