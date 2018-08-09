@@ -59,13 +59,14 @@
 								<td class="remaining">20</td>
 								<td>
 									<ul class="list-inline">
-
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput1"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="collapse" type="number" id="customInput1"></li>
+										<li class="list-inline-item"><input class="customInput" type="number"></li>
+
+										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 								</td>
 							</tr>
@@ -81,11 +82,11 @@
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target=".customInput2"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="customInput2 collapse" type="number"></li>
+										<li class="list-inline-item"><input class="customInput" type="number"></li>
 
-										<li class="list-inline-item"><a href="" class="customInput2 collapse"><i class="fa fa-check fa-lg"></i></a> <a href="" class="customInput2 collapse"><i class="fa fa-close fa-lg"></i></a></li>
+										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 
 								</td>
@@ -102,9 +103,11 @@
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput3"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="collapse" type="number" id="customInput3"></li>
+										<li class="list-inline-item"><input class="customInput" type="number"></li>
+
+										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 									
 								</td>
@@ -121,9 +124,11 @@
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput4"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="collapse" type="number" id="customInput4"></li>
+										<li class="list-inline-item"><input class="customInput" type="number"></li>
+
+										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 									
 								</td>
@@ -175,6 +180,7 @@
 
 	$(document).ready(function () {
 		$('[data-toggle="tooltip"]').tooltip();
+		$(".customInput").hide();
 
 	});
 
@@ -189,17 +195,18 @@
 
 	$(".inputBtn").click(function() {
 
-		$(this).closest('tr').find(".inputBtn").toggle();
-		
+		$(this).closest('tr').find(".inputBtn").hide();
+		$(this).closest('tr').find(".customInput").show(); 		
 
 	});
 
-		$(".fa-close").click(function() {
-        
-		$(this).closest('tr').find(".inputBtn").show();
-		$(this).closest('tr').find(".customInput2").hide();
-		
 
+
+	$(".fa-close").click(function() {
+		
+		$(this).closest('tr').find(".inputBtn").show();
+		$(this).closest('tr').find(".customInput").hide();
+		
 	});
 
 
