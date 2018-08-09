@@ -203,8 +203,16 @@
 
 			var numToSubmit = $(this).closest('tr').find(".customInput").val();
 			$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
-				return currTxt - numToSubmit;
+				if (numToSubmit == 0) {
+					alert('Please insert a valid quantity to withdraw')
+				} else if(numToSubmit > currTxt) {
+					alert('cannot withdraw this amount')
+				} else {
+					return currTxt - numToSubmit;
+				}
 			});
+
+
 			$(this).closest('tr').find(".collapseX").hide(); 
 			$(this).closest('tr').find(".inputBtn").show();
 
@@ -227,7 +235,6 @@
 			$(this).closest('tr').find(".collapseX").hide();
 
 		});
-
 
 	</script>
 
