@@ -64,9 +64,9 @@
 										<li class="list-inline-item">
 											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="customInput" type="number"></li>
+										<li class="list-inline-item"><input placeholder="Set Amount" class="customInput collapseX" type="number"></li>
 
-										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 								</td>
 							</tr>
@@ -84,9 +84,9 @@
 										<li class="list-inline-item">
 											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="customInput" type="number"></li>
+										<li class="list-inline-item"><input placeholder="Set Amount" value="10" class="customInput collapseX" type="number"></li>
 
-										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 
 								</td>
@@ -105,9 +105,9 @@
 										<li class="list-inline-item">
 											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="customInput" type="number"></li>
+										<li class="list-inline-item"><input placeholder="Set Amount"class="customInput collapseX" type="number" value="9"></li>
 
-										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 									
 								</td>
@@ -121,95 +121,114 @@
 								<td>
 
 									<ul class="list-inline">
-										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
-
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
-										</li>
-										<li class="list-inline-item"><input class="customInput" type="number"></li>
+											<button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
-										<li class="list-inline-item"><a href="#" class="customInput"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="customInput"><i class="fa fa-close fa-lg"></i></a></li>
-									</ul>
-									
-								</td>
-							</tr>
+											<li class="list-inline-item">
+												<button class="btn btn-sm btn-default inputBtn">
+													<i class="fa fa-pencil"></i>
+												</button>
+											</li>
 
-						</tbody>
+											<li class="list-inline-item">
+												<input placeholder="Set Amount" class="customInput collapseX" type="number" value="13">
+											</li>
 
-					</table>
+											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+										</ul>
+
+									</td>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+
+					</div>
+					<!-- /.box-body -->
 
 
 				</div>
-				<!-- /.box-body -->
-
-
 			</div>
-		</div>
-	</div> 
+		</div> 
 
-</section>
+	</section>
 
-@endsection
+	@endsection
 
-@push('scripts')
+	@push('scripts')
 
-<script>
+	<script>
 
-	function search() {
+		function search() {
 
-		var input, filter, table, tr, td, i;
-		input = document.getElementById("search");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("itemsTbl");
-		tr = table.getElementsByTagName("tr");
+			var input, filter, table, tr, td, i;
+			input = document.getElementById("search");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("itemsTbl");
+			tr = table.getElementsByTagName("tr");
 
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[1];
-			if (td) {
-				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				if (td) {
+					if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
 				}
 			}
 		}
-	}
 
 
 
 
-	$(document).ready(function () {
-		$('[data-toggle="tooltip"]').tooltip();
-		$(".customInput").hide();
+		$(document).ready(function () {
+			$('[data-toggle="tooltip"]').tooltip();
+			$(".collapseX").hide();
 
-	});
-
-
-	$(".minusOneBtn").click(function() {
-		$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
-			return currTxt - 1;
 		});
-	});
-
-	
-
-	$(".inputBtn").click(function() {
-
-		$(this).closest('tr').find(".inputBtn").hide();
-		$(this).closest('tr').find(".customInput").show(); 		
-
-	});
 
 
+		$(".minusOneBtn").click(function() {
+			$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
+				return currTxt - 1;
 
-	$(".fa-close").click(function() {
-		
-		$(this).closest('tr').find(".inputBtn").show();
-		$(this).closest('tr').find(".customInput").hide();
-		
-	});
+			});
+
+		});
+
+		$(".submitNum").click(function() {
+
+			var numToSubmit = $(this).closest('tr').find(".customInput").val();
+			$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
+				return currTxt - numToSubmit;
+			});
+			$(this).closest('tr').find(".collapseX").hide(); 
+			$(this).closest('tr').find(".inputBtn").show();
+
+		});
 
 
-</script>
 
-@endpush
+		$(".inputBtn").click(function() {
+
+			$(this).closest('tr').find(".inputBtn").hide();
+			$(this).closest('tr').find(".collapseX").show(); 		
+
+		});
+
+
+
+		$(".fa-close").click(function() {
+
+			$(this).closest('tr').find(".inputBtn").show();
+			$(this).closest('tr').find(".collapseX").hide();
+
+		});
+
+
+	</script>
+
+	@endpush
