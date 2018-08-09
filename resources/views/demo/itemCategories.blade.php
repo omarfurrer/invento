@@ -56,14 +56,14 @@
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Temporary Cement</td>
 								<td>3</td>
-								<td>20</td>
+								<td class="remaining">20</td>
 								<td>
 									<ul class="list-inline">
 
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default" data-toggle="collapse" data-target="#customInput1"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput1"><i class="fa fa-pencil"></i></button>
 										</li>
 										<li class="list-inline-item"><input class="collapse" type="number" id="customInput1"></li>
 									</ul>
@@ -81,9 +81,11 @@
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default" data-toggle="collapse" data-target="#customInput2"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target=".customInput2"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input class="collapse" type="number" id="customInput2"></li>
+										<li class="list-inline-item"><input class="customInput2 collapse" type="number"></li>
+
+										<li class="list-inline-item"><a href="" class="customInput2 collapse"><i class="fa fa-check fa-lg"></i></a> <a href="" class="customInput2 collapse"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
 
 								</td>
@@ -93,14 +95,14 @@
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Matrix Band Small</td>
 								<td>4</td>
-								<td>9</td>
+								<td class="remaining">9</td>
 								<td>
 
 									<ul class="list-inline">
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default" data-toggle="collapse" data-target="#customInput3"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput3"><i class="fa fa-pencil"></i></button>
 										</li>
 										<li class="list-inline-item"><input class="collapse" type="number" id="customInput3"></li>
 									</ul>
@@ -112,14 +114,14 @@
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Hexitol</td>
 								<td>6</td>
-								<td>13</td>
+								<td class="remaining">13</td>
 								<td>
 
 									<ul class="list-inline">
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 										<li class="list-inline-item">
-											<button class="btn btn-sm btn-default" data-toggle="collapse" data-target="#customInput4"><i class="fa fa-pencil"></i></button>
+											<button class="btn btn-sm btn-default inputBtn" data-toggle="collapse" data-target="#customInput4"><i class="fa fa-pencil"></i></button>
 										</li>
 										<li class="list-inline-item"><input class="collapse" type="number" id="customInput4"></li>
 									</ul>
@@ -174,22 +176,31 @@
 	$(document).ready(function () {
 		$('[data-toggle="tooltip"]').tooltip();
 
-		var totalUses = $(".remaining").html();
-
-		
-		
+	});
 
 
 	$(".minusOneBtn").click(function() {
+		$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
+			return currTxt - 1;
+		});
+	});
+
+	
+
+	$(".inputBtn").click(function() {
+
+		$(this).closest('tr').find(".inputBtn").toggle();
 		
-		var subtractedUses = totalUses - 1;
-		$(this).next(".remaining").replaceWith("subtractedUses");
-		
-	   });
 
 	});
 
-     
+		$(".fa-close").click(function() {
+        
+		$(this).closest('tr').find(".inputBtn").show();
+		$(this).closest('tr').find(".customInput2").hide();
+		
+
+	});
 
 
 </script>

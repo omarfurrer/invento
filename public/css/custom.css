@@ -120,3 +120,21 @@ button[aria-expanded=false] .fa-sort-up {
 #customInput1, #customInput2, #customInput3, #customInput4 {
 	max-width: 70px;
 }
+
+.list-inline-item input {
+	max-width: 50px;
+}
+
+
+.list-inline-item .collapse.in {
+	display: inline-block;
+
+}
+
+.customInput2 .fa-check {
+	color: green;
+} 
+
+.customInput2 .fa-close {
+	color: red;
+} 		
