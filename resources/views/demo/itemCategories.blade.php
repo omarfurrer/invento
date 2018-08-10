@@ -55,8 +55,8 @@
 							<tr class="collapse multi-collapse">
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Temporary Cement</td>
-								<td>3</td>
-								<td class="remaining">20</td>
+								<td class="stockQuantity">3</td>
+								<td data-maxNumber="30" class="remaining">20</td>
 								<td>
 									<ul class="list-inline">
 										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
@@ -74,8 +74,8 @@
 							<tr class="collapse multi-collapse">
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Suction</td>
-								<td>5</td>
-								<td value="10" class="remaining">10</td>
+								<td class="stockQuantity">5</td>
+								<td data-maxNumber="30" class="remaining">10</td>
 								<td>
 
 									<ul class="list-inline">
@@ -95,8 +95,8 @@
 							<tr class="collapse multi-collapse">
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Matrix Band Small</td>
-								<td>4</td>
-								<td class="remaining">9</td>
+								<td class="stockQuantity">4</td>
+								<td data-maxNumber="30" class="remaining">9</td>
 								<td>
 
 									<ul class="list-inline">
@@ -116,8 +116,8 @@
 							<tr class="collapse multi-collapse">
 								<td><img src="https://placeholdit.co//i/50x50?"></td>
 								<td>Hexitol</td>
-								<td>6</td>
-								<td class="remaining">13</td>
+								<td class="stockQuantity">6</td>
+								<td data-maxNumber="30" class="remaining">13</td>
 								<td>
 
 									<ul class="list-inline">
@@ -192,12 +192,29 @@
 
 
 		$(".minusOneBtn").click(function() {
-			$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
-				return currTxt - 1;
+  //Declare Variables
+  var $remaining = $(this).closest('tr').find(".remaining");
+  var $qty = $(this).closest('tr').find(".stockQuantity");
 
-			});
+  //Get current values
+  var batchSize = +$remaining.attr("data-maxNumber");
+  var currentRemaining = +$remaining.text();
+  var currentQty = +$qty.text();
 
-		});
+  //Subtract values
+  if (currentRemaining <= 1 && currentQty >= 1) {
+  	currentRemaining = batchSize;
+  	currentQty = currentQty-1;
+  } else if (currentRemaining > 0) {
+  	currentRemaining = currentRemaining-1;
+  }
+
+  //Update text
+  $remaining.text(currentRemaining);
+  $qty.text(currentQty);
+});
+
+
 
 		$(".submitNum").click(function() {
 
