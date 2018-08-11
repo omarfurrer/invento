@@ -84,7 +84,7 @@
 										<li class="list-inline-item">
 											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input placeholder="Set Amount" value="10" class="customInput collapseX" type="number"></li>
+										<li class="list-inline-item"><input placeholder="Set Amount" value="" class="customInput collapseX" type="number"></li>
 
 										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
@@ -105,7 +105,7 @@
 										<li class="list-inline-item">
 											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
 										</li>
-										<li class="list-inline-item"><input placeholder="Set Amount"class="customInput collapseX" type="number" value="9"></li>
+										<li class="list-inline-item"><input placeholder="Set Amount"class="customInput collapseX" type="number" ></li>
 
 										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 									</ul>
@@ -131,7 +131,7 @@
 											</li>
 
 											<li class="list-inline-item">
-												<input placeholder="Set Amount" class="customInput collapseX" type="number" value="13">
+												<input placeholder="Set Amount" class="customInput collapseX" type="number">
 											</li>
 
 											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
@@ -207,6 +207,8 @@
   	currentQty = currentQty-1;
   } else if (currentRemaining > 0) {
   	currentRemaining = currentRemaining-1;
+  } else if (currentRemaining == 0 && currentQty == 0) {
+  	alert('No units in stock')
   }
 
   //Update text
@@ -218,22 +220,41 @@
 
 		$(".submitNum").click(function() {
 
-			var numToSubmit = $(this).closest('tr').find(".customInput").val();
-			$(this).closest('tr').find(".remaining").text(function(_, currTxt) {
-				if (numToSubmit == 0) {
-					alert('Please insert a valid quantity to withdraw')
-				} else if(numToSubmit > currTxt) {
-					alert('cannot withdraw this amount')
-				} else {
-					return currTxt - numToSubmit;
-				}
-			});
+			
+			var $remaining = $(this).closest('tr').find(".remaining");
+			var $qty = $(this).closest('tr').find(".stockQuantity");
+			var $numToSubmit = $(this).closest('tr').find(".customInput");
+
+  //Get current values
+  var batchSize = +$remaining.attr("data-maxNumber");
+  var currentRemaining = +$remaining.text();
+  var currentQty = +$qty.text();
+  var currentInputValue = $numToSubmit.val(); 
+  var difference = currentRemaining - currentInputValue;
+  //Subtract values
+   if (currentRemaining == 0 && currentQty == 0) {
+  	alert('No units in stock');
+  }
+  else if (difference < 0) {
+  	currentRemaining = difference + batchSize;
+  	currentQty = currentQty -1;
+  } else if (difference > 0) {
+  	currentRemaining = difference;
+  }  
+
+  //Update text
+  $remaining.text(currentRemaining);
+  $qty.text(currentQty);
+
+  $(this).closest('tr').find(".collapseX").hide(); 
+  $(this).closest('tr').find(".inputBtn").show();
+});
 
 
-			$(this).closest('tr').find(".collapseX").hide(); 
-			$(this).closest('tr').find(".inputBtn").show();
 
-		});
+
+
+
 
 
 
