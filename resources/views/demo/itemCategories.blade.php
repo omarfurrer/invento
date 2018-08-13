@@ -42,108 +42,207 @@
 								<th>Withdraw <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="You can choose to withdraw by a single use or by setting a custom amount of uses you want to withdraw"></i></th>
 
 							</tr>
-						
+
+							<tr class="categoryRow">
+								<td id="categoryTd" colspan="5">
+									<button class="btn rowToggleBtn" data-toggle="collapse" data-target=".collapseMe" aria-controls="collapseMe" aria-expanded="false">ORTHO
+										<a><i class="fa fa-chevron-down pull-right"></i><i class="fa fa-chevron-up pull-right"></i></a>
+									</button>
+
+								</td>
+							</tr>
+
+							
+
+							<tr class="collapseMe collapse">
+								<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/0tmiP4WOc2GmbiKkfBKXjvxkLD9rLSymMVUfwLIG.jpeg"></td>
+								<td>Temporary Cement</td>
+								<td class="stockQuantity">3</td>
+								<td data-maxNumber="30" class="remaining">20</td>
+								<td>
+									<ul class="list-inline">
+										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+										<li class="list-inline-item">
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+										</li>
+										<li class="list-inline-item"><input placeholder="Set Amount" min="1" class="customInput collapseX form-control" type="number"></li>
+
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+									</ul>
+								</td>
+							</tr>
+
+							<tr class="collapseMe collapse panel-collapse">
+								<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/3cfK9jswTwO0Ge6HRkMmcx11qq8Z4vpCPYdj1h3C.jpeg"></td>
+								<td>Suction</td>
+								<td class="stockQuantity">5</td>
+								<td data-maxNumber="30" class="remaining">10</td>
+								<td>
+
+									<ul class="list-inline">
+										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+										<li class="list-inline-item">
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+										</li>
+										<li class="list-inline-item"><input placeholder="Set Amount" value="" min="1" class="customInput collapseX form-control" type="number"></li>
+
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+									</ul>
+
+								</td>
+							</tr>
+
+							<tr class="collapseMe collapse">
+								<td><img class="categoryTdImg" src="//cdn.shopify.com/s/files/1/0205/1890/products/tofflemire-matrix-band_large.jpg?v=1363037387"></td>
+								<td>Matrix Band Small</td>
+								<td class="stockQuantity">4</td>
+								<td data-maxNumber="30" class="remaining">9</td>
+								<td>
+
+									<ul class="list-inline">
+										<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+										<li class="list-inline-item">
+											<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+										</li>
+										<li class="list-inline-item"><input placeholder="Set Amount" min="1" class="customInput  collapseX form-control" type="number" ></li>
+
+										<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+									</ul>
+
+								</td>
+							</tr>
+
+							<tr class="collapseMe collapse">
+								<td><img class="categoryTdImg" src="https://images.yaoota.com/9Px17k_9nY6oADLdcRfVM-kmMHQ=/trim/yaootaweb-production/media/crawledproductimages/eaf198e6051451b3cab781954783587f97452a9c.jpg"></td>
+								<td>Hexitol</td>
+								<td class="stockQuantity">6</td>
+								<td data-maxNumber="30" class="remaining">13</td>
+								<td>
+
+									<ul class="list-inline">
+										<li class="list-inline-item">
+											<button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+											<li class="list-inline-item">
+												<button class="btn btn-sm btn-default inputBtn">
+													<i class="fa fa-pencil"></i>
+												</button>
+											</li>
+
+											<li class="list-inline-item">
+												<input placeholder="Set Amount" class="customInput form-control collapseX" type="number" min="1">
+											</li>
+
+											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+										</ul>
+
+									</td>
+								</tr>
 								<tr class="categoryRow">
 									<td id="categoryTd" colspan="5">
-										<button class="btn collapsed" data-toggle="collapse" data-target="#collapseCategory" aria-controls="collapseCategory" aria-expanded="false">ORTHO
-											<a><i class="fa fa-chevron-down pull-right"></i></a>
+										<button class="btn rowToggleBtn" data-toggle="collapse" data-target=".collapseMe1" aria-controls="collapseMe1" aria-expanded="false">PEDO
+											<a><i class="fa fa-chevron-down pull-right"></i><i class="fa fa-chevron-up pull-right"></i></a>
 										</button>
 
 									</td>
 								</tr>
 
-				                      <div class="collapse list-group" id="collapseCategory">
 
-									<tr>
-										<td><img src="https://placeholdit.co//i/50x50?"></td>
-										<td>Temporary Cement</td>
-										<td class="stockQuantity">3</td>
-										<td data-maxNumber="30" class="remaining">20</td>
-										<td>
-											<ul class="list-inline">
-												<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+								<tr class="collapseMe1 collapse">
+									<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/h0R1a1bcpNy30fU19IYtkIzQytBT2r5K1TNJIwnM.jpeg"></td>
+									<td>Syrnge Long</td>
+									<td class="stockQuantity">3</td>
+									<td data-maxNumber="30" class="remaining">20</td>
+									<td>
+										<ul class="list-inline">
+											<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+											<li class="list-inline-item">
+												<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+											</li>
+											<li class="list-inline-item"><input placeholder="Set Amount" min="1" class="customInput collapseX form-control" type="number"></li>
+
+											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+										</ul>
+									</td>
+								</tr>
+
+								<tr class="collapseMe1 collapse panel-collapse">
+									<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/O82hLRxG2TME7QBrgmhM0k8Gjly3cVvQQcq3ewHM.jpeg"></td>
+									<td>Light(Green)</td>
+									<td class="stockQuantity">5</td>
+									<td data-maxNumber="30" class="remaining">10</td>
+									<td>
+
+										<ul class="list-inline">
+											<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+											<li class="list-inline-item">
+												<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+											</li>
+											<li class="list-inline-item"><input placeholder="Set Amount" value="" min="1" class="customInput collapseX form-control" type="number"></li>
+
+											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+										</ul>
+
+									</td>
+								</tr>
+
+								<tr class="collapseMe1 collapse">
+									<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/296nhptNSQWv7Y5raGygzQmcOPq3JvomOpEERXLh.jpeg"></td>
+									<td>Gloves Medium</td>
+									<td class="stockQuantity">4</td>
+									<td data-maxNumber="30" class="remaining">9</td>
+									<td>
+
+										<ul class="list-inline">
+											<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
+
+											<li class="list-inline-item">
+												<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+											</li>
+											<li class="list-inline-item"><input placeholder="Set Amount" min="1" class="customInput  collapseX form-control" type="number" ></li>
+
+											<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
+										</ul>
+
+									</td>
+								</tr>
+
+								<tr class="collapseMe1 collapse">
+									<td><img class="categoryTdImg" src="http://nvnto.com/storage/images/items/VuU8sHsdXgVjr357x4ktoiEt0C6JNSDZ8KvIPnEl.jpeg"></td>
+									<td>Mask</td>
+									<td class="stockQuantity">6</td>
+									<td data-maxNumber="30" class="remaining">13</td>
+									<td>
+
+										<ul class="list-inline">
+											<li class="list-inline-item">
+												<button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
 												<li class="list-inline-item">
-													<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
+													<button class="btn btn-sm btn-default inputBtn">
+														<i class="fa fa-pencil"></i>
+													</button>
 												</li>
-												<li class="list-inline-item"><input placeholder="Set Amount" class="customInput collapseX form-control" type="number"></li>
+
+												<li class="list-inline-item">
+													<input placeholder="Set Amount" class="customInput form-control collapseX" type="number" min="1">
+												</li>
 
 												<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
 											</ul>
-										</td>
-									</tr>
-
-									<tr>
-										<td><img src="https://placeholdit.co//i/50x50?"></td>
-										<td>Suction</td>
-										<td class="stockQuantity">5</td>
-										<td data-maxNumber="30" class="remaining">10</td>
-										<td>
-
-											<ul class="list-inline">
-												<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
-
-												<li class="list-inline-item">
-													<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
-												</li>
-												<li class="list-inline-item"><input placeholder="Set Amount" value="" class="customInput collapseX form-control" type="number"></li>
-
-												<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
-											</ul>
 
 										</td>
 									</tr>
 
-									<tr>
-										<td><img src="https://placeholdit.co//i/50x50?"></td>
-										<td>Matrix Band Small</td>
-										<td class="stockQuantity">4</td>
-										<td data-maxNumber="30" class="remaining">9</td>
-										<td>
 
-											<ul class="list-inline">
-												<li class="list-inline-item"><button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
 
-												<li class="list-inline-item">
-													<button class="btn btn-sm btn-default inputBtn"><i class="fa fa-pencil"></i></button>
-												</li>
-												<li class="list-inline-item"><input placeholder="Set Amount"class="customInput collapseX form-control" type="number" ></li>
 
-												<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
-											</ul>
-
-										</td>
-									</tr>
-
-									<tr>
-										<td><img src="https://placeholdit.co//i/50x50?"></td>
-										<td>Hexitol</td>
-										<td class="stockQuantity">6</td>
-										<td data-maxNumber="30" class="remaining">13</td>
-										<td>
-
-											<ul class="list-inline">
-												<li class="list-inline-item">
-													<button class="btn btn-default btn-sm minusOneBtn"><i class="fa fa-chevron-down fa-sm"></i> -1</button></li>
-
-													<li class="list-inline-item">
-														<button class="btn btn-sm btn-default inputBtn">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</li>
-
-													<li class="list-inline-item">
-														<input placeholder="Set Amount" class="customInput form-control collapseX" type="number">
-													</li>
-
-													<li class="list-inline-item"><a href="#" class="collapseX submitNum"><i class="fa fa-check fa-lg"></i></a> <a href="#" class="collapseX"><i class="fa fa-close fa-lg"></i></a></li>
-												</ul>
-
-											</td>
-										</tr>
-
-									</div>
-								
 
 								</tbody>
 
@@ -192,7 +291,14 @@
 			$(document).ready(function () {
 				$('[data-toggle="tooltip"]').tooltip();
 				$(".collapseX").hide();
+				$(".fa-chevron-up").hide();
 
+			});
+
+			$(".rowToggleBtn").click(function(){
+				var $tr = $(this).closest('tr'); 
+				$tr.find(".fa-chevron-up").toggle();
+                $tr.find(".fa-chevron-down").toggle(); 
 			});
 
 
@@ -232,38 +338,27 @@
 				var $numToSubmit = $tr.find(".customInput");
 
   //Get current values
-  var batchSize = +$remaining.attr("data-maxNumber");
-  var currentRemaining = +$remaining.text();
-  var currentQty = +$qty.text();
+  var batchSize = $remaining.attr("data-maxNumber");
+  var currentRemaining = $remaining.text();
+  var currentQty = $qty.text();
   var currentInputValue = $numToSubmit.val(); 
-  var difference = currentRemaining - currentInputValue;
-  var divisible = currentInputValue / batchSize;
-  var totalUses = currentQty * batchSize + currentRemaining;
-  var decimalPart = "0."+divisible.toFixed();
   //Subtract values
-  if (currentRemaining == 0 && currentQty == 0) {
-  	alert('No units in stock');
-  } else if(currentInputValue < 0) {
-  	alert('Please insert a valid quantity to withdraw');
-  } else if (currentInputValue > currentQty * batchSize + currentRemaining) {
-  	alert("Cannot withdraw this amount");
-  } else if (currentInputValue == currentQty * batchSize + currentRemaining) {
-  	currentRemaining = 0;
-  	currentQty = 0;
-  } else if (currentInputValue > batchSize + currentRemaining && currentInputValue < totalUses) {
-  	currentQty = currentQty - Math.round(divisible);
-  	console.log(decimalPart);
-  	currentRemaining =  batchSize * decimalPart;
-  } 
-  else if (difference < 0) {
-  	currentRemaining = difference + batchSize;
-  	currentQty = currentQty -1;
-  } else if (difference > 0) {
-  	currentRemaining = difference;
-  }  else if (difference == 0) {
-  	currentRemaining = difference;
-  } 
 
+  var totalLeft = Number(currentRemaining) + Number(batchSize) * Number(currentQty);
+
+  if (currentInputValue > totalLeft) {
+  // invalid
+} else {
+  // calculate how many to take from remaining
+  var wr = currentInputValue % batchSize;
+  // update qty and remaining
+  currentQty -= (currentInputValue - wr) / batchSize;
+  currentRemaining -= wr;
+  if (currentRemaining < 0) {
+  	currentRemaining += Number(batchSize);
+  	currentQty -= 1;
+  } 
+}  
   //Update text
   $remaining.text(currentRemaining);
   $qty.text(currentQty);

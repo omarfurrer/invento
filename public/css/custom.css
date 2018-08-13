@@ -141,3 +141,8 @@ button[aria-expanded=false] .fa-sort-up {
 	color: red;
 	margin-left: 7px;
 } 		
+
+.categoryTdImg {
+	width: 60px;
+	height: 60px;
+}
